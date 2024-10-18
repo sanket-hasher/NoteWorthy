@@ -1,12 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"  
     %>
+    <%@ page import="java.net.URLEncoder" %>
+    <%@ page session="true" %>
+    
+    <%
+    String user=request.getParameter("username");
+    String email=request.getParameter("email");
+    session.setAttribute("username",user);
+    session.setAttribute("email",email);
+    String username = (String) session.getAttribute("username");
+    String emailid = (String) session.getAttribute("email");%>
 <!DOCTYPE html>
-<!-- Coding By CodingNepal - youtube.com/codingnepal -->
+
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <title>Drawing App JavaScript | CodingNepal</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +25,7 @@
     <aside
     class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l"
   >
-    <a href="/">
+    <a href="/Login_Registration/index.jsp">
       <svg
         class="absolute h-5 cursor-pointer"
         xmlns="http://www.w3.org/2000/svg"
@@ -36,8 +45,8 @@
         src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
         alt="avatar"
       />
-      <h4 class="mx-2 mt-2 font-medium text-white">John Doe</h4>
-      <p class="mx-2 mt-1 text-sm font-medium text-white">john@example.com</p>
+      <h4 class="mx-2 mt-2 font-medium text-white"><%=username %></h4>
+      <p class="mx-2 mt-1 text-sm font-medium text-white"><%=emailid %></p>
     </div>
   
     <div class="flex flex-col justify-between flex-1 mt-6">
@@ -58,7 +67,7 @@
             />
           </svg>
   
-          <a href="/main.html" class="mx-4 font-medium">Daily Tasks</a>
+          <a href="http://localhost:8080/Login_Registration/main.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Daily Tasks</a>
         </p>
   
         <p
@@ -116,7 +125,7 @@
           />
         </svg>
   
-        <a href="/files.html" class="mx-4 font-medium">Files</a>
+        <a href="http://localhost:8080/Task/files.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Files</a>
       </p>
   
         <!-- Repeat similarly for other menu items like March, April, May, etc. -->

@@ -2,7 +2,6 @@ package com.noteworthy;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -14,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class Login
@@ -74,7 +74,14 @@ public class Login extends HttpServlet {
                 if (resultSet.next()) {
                 	String email = resultSet.getString("email");
                 	System.out.println(email);
-                	response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(email, "UTF-8"));
+                	HttpSession session = request.getSession();
+                	session.setAttribute("username", username);
+                	session.setAttribute("email", email);
+                	response.sendRedirect("main.jsp");
+//                	response.sendRedirect("http://localhost:8080/Task/paint.jsp?username=" + URLEncoder.encode(username, "UTF-8")+ "&email=" + URLEncoder.encode(email, "UTF-8"));
+//                	response.sendRedirect("http://localhost:8080/Task/files.jsp?username=" + URLEncoder.encode(username, "UTF-8")+ "&email=" + URLEncoder.encode(email, "UTF-8"));
+                	//response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(email, "UTF-8"));
+                	
                 } else {
                 	response.sendRedirect("login.jsp?msg=valid&username=notfound");
                 }
