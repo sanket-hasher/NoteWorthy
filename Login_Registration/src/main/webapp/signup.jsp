@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+   <% String msg=request.getParameter("msg"); %>
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,7 @@
       <a>EXPLORE</a>
       <a>about</a>
       <a>contact</a>
-      <a href="/login.html">login</a>
+      <a href="/Login_Registration/login.jsp">login</a>
     </ul>
   </nav>
     <div class="flex h-screen">
@@ -127,7 +128,7 @@
             <div class="mt-4 text-sm text-gray-600 text-center">
               <p>or with email</p>
             </div>
-            <form id="signupForm" action="#" method="POST" class="space-y-4">
+            <form id="signupForm" action="register" method="post" class="space-y-4">
               <div>
                   <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
                   <input type="text" id="username" name="username" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
@@ -149,73 +150,47 @@
                   <span class="error hidden" id="confirmPasswordError">Passwords do not match.</span>
               </div>
               <div>
-                  <button type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300">Sign Up</button>
+                  <input type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300" value="Sign Up">
               </div>
+              <% if(msg.equals("invalid")) {
+            	%>
+            	<h3 class="text-red-500 font-bold text-xl">Please fill out the form</h3>
+            	<% }
+            else if (msg.equals("short-password")) {
+            %>
+            <h3 class="text-red-500 font-bold text-xl">Passwords too Short</h3>
+            <% }
+            else if (msg.equals("weak-password")) {
+            %>
+            <h3 class="text-red-500 font-italics text-xl">Password must contain at least one uppercase letter, one special character, and one digit</h3>
+            	<% }
+            else if (msg.equals("password-mismatch")) {
+            %>
+            <h3 class="text-red-500 font-bold text-xl">Passwords Donot Match</h3>
+            
+            	<% }
+            else if(msg.equals("same-username-found")) {
+            %>
+            <h3 class="text-red-500 font-bold text-xl">Same Username Found</h3>
+            <% }
+            else if(msg.equals("signup-failed")) {
+            %>
+            <h3 class="text-red-500 font-bold text-xxl">Failed to Signup</h3>
+            <% } 
+            else {
+            	%>
+            	<h3 class="text-green-600 font-bold text-xxl">Registration Successfull</h3><br><br>
+            	<a href="/Login_Registration/index.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Return to Home</a>
+            
+            <% } %>
           </form>
             <div class="mt-4 text-sm text-gray-600 text-center">
-              <p>Already have an account? <a href="/login.jsp" class="text-black hover:underline">Login here</a>
+              <p>Already have an account? <a href="/Login_Registration/login.jsp" class="text-black hover:underline">Login here</a>
               </p>
             </div>
           </div>
         </div>
       </div>
-      <script>
-       const form = document.getElementById('signupForm');
-        const usernameInput = document.getElementById('username');
-        const emailInput = document.getElementById('email');
-        const passwordInput = document.getElementById('password');
-        const confirmPasswordInput = document.getElementById('confirm-password');
-       
-
-
-
-        form.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission for validation
-            
-            // Clear previous error messages
-            document.querySelectorAll('.error').forEach(error => {
-                error.classList.add('hidden');
-            });
-
-            let isValid = true;
-
-            // Validate username
-            const username = usernameInput.value;
-            const usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
-            if (!usernameRegex.test(username)) {
-                document.getElementById('usernameError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validate email
-            const email = emailInput.value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                document.getElementById('emailError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validate password
-            const password = passwordInput.value;
-            const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                document.getElementById('passwordError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // Validate confirm password
-            const confirmPassword = confirmPasswordInput.value;
-            if (password !== confirmPassword) {
-                document.getElementById('confirmPasswordError').classList.remove('hidden');
-                isValid = false;
-            }
-
-            // If all validations pass, you can submit the form or process the data
-            if (isValid) {
-                // You can submit the form here or perform an action
-                alert('Form submitted successfully!'); // For demonstration purposes
-            }
-        });
-    </script>
+      
 </body>
 </html>

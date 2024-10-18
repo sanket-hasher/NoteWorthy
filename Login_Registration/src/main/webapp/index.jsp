@@ -17,7 +17,7 @@
             <a>EXPLORE</a>
             <a>about</a>
             <a href="/contact.jsp">contact</a>
-            <a href="/login.jsp">login</a>
+            <a href="/Login_Registration/login.jsp">login</a>
           </ul>
         </nav>
         <div class="container w-screen max-w-[90%] m-auto h-screen">
@@ -37,7 +37,7 @@
                 Get Started
               </a>
               <div class="mt-8 underline font-semibold">
-                <a href="/login.jsp">Already have an account? </a><a href="/login.jsp">Login in</a>
+                <a href="/Login_Registration/login.jsp">Already have an account? </a><a href="/Login_Registration/login.jsp">Login in</a>
               </div>
             </div>
             <img class="h-[40rem]" src="Assets/bg.jpg" />

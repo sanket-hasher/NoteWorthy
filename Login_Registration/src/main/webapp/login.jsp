@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@ page import="java.net.URLEncoder" %>
+     <%String msg=request.getParameter("msg");
+    String username=request.getParameter("username");
+    String emailid=request.getParameter("email");%>
     <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,7 +21,7 @@
         <a>EXPLORE</a>
         <a>about</a>
         <a>contact</a>
-        <a href="/login.html">login</a>
+        <a href="/Login_Registration/login.jsp">login</a>
       </ul>
     </nav>
     <div class="flex h-screen">
@@ -259,7 +263,7 @@
       <div class="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
         <div class="max-w-md w-full p-6">
           <h1 class="text-3xl font-semibold mb-6 text-black text-center">
-            Login In
+            Login 
           </h1>
           <h1 class="text-sm font-semibold mb-6 text-gray-500 text-center">
             Join to Our Community with all time access and free
@@ -320,7 +324,7 @@
           <div class="mt-4 text-sm text-gray-600 text-center">
             <p>or with email</p>
           </div>
-          <form action="#" method="POST" class="space-y-4">
+          <form action="login" method="post" class="space-y-4">
             <!-- Your form elements go here -->
             <div>
               <label
@@ -358,19 +362,33 @@
               </div>
             </div>
             <div>
-              <button
+              <input
                 type="submit"
+                value="Login"
                 class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
               >
-                Login In
-              </button>
+                
+              
             </div>
+            <% if(msg.equals("invalid")) { %>
+            <h3 class="text-red-500 font-bold text-xl">Enter your Credentials</h3>
+            <% }
+            else if( msg.equals("valid") && username.equals("notfound")) { %>
+            <h3 class="text-red-500 font-bold text-xl">USername or Password Incorrect</h3>
+            <%}
+            else
+            {
+            	response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(emailid, "UTF-8"));%>
+            	
+            <%} %>
+            
+            
           </form>
           <div class="mt-4 text-sm text-gray-600 text-center">
             <p>
-              Already have an account?
-              <a href="/signup.jsp" class="text-black hover:underline"
-                >Sign In</a
+              Don't have an account?
+              <a href="/Login_Registration/signup.jsp" class="text-black hover:underline"
+                >Sign Up</a
               >
             </p>
           </div>

@@ -1,0 +1,9 @@
+CREATE TABLE User (Username VARCHAR(30) UNIQUE Primary Key,Email VARCHAR(20),Password VARCHAR(20));
+
+CREATE TABLE review (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    stars INT CHECK (stars >= 1 AND stars <= 5),
+    comment VARCHAR(300)
+);
+
