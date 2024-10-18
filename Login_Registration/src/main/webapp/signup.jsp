@@ -179,7 +179,7 @@
             <% } 
             else {
             	%>
-            	<h3 class="text-green-600 font-bold text-xxl">Registration Successfull</h3><br><br>
+            	<h3 class="text-green-600 font-bold text-xxl">Registration Successfull</h3><br>
             	<a href="/Login_Registration/index.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Return to Home</a>
             
             <% } %>

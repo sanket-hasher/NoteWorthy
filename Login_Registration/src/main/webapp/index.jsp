@@ -31,7 +31,7 @@
                 Remember everything and tackle any project with your notes, tasks,
                 and schedule all in one place.
               </p>
-              <a href="/main.jsp"
+              <a href="/Login_Registration/main.jsp"
                 class="px-8 py-4 rounded-md shadow-xl text-white   uppercase bg-[#7E60BF]"
               >
                 Get Started

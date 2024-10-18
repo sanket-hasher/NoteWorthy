@@ -374,7 +374,7 @@
             <h3 class="text-red-500 font-bold text-xl">Enter your Credentials</h3>
             <% }
             else if( msg.equals("valid") && username.equals("notfound")) { %>
-            <h3 class="text-red-500 font-bold text-xl">USername or Password Incorrect</h3>
+            <h3 class="text-red-500 font-bold text-xl">Username or Password Incorrect</h3>
             <%}
             else
             {
