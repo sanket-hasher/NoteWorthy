@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <libraryInfos>
     <libraryInfo home="C:\Users\Administrator\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_22.0.2.v20240802-1626\jre" version="22.0.2"/>
+    <libraryInfo home="/usr/lib/jvm/java-21-openjdk-arm64" version="21.0.4"/>
     <libraryInfo home="C:\Users\Administrator\AppData\Local\Programs\Eclipse Adoptium\jdk-17.0.11.9-hotspot" version="17.0.11"/>
     <libraryInfo home="C:\Users\Administrator\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_22.0.2.v20240802-1626" version="22.0.2">
         <bootpath>

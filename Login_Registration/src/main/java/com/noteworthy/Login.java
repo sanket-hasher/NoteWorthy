@@ -22,9 +22,9 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
-	private static final String DB_USER = "Sanket";
-	private static final String DB_PASSWORD = "Sanket7044";
+	private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
+    private static final String DB_USER = "Sanket";
+    private static final String DB_PASSWORD = "password";
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -51,7 +51,7 @@ public class Login extends HttpServlet {
 		} else {
 			try {
 				// Load MySQL JDBC Driver
-				Class.forName("com.mysql.cj.jdbc.Driver");
+				//Class.forName("com.mysql.cj.jdbc.Driver");
 
 				// Establish a connection
 				Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -98,9 +98,6 @@ public class Login extends HttpServlet {
 				resultSet.close();
 				preparedStatement.close();
 				connection.close();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-				out.println("<h3>Error: JDBC Driver not found.</h3>");
 			} catch (SQLException e) {
 				e.printStackTrace();
 				out.println("<h3>Error: Database connection or SQL operation failed.</h3>");

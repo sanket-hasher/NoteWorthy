@@ -3,6 +3,8 @@
 	<name>Login_Registration</name>
 	<comment></comment>
 	<projects>
+		<project>Servers</project>
+		<project>Task</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

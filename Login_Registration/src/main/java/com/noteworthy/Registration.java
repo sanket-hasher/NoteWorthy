@@ -1,10 +1,5 @@
 package com.noteworthy;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -13,15 +8,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+
 /**
  * Servlet implementation class Register
  */
 @WebServlet("/register")
 public class Registration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	  private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
-	    private static final String DB_USER = "Sanket";
-	    private static final String DB_PASSWORD = "Sanket7044";
+	private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
+    private static final String DB_USER = "Sanket";
+    private static final String DB_PASSWORD = "password";
 
     /**
      * Default constructor. 
@@ -75,7 +76,7 @@ public class Registration extends HttpServlet {
 	        // Database connection and SQL statement
 	        try {
 	            // Load MySQL JDBC Driver
-	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            //Class.forName("com.mysql.cj.jdbc.Driver");
 
 	            // Establish a connection
 	            Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -116,9 +117,6 @@ public class Registration extends HttpServlet {
 	            preparedStatement2.close();
 	            preparedStatement1.close();
 	            connection.close();
-	        } catch (ClassNotFoundException e) {
-	            e.printStackTrace();
-	            out.println("<h3>Error: JDBC Driver not found.</h3>");
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	            out.println("<h3>Error: Database connection or SQL operation failed.</h3>");

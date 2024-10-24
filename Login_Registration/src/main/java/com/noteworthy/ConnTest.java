@@ -5,16 +5,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnTest {
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/User_Details";
+	private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
     private static final String DB_USER = "Sanket";
-    private static final String DB_PASSWORD = "Sanket7044";
+    private static final String DB_PASSWORD = "password";
 
     public static void main(String[] args) {
         Connection connection = null;
 
         try {
             // Load the MySQL JDBC Driver
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
             System.out.println("MySQL JDBC Driver Registered!");
 
             // Establish a connection
@@ -27,9 +27,6 @@ public class ConnTest {
                 System.out.println("Failed to make a connection to the database.");
             }
 
-        } catch (ClassNotFoundException e) {
-            System.out.println("MySQL JDBC Driver not found. Include the JDBC driver in your library path.");
-            e.printStackTrace();
         } catch (SQLException e) {
             System.out.println("Connection to the database failed!");
             e.printStackTrace();
