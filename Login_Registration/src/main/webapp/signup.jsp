@@ -9,19 +9,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
     <style>
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
       /* Optional styles to enhance error message visibility */
       .error {
           color: red;
           font-size: 0.875rem; /* Smaller text for error messages */
           margin-top: 0.25rem; /* Spacing above error messages */
       }
+     
+      ::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-clr);
+  border-radius: 50px;
+}
+     
   </style>
 </head>
 <body>
     <nav
     class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50"
   >
-    <a href="/" class="text-4xl font-bold">LOGO</a>
+    <a href="/Login_Registration" class="text-4xl font-bold">LOGO</a>
     <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
       <a>EXPLORE</a>
       <a>about</a>
@@ -154,32 +174,109 @@
               </div>
               <% if(msg.equals("invalid")) {
             	%>
-            	<h3 class="text-red-500 font-bold text-xl">Please fill out the form</h3>
+            	 <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Please fill out the form
+	        </p>
+	      </div>
+	    </div>
             	<% }
             else if (msg.equals("short-password")) {
             %>
-            <h3 class="text-red-500 font-bold text-xl">Passwords too Short</h3>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Password too short
+	        </p>
+	      </div>
+	    </div>
             <% }
             else if (msg.equals("weak-password")) {
             %>
-            <h3 class="text-red-500 font-italics text-xl">Password must contain at least one uppercase letter, one special character, and one digit</h3>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	         Password must contain at least one uppercase letter, one special character, and one digit
+	        </p>
+	      </div>
+	    </div>
             	<% }
             else if (msg.equals("password-mismatch")) {
             %>
-            <h3 class="text-red-500 font-bold text-xl">Passwords Donot Match</h3>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        Passwords Donot Match
+	        </p>
+	      </div>
+	    </div>
             
             	<% }
             else if(msg.equals("same-username-found")) {
             %>
-            <h3 class="text-red-500 font-bold text-xl">Same Username Found</h3>
+              <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        User already exits
+	        </p>
+	      </div>
+	    </div>
             <% }
             else if(msg.equals("signup-failed")) {
             %>
-            <h3 class="text-red-500 font-bold text-xxl">Failed to Signup</h3>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        Filed to signup
+	        </p>
+	      </div>
+	    </div>
             <% } 
             else {
             	%>
-            	<h3 class="text-green-600 font-bold text-xxl">Registration Successfull</h3><br>
+            	  <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	       <svg class="shrink-0 size-5 mt-0.2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
+<path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"></path>
+</svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        Registration Sucessful
+	        </p>
+	      </div>
+	    </div>
             	<a href="/Login_Registration/index.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Return to Home</a>
             
             <% } %>
@@ -191,6 +288,21 @@
           </div>
         </div>
       </div>
-      
+      <script>
+
+      if (toast) {
+          toast.style.display = 'flex';
+          setTimeout(() => {
+              toast.style.display = 'none';
+          }, 3000); // Hide after 3 seconds
+      }
+      document.getElementById('signupForm').addEventListener('submit', (e) => {
+    	    e.preventDefault();
+    	
+    	    
+    	});
+
+      </script>
 </body>
+
 </html>

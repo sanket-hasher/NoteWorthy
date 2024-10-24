@@ -20,10 +20,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+      ::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-clr);
+  border-radius: 50px;
+}
+      </style>
 
   <body class="flex overflow-hidden bg-blue-400 ">
     <aside
-    class="flex flex-col w-64 h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l"
+    class="flex flex-col  h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l"
   >
     <a href="/Login_Registration/index.jsp">
       <svg

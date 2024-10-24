@@ -12,11 +12,31 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
   </head>
+   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+      ::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #f5f5f5;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--primary-clr);
+  border-radius: 50px;
+}
+      </style>
   <body>
     <nav
       class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50"
     >
-      <a href="/" class="text-4xl font-bold">LOGO</a>
+      <a href="/Login_Registration" class="text-4xl font-bold">LOGO</a>
       <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
         <a>EXPLORE</a>
         <a>about</a>
@@ -324,7 +344,7 @@
           <div class="mt-4 text-sm text-gray-600 text-center">
             <p>or with email</p>
           </div>
-          <form action="login" method="post" class="space-y-4">
+          <form id='myFrom' action="login" method="post" class="space-y-4">
             <!-- Your form elements go here -->
             <div>
               <label
@@ -352,13 +372,16 @@
                   id="pass"
                   class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
                 />
-                <svg id="eyebtn" class="h-5 relative right-8 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                <div class="absolute">
+                <svg id="eyebtn" class="h-5 relative left-[22rem] cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                   <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
                   <path
                     fill="#929cae"
                     d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"
                   />
                 </svg>
+                </div>
+                
               </div>
             </div>
             <div>
@@ -371,10 +394,32 @@
               
             </div>
             <% if(msg.equals("invalid")) { %>
-            <h3 class="text-red-500 font-bold text-xl">Enter your Credentials</h3>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Enter Your Credentials
+	        </p>
+	      </div>
+	    </div>
             <% }
             else if( msg.equals("valid") && username.equals("notfound")) { %>
-            <h3 class="text-red-500 font-bold text-xl">Username or Password Incorrect</h3>
+            <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Username or Passowrd Incorrect
+	        </p>
+	      </div>
+	    </div>
             <%}
             else
             {
@@ -398,6 +443,8 @@
  <script>
     const pass = document.getElementById('pass');
 const eyebtn = document.getElementById('eyebtn');
+const toast = document.querySelector('.toast');
+
 
 eyebtn.addEventListener('click', () => {
     // Check the current type and toggle between 'text' and 'password'
@@ -407,6 +454,21 @@ eyebtn.addEventListener('click', () => {
     } else {
         pass.setAttribute('type', 'password');
     }
+});
+
+if (toast) {
+    toast.style.display = 'flex';
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 3000); // Hide after 3 seconds
+}
+
+document.getElementById('myForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    toast.style.display = 'block';
+    setTimeout(() => {
+        toast.style.display = 'none';
+    }, 3000);
 });
 
     </script>
