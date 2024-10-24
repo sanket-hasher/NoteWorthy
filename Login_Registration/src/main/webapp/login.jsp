@@ -440,37 +440,7 @@
         </div>
       </div>
     </div>
- <script>
-    const pass = document.getElementById('pass');
-const eyebtn = document.getElementById('eyebtn');
-const toast = document.querySelector('.toast');
-
-
-eyebtn.addEventListener('click', () => {
-    // Check the current type and toggle between 'text' and 'password'
-    const currentType = pass.getAttribute('type');
-    if (currentType === 'password') {
-        pass.setAttribute('type', 'text');
-    } else {
-        pass.setAttribute('type', 'password');
-    }
-});
-
-if (toast) {
-    toast.style.display = 'flex';
-    setTimeout(() => {
-        toast.style.display = 'none';
-    }, 3000); // Hide after 3 seconds
-}
-
-document.getElementById('myForm').addEventListener('submit', (e) => {
-    e.preventDefault();
-    toast.style.display = 'block';
-    setTimeout(() => {
-        toast.style.display = 'none';
-    }, 3000);
-});
-
-    </script>
+ <script src="/Login_Registration/script1.js">
+ </script>
   </body>
 </html>

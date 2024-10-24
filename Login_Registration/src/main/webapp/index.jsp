@@ -34,7 +34,9 @@
         >
           <a href="/Login_Registration" class="text-4xl font-bold">LOGO</a>
           <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
-            <a>EXPLORE</a>
+             <a>EXPLORE</a>
+            <!-- <form action="logout" method="post">
+            <input type="submit" value="Logout"></form>-->
             <a>about</a>
             <a href="/contact.jsp">contact</a>
             <a href="/Login_Registration/login.jsp">login</a>
@@ -54,10 +56,11 @@
               <a href="/Login_Registration/main.jsp"
                 class="px-8 py-4 rounded-md shadow-xl text-white   uppercase bg-[#7E60BF]"
               >
+              
                 Get Started
               </a>
               <div class="mt-8 underline font-semibold">
-                <a href="/Login_Registration/login.jsp">Already have an account? </a><a href="/Login_Registration/login.jsp">Login in</a>
+                <a href="/Login_Registration/login.jsp">Already have an account? </a><a href="/Login_Registration/login.jsp">Login</a>
               </div>
             </div>
             <img class="h-[40rem]" src="Assets/bg.jpg" />
@@ -385,7 +388,7 @@
                     target="_blank"
                     class="text-white transition hover:opacity-75"
                   >
-                    <span class="sr-only">Dribbble</span>
+                    <span class="sr-only">Dribble</span>
     
                     <svg
                       class="size-6"

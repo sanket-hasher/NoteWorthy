@@ -7,8 +7,25 @@
     <%
     //String username=request.getParameter("username");
     //String emailid=request.getParameter("email");
-    String username = (String) session.getAttribute("username");
-    String emailid = (String) session.getAttribute("email");
+   // String username = (String) session.getAttribute("username");
+   // String emailid = (String) session.getAttribute("email");
+   String username = null;
+    String emailid = null;
+    
+    // Get cookies from the request
+    Cookie[] cookies = request.getCookies();
+    
+    if (cookies != null) {
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("username")) {
+                username = cookie.getValue();
+            }
+            if (cookie.getName().equals("email")) {
+                emailid = cookie.getValue();
+            }
+        }
+    }
+    
     %>
 <!DOCTYPE html>
 <html lang="en">

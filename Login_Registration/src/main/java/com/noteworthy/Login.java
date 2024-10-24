@@ -10,6 +10,7 @@ import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,85 +22,90 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	  private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
-	    private static final String DB_USER = "Sanket";
-	    private static final String DB_PASSWORD = "Sanket7044";
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Login() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
+	private static final String DB_USER = "Sanket";
+	private static final String DB_PASSWORD = "Sanket7044";
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public Login() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+
 		PrintWriter out = response.getWriter();
 
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        if(username==null || username.isEmpty()||password==null||password.isEmpty())
-        {
-        	response.sendRedirect("login.jsp?msg=invalid");
-        }
-        else
-        	
-        {
-        	try {
-                // Load MySQL JDBC Driver
-                Class.forName("com.mysql.cj.jdbc.Driver");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
 
-                // Establish a connection
-                Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+		if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+			response.sendRedirect("login.jsp?msg=invalid");
+		} else {
+			try {
+				// Load MySQL JDBC Driver
+				Class.forName("com.mysql.cj.jdbc.Driver");
 
-                // SQL select query to verify user credentials
-                String sql = "SELECT email FROM User WHERE username = ? AND password = ?";
+				// Establish a connection
+				Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-                // Prepare statement
-                PreparedStatement preparedStatement = connection.prepareStatement(sql);
-                preparedStatement.setString(1, username);
-                preparedStatement.setString(2, password);
+				// SQL select query to verify user credentials
+				String sql = "SELECT email FROM User WHERE username = ? AND password = ?";
 
-                // Execute query
-                ResultSet resultSet = preparedStatement.executeQuery();
+				// Prepare statement
+				PreparedStatement preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, username);
+				preparedStatement.setString(2, password);
 
-                // Check if a matching user exists
-                if (resultSet.next()) {
-                	String email = resultSet.getString("email");
-                	System.out.println(email);
-                	HttpSession session = request.getSession();
-                	session.setAttribute("username", username);
-                	session.setAttribute("email", email);
-                	response.sendRedirect("main.jsp");
-//                	response.sendRedirect("http://localhost:8080/Task/paint.jsp?username=" + URLEncoder.encode(username, "UTF-8")+ "&email=" + URLEncoder.encode(email, "UTF-8"));
-//                	response.sendRedirect("http://localhost:8080/Task/files.jsp?username=" + URLEncoder.encode(username, "UTF-8")+ "&email=" + URLEncoder.encode(email, "UTF-8"));
-                	//response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(email, "UTF-8"));
-                	
-                } else {
-                	response.sendRedirect("login.jsp?msg=valid&username=notfound");
-                }
+				// Execute query
+				ResultSet resultSet = preparedStatement.executeQuery();
 
-                // Close resources
-                resultSet.close();
-                preparedStatement.close();
-                connection.close();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-                out.println("<h3>Error: JDBC Driver not found.</h3>");
-            } catch (SQLException e) {
-                e.printStackTrace();
-                out.println("<h3>Error: Database connection or SQL operation failed.</h3>");
-            }
-        }
-        
-        
+				// Check if a matching user exists
+				if (resultSet.next()) {
+					String email = resultSet.getString("email");
+
+					// Set session attributes
+					HttpSession session = request.getSession();
+					session.setAttribute("username", username);
+					session.setAttribute("email", email);
+
+					// Create cookies to store the username and email
+					Cookie usernameCookie = new Cookie("username", username);
+					Cookie emailCookie = new Cookie("email", email);
+
+					// Set the expiration time for the cookies (e.g., 7 days)
+					usernameCookie.setMaxAge(7 * 24 * 60 * 60); // 7 days in seconds
+					emailCookie.setMaxAge(7 * 24 * 60 * 60);
+
+					// Add the cookies to the response
+					response.addCookie(usernameCookie);
+					response.addCookie(emailCookie);
+
+					// Redirect to the main page
+					response.sendRedirect("main.jsp");
+				} else {
+					response.sendRedirect("login.jsp?msg=valid&username=notfound");
+				}
+
+				// Close resources
+				resultSet.close();
+				preparedStatement.close();
+				connection.close();
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+				out.println("<h3>Error: JDBC Driver not found.</h3>");
+			} catch (SQLException e) {
+				e.printStackTrace();
+				out.println("<h3>Error: Database connection or SQL operation failed.</h3>");
+			}
+		}
 	}
 
 	/**
@@ -109,5 +115,4 @@ public class Login extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }
