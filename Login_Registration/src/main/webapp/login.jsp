@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%@ page import="java.net.URLEncoder" %>
-     <%String msg=request.getParameter("msg");
+<%@ page import="java.net.URLEncoder" %>
+<%String msg=request.getParameter("msg");
     String username=request.getParameter("username");
     String emailid=request.getParameter("email");%>
     <!DOCTYPE html>

@@ -57,9 +57,9 @@
 }
       </style>
   <body>
-    <div class="flex">
+    <div class="flex w-full">
       <aside
-      class="flex flex-col h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l"
+      class="flex w-[18%] flex-col h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l"
     >
       <a href="/Login_Registration/index.jsp">
         <svg
@@ -197,21 +197,23 @@
         </nav>
       </div>
     </aside>
-      <div class="container mx-auto">
-        <div class="flex space-x-4 mt-8">
+      <div class="bg-purple-100 mx-auto w-[82%]">
+        <div class="flex space-x-4 mt-8 justify-center">
           <!-- To Do Column -->
           <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
             <h2 class="font-bold text-xl mb-4">To Do</h2>
-            <div class="mb-4">
+            <div class="mb-4" id="todo-column">
               <input
+              	class="border rounded p-2 w-full"
                 id="new-task-todo"
                 type="text"
                 placeholder="Add new task"
-                class="border rounded p-2 w-full"
+                
               />
               <button
+                
+                class="mt-2 w-full bg-purple-600 text-white p-2 rounded"
                 onclick="addTask('todo')"
-                class="mt-2 w-full bg-blue-500 text-white p-2 rounded"
               >
                 Add Task
               </button>
@@ -241,16 +243,12 @@
           <!-- In Progress Column -->
           <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
             <h2 class="font-bold text-xl mb-4">In Progress</h2>
-            <div class="mb-4">
-              <input
-                id="new-task-inprogress"
-                type="text"
-                placeholder="Add new task"
-                class="border rounded p-2 w-full"
-              />
+            <div class="mb-4" id="in-progress-column">
+              <input class="border rounded p-2 w-full" id="new-task-inprogress" type="text" placeholder="Add new task" />
               <button
+                
+                class="mt-2 w-full bg-purple-600 text-white p-2 rounded"
                 onclick="addTask('inprogress')"
-                class="mt-2 w-full bg-blue-500 text-white p-2 rounded"
               >
                 Add Task
               </button>
@@ -280,7 +278,7 @@
           <!-- Done Column -->
           <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
             <h2 class="font-bold text-xl mb-4">Done</h2>
-            <div class="mb-4">
+            <div class="mb-4" id="done-column">
               <input
                 id="new-task-done"
                 type="text"
@@ -288,8 +286,9 @@
                 class="border rounded p-2 w-full"
               />
               <button
+                
+                class="mt-2 w-full bg-purple-600 text-white p-2 rounded"
                 onclick="addTask('done')"
-                class="mt-2 w-full bg-blue-500 text-white p-2 rounded"
               >
                 Add Task
               </button>
@@ -318,7 +317,7 @@
         </div>
       </div>
     </div>
-    <script>
+    <script type="text/javascript">
       function drag(event) {
         event.dataTransfer.setData("text", event.target.id);
         event.target.classList.add("dragging");
@@ -333,16 +332,42 @@
       }
 
       function addTask(column) {
-        const taskInput = document.getElementById(`new-task-${column}`);
+    	  console.log("column name",column)
+        const taskInput = document.getElementById('new-task-'+column);
+    	 console.log("Task Input element:", taskInput);
+        if (!taskInput) 
+        {
+            //console.error(Input element with ID 'new-task-${column}' not found.);
+            return;
+          }
         const taskText = taskInput.value.trim();
-        if (taskText === "") return;
+        if (taskText === "") 
+        	return;
+        
+        const taskId = `task-${Date.now()}`;
 
         // Create new task element
+        
         const taskElement = document.createElement("div");
-        taskElement.className =
-          "task bg-blue-100 p-4 rounded-md cursor-pointer";
+       
+        
+        switch (column) {
+        case 'todo':
+            taskElement.className = "task bg-blue-100 p-4 rounded-md cursor-pointer"; // To Do
+            break;
+        case 'inprogress':
+            taskElement.className = "task bg-yellow-100 p-4 rounded-md cursor-pointer"; // In Progress
+            break;
+        case 'done':
+            taskElement.className = "task bg-green-100 p-4 rounded-md cursor-pointer"; // Done
+            break;
+        default:
+            taskElement.className = "task bg-gray-100 p-4 rounded-md cursor-pointer"; // Default color
+    }
         taskElement.draggable = true;
         taskElement.ondragstart = drag;
+        taskElement.id = taskId;
+        
 
         // Add task text
         taskElement.textContent = taskText;

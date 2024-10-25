@@ -39,4 +39,14 @@
     <servlet-name>Logout</servlet-name>
     <url-pattern>/Logout</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubmitReview</display-name>
+    <servlet-name>SubmitReview</servlet-name>
+    <servlet-class>com.noteworthy.SubmitReview</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubmitReview</servlet-name>
+    <url-pattern>/SubmitReview</url-pattern>
+  </servlet-mapping>
 </web-app>
