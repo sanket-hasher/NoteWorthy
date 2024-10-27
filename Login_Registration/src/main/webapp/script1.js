@@ -7,7 +7,7 @@ eyebtn.addEventListener('click', (e) => {
 	console.log(e);
     // Check the current type and toggle between 'text' and 'password'
     const currentType = pass.getAttribute('type');
-    if (currentType === 'text') {
+    if (currentType == 'text') {
         pass.setAttribute('type', 'password');
     } else {
         pass.setAttribute('type', 'text');

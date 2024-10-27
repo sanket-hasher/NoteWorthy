@@ -24,7 +24,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
-
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
   </head>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -235,7 +235,7 @@
         </div>
 
         <div class="flex flex-col gap-4 w-[40%] ">
-          <div class="swiper mySwiper">
+          <!-- <div class="swiper mySwiper">
             <div class="swiper-wrapper">
               <div class="swiper-slide">
                 <p class="text-2xl">⭐⭐⭐⭐⭐</p>
@@ -287,11 +287,16 @@
               </div>
             </div>
              <div class="swiper-pagination"></div>
-          </div>
+          </div>-->
+          <div class="swiper-container">
+    <div class="swiper-wrapper" id="reviewsContainer">
+        <!-- Dynamic reviews will be injected here -->
+    </div>
+</div>
           <div>
 
           </div>
-
+          <div id="message" style="display: none;"></div>
           <form id="reviewForm" onsubmit="submitReview(event)">
             <!-- Name Field -->
             <div>
@@ -304,6 +309,7 @@
             <div class="relative mt-8">
               <div class="relative w-full min-w-[200px]">
                 <textarea rows="8"
+                  name="comment"
                   class="peer h-full min-h-[100px] w-full !resize-none  rounded-[7px] border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
                   placeholder=" "></textarea>
                 <label
@@ -554,6 +560,59 @@
       integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+    /*document.addEventListener("DOMContentLoaded", function() {
+        fetch('loadReviews')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(reviews => {
+                const reviewsContainer = document.getElementById('reviewsContainer');
+                reviews.forEach(review => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.innerHTML = `
+                        <p class="text-2xl">${'?'.repeat(review.stars)} (${review.stars})</p>
+                        <h2 class="text-3xl font-bold">${review.name}</h2>
+                        <p class="font-semibold">"${review.comment}"</p>
+                    `;
+                    reviewsContainer.appendChild(slide);
+                });
+                // Initialize Swiper here if needed
+            })
+            .catch(error => {
+                console.error('Error fetching reviews:', error);
+            });
+    });*/
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('loadReviews')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.json();
+            })
+            .then(reviews => {
+                console.log('Fetched Reviews:', reviews); // Log the fetched reviews
+                const reviewsContainer = document.getElementById('reviewsContainer');
+                reviews.forEach(review => {
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.innerHTML = `
+                        <p class="text-2xl">${'?'.repeat(review.stars)} (${review.stars})</p>
+                        <h2 class="text-3xl font-bold">${review.name}</h2>
+                        <p class="font-semibold">"${review.comment}"</p>
+                    `;
+                    reviewsContainer.appendChild(slide);
+                });
+                // Initialize Swiper here if needed
+            })
+            .catch(error => {
+                console.error('Error fetching reviews:', error);
+            });
+    });
     
     var username = "<%= username != null ? username : "" %>";
     
@@ -595,35 +654,50 @@ gsap.registerPlugin(ScrollTrigger);
         },
       });
 
-
       function submitReview(event) {
-        event.preventDefault(); // Prevent default form submission
+    	    event.preventDefault(); // Prevent default form submission
 
-        const form = document.getElementById("reviewForm");
-        const formData = new URLSearchParams(new FormData(form));
+    	    const form = document.getElementById("reviewForm");
+    	    const formData = new URLSearchParams(new FormData(form));
 
-        fetch("/Login_Registration/submitReview", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: formData.toString()
-        })
-          .then(response => {
-            // Check if the response is okay
-            if (!response.ok) {
-              throw new Error("Network response was not ok: " + response.statusText);
-            }
-            return response.text(); // Get the response text
-          })
-          .then(message => {
-            console.log("Server Response:", message); // Debugging log
-            document.getElementById("message").innerHTML = `<p>${message}</p>`; // Display server message
-            document.getElementById("reviewForm").reset(); // Optionally reset the form after submission
-          })
-          .catch(error => {
-            console.error("Error:", error); // Detailed error log
-            document.getElementById("message").innerHTML = "<p style='color:red;'>An error occurred while submitting the review. Please try again later.</p>";
-          });
-      }
+    	    console.log("Form Data:", formData.toString()); // Debugging form data output
+
+    	    fetch("submitReview", {
+    	        method: "POST",
+    	        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    	        body: formData.toString()
+    	    })
+    	    .then(response => {
+    	        // Check if the response is okay
+    	        if (!response.ok) {
+    	            throw new Error("Network response was not ok: " + response.statusText);
+    	        }
+    	        return response.text(); // Get the response text
+    	    })
+    	    .then(message => {
+    	        console.log("Server Response:", message); // Debugging log
+    	        displayMessage(message, 'success'); // Display success message
+    	        document.getElementById("reviewForm").reset(); // Optionally reset the form after submission
+    	    })
+    	    .catch(error => {
+    	        console.error("Error:", error); // Detailed error log
+    	        displayMessage("An error occurred while submitting the review. Please try again later.", 'error'); // Display error message
+    	    });
+    	}
+
+    	// Function to display messages
+    	function displayMessage(message, type) {
+    const messageElement = document.getElementById("message");
+    console.log("Displaying message:", message, "Type:", type); // Log message type and content
+    if (messageElement) {
+        messageElement.innerHTML = `<p style='color:${type == 'success' ? 'green' : 'red'};'>${message}</p>`;
+        messageElement.style.display = 'block'; // Ensure the message is visible
+        console.log("Message displayed:", messageElement.innerHTML); // Log displayed message
+    } else {
+        console.log("Message element not found.");
+    }
+}
+
 
       gsap.from("#anime1 h2, #anime1 div div",{
         delay:0.4,
