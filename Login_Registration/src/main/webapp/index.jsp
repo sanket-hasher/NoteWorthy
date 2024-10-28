@@ -140,7 +140,7 @@
         <img class="h-[42rem]" src="Assets/bg.jpg" />
       </div>
     </div>
-    <div class="relative flex flex-col items-center w-full h-[55vh] mb-8 p-8">
+    <div class="relative flex flex-col items-center w-full  mb-8 p-8">
       <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
         <source src="Assets/file.mp4" type="video/mp4">
 
@@ -227,7 +227,7 @@
       </div>
     </div>
 
-    <div class=" max-w-[90%] h-[70vh] m-auto mb-8 ">
+    <div class=" max-w-[90%]  m-auto mb-8 ">
       <h2 class="text-center text-4xl font-bold mb-8">Customer Reviews</h2>
       <div id="anime3" class="flex w-full items-start">
         <div class="w-[60%]">
@@ -235,64 +235,16 @@
         </div>
 
         <div class="flex flex-col gap-4 w-[40%] ">
-          <!-- <div class="swiper mySwiper">
-            <div class="swiper-wrapper">
-              <div class="swiper-slide">
-                <p class="text-2xl">⭐⭐⭐⭐⭐</p>
-                <h2 class=" text-3xl font-bold">Emily R</h2>
-                <p class="font-semibold">"I absolutely love this study planner! It helps me stay organized and
-                  on track with my work. The automatic syncing between my laptop
-                  and phone is a game-changer!"
-                </p>
-              </div>
-              <div class="swiper-slide">
-                <p class="text-2xl">⭐⭐⭐⭐⭐</p>
-                <h2 class=" text-3xl font-bold">Emily R</h2>
-                <p class="font-semibold">"I absolutely love this study planner! It helps me stay organized and
-                  on track with my work. The automatic syncing between my laptop
-                  and phone is a game-changer!"
-                </p>
-              </div>
-              <div class="swiper-slide">
-                <p class="text-2xl">⭐⭐⭐⭐⭐</p>
-                <h2 class=" text-3xl font-bold">Emily R</h2>
-                <p class="font-semibold">"I absolutely love this study planner! It helps me stay organized and
-                  on track with my work. The automatic syncing between my laptop
-                  and phone is a game-changer!"
-                </p>
-              </div>
-              <div class="swiper-slide">
-                <p class="text-2xl">⭐⭐⭐⭐⭐</p>
-                <h2 class=" text-3xl font-bold">Emily R</h2>
-                <p class="font-semibold">"I absolutely love this study planner! It helps me stay organized and
-                  on track with my work. The automatic syncing between my laptop
-                  and phone is a game-changer!"
-                </p>
-              </div>
-              <div class="swiper-slide">
-                <p class="text-2xl">⭐⭐⭐⭐⭐</p>
-                <h2 class=" text-3xl font-bold">Emily R</h2>
-                <p class="font-semibold">"I absolutely love this study planner! It helps me stay organized and
-                  on track with my work. The automatic syncing between my laptop
-                  and phone is a game-changer!"
-                </p>
-              </div>
-              <div class="swiper-slide">
-                <p class="text-2xl">⭐⭐⭐⭐⭐</p>
-                <h2 class=" text-3xl font-bold">Emily R</h2>
-                <p class="font-semibold">"I absolutely love this study planner! It helps me stay organized and
-                  on track with my work. The automatic syncing between my laptop
-                  and phone is a game-changer!"
-                </p>
-              </div>
-            </div>
-             <div class="swiper-pagination"></div>
-          </div>-->
-          <div class="swiper-container">
-    <div class="swiper-wrapper" id="reviewsContainer">
-        <!-- Dynamic reviews will be injected here -->
+          <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+            <!-- Slides will be dynamically inserted here -->
+        </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
     </div>
-</div>
+       
+        
           <div>
 
           </div>
@@ -586,33 +538,69 @@
                 console.error('Error fetching reviews:', error);
             });
     });*/
-    document.addEventListener("DOMContentLoaded", function() {
-        fetch('loadReviews')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(reviews => {
-                console.log('Fetched Reviews:', reviews); // Log the fetched reviews
-                const reviewsContainer = document.getElementById('reviewsContainer');
-                reviews.forEach(review => {
-                    const slide = document.createElement('div');
-                    slide.className = 'swiper-slide';
-                    slide.innerHTML = `
-                        <p class="text-2xl">${'?'.repeat(review.stars)} (${review.stars})</p>
-                        <h2 class="text-3xl font-bold">${review.name}</h2>
-                        <p class="font-semibold">"${review.comment}"</p>
-                    `;
-                    reviewsContainer.appendChild(slide);
-                });
-                // Initialize Swiper here if needed
-            })
-            .catch(error => {
-                console.error('Error fetching reviews:', error);
+    document.addEventListener("DOMContentLoaded", async function () {
+        try {
+            const response = await fetch('loadReviews');
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+
+            const reviews = await response.json();
+            console.log('Fetched Reviews:', reviews); // Log the fetched reviews
+
+            // Select the Swiper wrapper element
+            const swiperWrapper = document.querySelector('.swiper-wrapper');
+
+            // Clear any existing slides
+            swiperWrapper.innerHTML = ''; // Clear previous content
+
+            // Loop through each review and create slides
+            reviews.forEach(review => {
+                // Create a new slide
+                const slide = document.createElement('div');
+                slide.classList.add('swiper-slide');
+
+                // Create the inner content for the slide
+                const stars = document.createElement('p');
+                stars.className = "text-2xl";
+                stars.textContent = '⭐'.repeat(review.stars); // Set stars based on review.stars
+
+                const name = document.createElement('h2');
+                name.className = "text-3xl font-bold";
+                name.textContent = review.name; // Set the review name
+
+                const comment = document.createElement('p');
+                comment.className = "font-semibold";
+                comment.textContent = review.comment; // Set the review comment
+
+                // Append the content to the slide
+                slide.appendChild(stars);
+                slide.appendChild(name);
+                slide.appendChild(comment);
+
+                // Append the slide to the Swiper wrapper
+                swiperWrapper.appendChild(slide);
             });
+
+            // Initialize Swiper after adding all slides
+            var swiper = new Swiper(".mySwiper", {
+                grabCursor: true,
+                loop: true,
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+
+        } catch (error) {
+            console.error('Error fetching reviews:', error);
+        }
     });
+
     
     var username = "<%= username != null ? username : "" %>";
     
