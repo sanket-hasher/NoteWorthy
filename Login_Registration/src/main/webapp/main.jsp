@@ -161,7 +161,7 @@
               />
             </svg>
     
-            <a href="http://localhost:8080/Task/paint.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Paint</a>
+            <a href="http://localhost:8080/Task/paint.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Whiteboard</a>
           </p>
     
           <p

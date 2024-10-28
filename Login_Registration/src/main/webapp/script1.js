@@ -4,7 +4,9 @@ const toast = document.querySelector('.toast');
 
 
 eyebtn.addEventListener('click', (e) => {
+	//console.log(" hello ")
 	console.log(e);
+	
     // Check the current type and toggle between 'text' and 'password'
     const currentType = pass.getAttribute('type');
     if (currentType == 'text') {
@@ -21,8 +23,8 @@ if (toast) {
     }, 3000); // Hide after 3 seconds
 }
 
-document.getElementById('myForm').addEventListener('submit', (e) => {
-    e.preventDefault();
+document.getElementById('myForm').addEventListener('submit', () => {
+   
     toast.style.display = 'block';
     setTimeout(() => {
         toast.style.display = 'none';
