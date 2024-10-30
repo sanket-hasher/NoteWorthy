@@ -1,7 +1,6 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.net.URLEncoder" %>
+
 <%String msg=request.getParameter("msg");
     String username=request.getParameter("username");
     String emailid=request.getParameter("email");%>
@@ -11,6 +10,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+    
     <title>Document</title>
   </head>
    <style>
@@ -294,6 +297,7 @@
           >
             <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
               <button
+              id="googleSignInButton"
                 type="button"
                 class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
@@ -423,8 +427,21 @@
 	    </div>
             <%}
             else
-            {
-            	response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(emailid, "UTF-8"));%>
+            {%>
+            <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-green-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Login Successful
+	        </p>
+	      </div>
+	    </div>
+            
+            	<% //response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(emailid, "UTF-8"));%>
             	
             <%} %>
             
@@ -441,7 +458,7 @@
         </div>
       </div>
     </div>
- <script src="/Login_Registration/script1.js">
- </script>
+ 
+ <script src="/Login_Registration/script1.js" ></script>
   </body>
 </html>

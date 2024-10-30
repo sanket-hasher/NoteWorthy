@@ -103,7 +103,7 @@
         </li>
         <li class="relative">
           <div class="group">
-            <a href="/Login_Registration/login.jsp" id="login-container" style="display: none" class="block">login</a>
+            <a href="http://localhost:8080/Login_Registration/login.jsp" id="login-container" style="display: none" class="block">login</a>
             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
           </div>
            <div id="logout-container" class="group" style="display: none">
@@ -133,8 +133,8 @@
             Get Started
           </a>
           <div id="show-login" class="mt-8 underline font-semibold none">
-            <a href="/Login_Registration/login.jsp">Already have an account? </a><a
-              href="/Login_Registration/login.jsp">Login</a>
+            <a href="http://localhost:8080/Login_Registration/login.jsp">Already have an account? </a><a
+              href="http://localhost:8080/Login_Registration/login.jsp">Login</a>
           </div>
         </div>
         <img class="h-[42rem]" src="Assets/bg.jpg" />
@@ -618,9 +618,9 @@
         var getStartedButton = document.getElementById('get-started-btn');
         
         if (username) {
-            getStartedButton.href = "/Login_Registration/main.jsp";
+            getStartedButton.href = "http://localhost:8080/Login_Registration/main.jsp";
         } else {
-            getStartedButton.href = "/Login_Registration/login.jsp";
+            getStartedButton.href = "http://localhost:8080/Login_Registration/login.jsp";
         }
     });
 
