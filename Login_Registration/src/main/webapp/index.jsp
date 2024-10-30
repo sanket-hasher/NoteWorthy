@@ -618,9 +618,9 @@
         var getStartedButton = document.getElementById('get-started-btn');
         
         if (username) {
-            getStartedButton.href = "http://localhost:8080/Login_Registration/main.jsp";
+            getStartedButton.href = "/Login_Registration/main.jsp";
         } else {
-            getStartedButton.href = "http://localhost:8080/Login_Registration/login.jsp";
+            getStartedButton.href = "/Login_Registration/login.jsp";
         }
     });
 
