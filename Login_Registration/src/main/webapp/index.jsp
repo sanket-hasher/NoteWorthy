@@ -80,7 +80,7 @@
 
   <body class="bg-white text-black">
     <nav class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50">
-      <a href="/Login_Registration" class="text-[6rem] font-sans-serif">Eduler</a>
+      <a href="/Login_Registration" class="text-6xl font-bold">Eduler</a>
       <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
         <li class="relative">
           <div class="group">
