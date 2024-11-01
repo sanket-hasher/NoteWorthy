@@ -60,9 +60,11 @@
       </a>
     
       <div class="flex flex-col items-center mt-6 -mx-2">
-         <div class="w-[6rem] h-[6rem] flex items-center justify-center text-center bg-red-500 rounded-full">
-    <h1 id="name" class="font-bold text-6xl text-white capitalize"><%= username.charAt(0) %></h1>
-</div>
+         <div
+				id="profile-icon"
+					class="w-[6rem] h-[6rem] flex items-center justify-center text-center rounded-full">
+					<h1 id="name" class="font-bold text-6xl text-white capitalize"><%=username.charAt(0)%></h1>
+				</div>
         <h4 class="mx-2 mt-2 font-medium text-white"><%=username %></h4>
         <p class="mx-2 mt-1 text-sm font-medium text-white"><%=emailid %></p>
       </div>
@@ -124,8 +126,20 @@
 
 
     
-   <!--  <script>
-      const calendar = document.querySelector(".calendar"),
+     <script>
+     
+     const colors = ["#FF5722", "#D32F2F", "#388E3C"];
+
+		// Select a random color from the array
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pick a random color
+			const randomColor = colors[Math.floor(Math.random() * colors.length)];
+			// Apply it to the background of the profile-icon
+			document.getElementById("profile-icon").style.backgroundColor = randomColor;
+		});
+     
+     
+   /*   const calendar = document.querySelector(".calendar"),
   date = document.querySelector(".date"),
   daysContainer = document.querySelector(".days"),
   prev = document.querySelector(".prev"),
@@ -599,7 +613,7 @@ function convertTime(time) {
   timeHour = timeHour % 12 || 12;
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
-}
-    </script>-->
+}*/
+    </script>
   </body>
 </html>

@@ -11,11 +11,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-auth.js"></script>
     
-    <title>Document</title>
-  </head>
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    
+
+
+
+    
+<title>Document</title>
+</head>
    <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
    * {
@@ -296,9 +302,13 @@
             class="mt-4 flex flex-col lg:flex-row items-center justify-between"
           >
             <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
+            <div class="g_id_signin" 
+         data-client_id="454600243556-d5d9aeqpmmr1scbhqmsildr49tbgcnu5.apps.googleusercontent.com" 
+         data-callback="onSignIn">
+    </div>
+              
               <button
               id="googleSignInButton"
-                type="button"
                 class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300"
               >
                 <svg
@@ -324,7 +334,8 @@
                     d="m419.404 58.936-82.933 67.896C313.136 112.246 285.552 103.82 256 103.82c-66.729 0-123.429 42.957-143.965 102.724l-83.397-68.276h-.014C71.23 56.123 157.06 0 256 0c62.115 0 119.068 22.126 163.404 58.936z"
                   ></path>
                 </svg>
-                Sign Up with Google
+                
+                Sign In With Google
               </button>
             </div>
             <div class="w-full lg:w-1/2 ml-0 lg:ml-2">
@@ -460,5 +471,57 @@
     </div>
  
  <script src="/Login_Registration/script1.js" ></script>
+ <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+// Your Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyCfX2-NYv587NRPNGXXPFJXFW4MyDp4hvM",
+    authDomain: "eduler-aa8a6.firebaseapp.com",
+    projectId: "eduler-aa8a6",
+    storageBucket: "eduler-aa8a6.appspot.com",
+    messagingSenderId: "130343224889",
+    appId: "1:130343224889:web:af64cf2bf7b3656b186fe8",
+    measurementId: "G-XK1NDEME6D"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth();
+
+// Google Sign-In function
+document.getElementById('googleSignInButton').addEventListener('click', async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+        const result = await signInWithPopup(auth, provider);
+        const user = result.user;
+        const idToken = await user.getIdToken();
+
+        console.log("ID Token:", idToken); // Log the ID Token for debugging
+
+        // Send the ID token to your servlet
+        const response = await fetch('googlelogin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ idToken }) // Ensure that idToken is sent as a JSON object
+        });
+
+        const data = await response.json();
+        if (data.success) {
+            window.location.href = 'main.jsp'; // Redirect to main.jsp on success
+        } else {
+            console.error(data.message);
+        }
+    } catch (error) {
+        console.error("Error during sign-in:", error);
+    }
+});
+
+    </script>
   </body>
 </html>

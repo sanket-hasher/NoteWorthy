@@ -76,7 +76,8 @@ if (cookies != null) {
 
 			<div class="flex flex-col items-center mt-6 -mx-2">
 				<div
-					class="w-[6rem] h-[6rem] flex items-center justify-center text-center bg-red-500 rounded-full">
+				id="profile-icon"
+					class="w-[6rem] h-[6rem] flex items-center justify-center text-center rounded-full">
 					<h1 id="name" class="font-bold text-6xl text-white capitalize"><%=username.charAt(0)%></h1>
 				</div>
 
@@ -213,6 +214,15 @@ if (cookies != null) {
 		const nameElement = document.getElementById("name");
 		const firstChar = nameElement.textContent.charAt(0);
 		nameElement.textContent = firstChar;
+		const colors = ["#FF5722", "#D32F2F", "#388E3C"];
+
+		// Select a random color from the array
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pick a random color
+			const randomColor = colors[Math.floor(Math.random() * colors.length)];
+			// Apply it to the background of the profile-icon
+			document.getElementById("profile-icon").style.backgroundColor = randomColor;
+		});
 
 		function drag(event) {
 			event.dataTransfer.setData("text", event.target.id);
