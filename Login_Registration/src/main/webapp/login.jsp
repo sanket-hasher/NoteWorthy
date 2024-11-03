@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-<%String msg=request.getParameter("msg");
-    String username=request.getParameter("username");
-    String emailid=request.getParameter("email");%>
     <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -360,104 +356,81 @@
           <div class="mt-4 text-sm text-gray-600 text-center">
             <p>or with email</p>
           </div>
-          <form id='myFrom' action="login" method="post" class="space-y-4">
-            <!-- Your form elements go here -->
-            <div>
-              <label
-                for="username"
-                class="block text-sm font-medium text-gray-700"
-                >Username</label
-              >
-              <input
-                type="text"
-                id="username"
-                name="username"
-                class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-              />
-            </div>
-            <div>
-              <label
-                for="password"
-                class="block text-sm font-medium text-gray-700"
-                >Password</label
-              >
-              <div class="flex items-center">
-                <input
-                  type="password"
-                  name="password"
-                  id="pass"
-                  class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
-                />
-                <div class="absolute">
-                <svg id="eyebtn" class="h-5 relative left-[22rem] cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
-                  <!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                  <path
-                    fill="#929cae"
-                    d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C89.6 183.5 63 226 49.4 256c13.6 30 40.2 72.5 78.6 108.3C169.2 402.4 222.8 432 288 432s118.8-29.6 159.9-67.7C486.4 328.5 513 286 526.6 256c-13.6-30-40.2-72.5-78.6-108.3C406.8 109.6 353.2 80 288 80zM95.4 112.6C142.5 68.8 207.2 32 288 32s145.5 36.8 192.6 80.6c46.8 43.5 78.1 95.4 93 131.1c3.3 7.9 3.3 16.7 0 24.6c-14.9 35.7-46.2 87.7-93 131.1C433.5 443.2 368.8 480 288 480s-145.5-36.8-192.6-80.6C48.6 356 17.3 304 2.5 268.3c-3.3-7.9-3.3-16.7 0-24.6C17.3 208 48.6 156 95.4 112.6zM288 336c44.2 0 80-35.8 80-80s-35.8-80-80-80c-.7 0-1.3 0-2 0c1.3 5.1 2 10.5 2 16c0 35.3-28.7 64-64 64c-5.5 0-10.9-.7-16-2c0 .7 0 1.3 0 2c0 44.2 35.8 80 80 80zm0-208a128 128 0 1 1 0 256 128 128 0 1 1 0-256z"
-                  />
+          <form id="myForm" action="login" method="post" class="space-y-4">
+    <!-- Username field -->
+    <div>
+        <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
+        <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your Username"
+            class="mt-1 p-2 w-full border rounded-md focus:border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-300 transition-colors duration-300"
+        />
+    </div>
+    
+    <!-- Password field -->
+    <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <div class="relative w-full">
+    <input type="password" id="pass" name="password" class="w-full p-2 border rounded" placeholder="Enter your password">
+    <svg id="eyebtn" class="h-5 w-5 text-gray-500 absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+        <path fill="#929cae" d="M288 80c-65.2 0-118.8 29.6-159.9 67.7C92.7 200.6 48 250 48 250s44.7 49.4 80.1 67.7c41.1 38.1 94.7 67.7 159.9 67.7s118.8-29.6 159.9-67.7C483.3 299.4 528 250 528 250s-44.7-49.4-80.1-67.7C406.8 109.6 353.2 80 288 80zm0 288c-53 0-96-43-96-96s43-96 96-96 96 43 96 96-43 96-96 96zM288 256a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"></path>
+    </svg>
+</div>
+
+    </div>
+    
+    <!-- Submit button -->
+    <div>
+        <input
+            type="submit"
+            value="Login"
+            class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
+        />
+    </div>
+    
+    <!-- Display error or success messages -->
+    <%
+        String msg = request.getParameter("msg");
+        String usernameParam = request.getParameter("username");
+        if ("invalid".equals(msg)) {
+    %>
+        <div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
                 </svg>
-                </div>
-                
-              </div>
             </div>
-            <div>
-              <input
-                type="submit"
-                value="Login"
-                class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-black focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors duration-300"
-              >
-                
-              
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Enter Your Credentials</p>
             </div>
-            <% if(msg.equals("invalid")) { %>
-             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	          Enter Your Credentials
-	        </p>
-	      </div>
-	    </div>
-            <% }
-            else if( msg.equals("valid") && username.equals("notfound")) { %>
-            <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	          Username or Passowrd Incorrect
-	        </p>
-	      </div>
-	    </div>
-            <%}
-            else
-            {%>
-            <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-green-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	          Login Successful
-	        </p>
-	      </div>
-	    </div>
-            
-            	<% //response.sendRedirect("main.jsp?msg=valid&username=" + URLEncoder.encode(username, "UTF-8") + "&email=" + URLEncoder.encode(emailid, "UTF-8"));%>
-            	
-            <%} %>
-            
-            
-          </form>
+        </div>
+    <% } else if ("valid".equals(msg) && "notfound".equals(usernameParam)) { %>
+        <div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                </svg>
+            </div>
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Username or Password Incorrect</p>
+            </div>
+        </div>
+    <% } else if ("valid".equals(msg) && !"notfound".equals(usernameParam)) { %>
+        <div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-green-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                </svg>
+            </div>
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Login Successful</p>
+            </div>
+        </div>
+    <% } %>
+</form>
+
           <div class="mt-4 text-sm text-gray-600 text-center">
             <p>
               Don't have an account?
