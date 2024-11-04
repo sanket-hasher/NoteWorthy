@@ -83,7 +83,7 @@ if (cookies != null) {
 
 
 				<h4 class="mx-2 mt-2 font-medium text-white"><%=username%></h4>
-				<p class="mx-2 mt-1 text-sm font-medium text-white"><%=emailid%></p>
+				
 			</div>
 
 			<div class="flex flex-col justify-between flex-1 mt-6">
