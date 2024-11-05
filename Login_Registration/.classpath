@@ -26,5 +26,7 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/slf4j-simple-2.0.16.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/slf4j-api-2.0.16.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/json-20240303.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/new-temp/NoteWorthy/Dependencies/jakarta.activation-2.0.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Desktop/new-temp/NoteWorthy/Dependencies/jakarta.mail-2.0.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
