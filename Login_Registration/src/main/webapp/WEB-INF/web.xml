@@ -58,4 +58,34 @@
     <servlet-name>GoogleLoginServlet</servlet-name>
     <url-pattern>/GoogleLoginServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GenerateOtp</display-name>
+    <servlet-name>GenerateOtp</servlet-name>
+    <servlet-class>com.noteworthy.GenerateOtp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GenerateOtp</servlet-name>
+    <url-pattern>/GenerateOtp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>VerifyOtp</display-name>
+    <servlet-name>VerifyOtp</servlet-name>
+    <servlet-class>com.noteworthy.VerifyOtp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>VerifyOtp</servlet-name>
+    <url-pattern>/VerifyOtp</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdatePassword</display-name>
+    <servlet-name>UpdatePassword</servlet-name>
+    <servlet-class>com.noteworthy.UpdatePassword</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdatePassword</servlet-name>
+    <url-pattern>/UpdatePassword</url-pattern>
+  </servlet-mapping>
 </web-app>
