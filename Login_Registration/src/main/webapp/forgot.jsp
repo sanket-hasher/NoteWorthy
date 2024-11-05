@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
-<!DOCTYPE html>
+   <% String msg=request.getParameter("msg"); %>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -126,166 +126,19 @@
         <!-- Right Pane -->
         <div class="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
           <div class="max-w-md w-full p-6">
-            <h1 class="text-3xl font-semibold mb-6 text-black text-center">Sign Up</h1>
+            <h1 class="text-3xl font-semibold mb-6 text-black text-center">Verify Yourself</h1>
             <h1 class="text-sm font-semibold mb-6 text-gray-500 text-center">Join to Our Community with all time access and free </h1>
-            <div class="mt-4 flex flex-col lg:flex-row items-center justify-between">
-              <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
-                <button type="button" class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4" id="google">
-                    <path fill="#fbbb00" d="M113.47 309.408 95.648 375.94l-65.139 1.378C11.042 341.211 0 299.9 0 256c0-42.451 10.324-82.483 28.624-117.732h.014L86.63 148.9l25.404 57.644c-5.317 15.501-8.215 32.141-8.215 49.456.002 18.792 3.406 36.797 9.651 53.408z"></path>
-                    <path fill="#518ef8" d="M507.527 208.176C510.467 223.662 512 239.655 512 256c0 18.328-1.927 36.206-5.598 53.451-12.462 58.683-45.025 109.925-90.134 146.187l-.014-.014-73.044-3.727-10.338-64.535c29.932-17.554 53.324-45.025 65.646-77.911h-136.89V208.176h245.899z"></path>
-                    <path fill="#28b446" d="m416.253 455.624.014.014C372.396 490.901 316.666 512 256 512c-97.491 0-182.252-54.491-225.491-134.681l82.961-67.91c21.619 57.698 77.278 98.771 142.53 98.771 28.047 0 54.323-7.582 76.87-20.818l83.383 68.262z"></path>
-                    <path fill="#f14336" d="m419.404 58.936-82.933 67.896C313.136 112.246 285.552 103.82 256 103.82c-66.729 0-123.429 42.957-143.965 102.724l-83.397-68.276h-.014C71.23 56.123 157.06 0 256 0c62.115 0 119.068 22.126 163.404 58.936z"></path>
-                  </svg> Sign Up with Google </button>
-              </div>
-              <div class="w-full lg:w-1/2 ml-0 lg:ml-2">
-                <button type="button" class="w-full flex justify-center items-center gap-2 bg-white text-sm text-gray-600 p-2 rounded-md hover:bg-gray-50 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 transition-colors duration-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" id="github" class="w-4">
-                    <path d="M7.999 0C3.582 0 0 3.596 0 8.032a8.031 8.031 0 0 0 5.472 7.621c.4.074.546-.174.546-.387 0-.191-.007-.696-.011-1.366-2.225.485-2.695-1.077-2.695-1.077-.363-.928-.888-1.175-.888-1.175-.727-.498.054-.488.054-.488.803.057 1.225.828 1.225.828.714 1.227 1.873.873 2.329.667.072-.519.279-.873.508-1.074-1.776-.203-3.644-.892-3.644-3.969 0-.877.312-1.594.824-2.156-.083-.203-.357-1.02.078-2.125 0 0 .672-.216 2.2.823a7.633 7.633 0 0 1 2.003-.27 7.65 7.65 0 0 1 2.003.271c1.527-1.039 2.198-.823 2.198-.823.436 1.106.162 1.922.08 2.125.513.562.822 1.279.822 2.156 0 3.085-1.87 3.764-3.652 3.963.287.248.543.738.543 1.487 0 1.074-.01 1.94-.01 2.203 0 .215.144.465.55.386A8.032 8.032 0 0 0 16 8.032C16 3.596 12.418 0 7.999 0z"></path>
-                  </svg> Sign Up with Github </button>
-              </div>
-            </div>
-            <div class="mt-4 text-sm text-gray-600 text-center">
-              <p>or with email</p>
-            </div>
-            <form id="signupForm" action="register" method="post" class="space-y-4">
-              <div>
-                  <label for="username" class="block text-sm font-medium text-gray-700">Username</label>
-                  <input type="text" id="username" name="username" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
-                  <span class="error hidden" id="usernameError">Username must be 3-20 characters long and contain only letters and numbers.</span>
-              </div>
+            <form  class="space-y-4">
               <div>
                   <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                   <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
                   <span class="error hidden" id="emailError">Please enter a valid email.</span>
               </div>
               <div>
-                  <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
-                  <input type="password" id="password" name="password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
-                  <span class="error hidden" id="passwordError">Password must be at least 8 characters long and include at least one number and one special character.</span>
+              <a class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300" href="/Login_Registration/otp.jsp">
+                  Generate OTP
+              </a>
               </div>
-              <div>
-                  <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
-                  <input type="password" id="confirm-password" name="confirm-password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
-                  <span class="error hidden" id="confirmPasswordError">Passwords do not match.</span>
-              </div>
-              <div>
-                  <input type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300" value="Sign Up">
-              </div>
-              <%
-   String msg = request.getParameter("msg"); 
-   if (msg != null) {
-       if (msg.equals("invalid")) {
-           // Invalid form input
-%>
-            	 <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	          Please fill out the form
-	        </p>
-	      </div>
-	    </div>
-            	<% }
-            else if (msg.equals("short-password")) {
-            %>
-             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	          Password too short
-	        </p>
-	      </div>
-	    </div>
-            <% }
-            else if (msg.equals("weak-password")) {
-            %>
-             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	         Password must contain at least one uppercase letter, one special character, and one digit
-	        </p>
-	      </div>
-	    </div>
-            	<% }
-            else if (msg.equals("password-mismatch")) {
-            %>
-             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        Passwords Donot Match
-	        </p>
-	      </div>
-	    </div>
-            
-            	<% }
-            else if(msg.equals("same-username-found")) {
-            %>
-              <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        User already exits
-	        </p>
-	      </div>
-	    </div>
-            <% }
-            else if(msg.equals("signup-failed")) {
-            %>
-             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-	        </svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        Failed to signup
-	        </p>
-	      </div>
-	    </div>
-            <% } 
-            else {
-            	%>
-            	  <div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	       <svg class="shrink-0 size-5 mt-0.2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"></path>
-</svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        Registration Sucessful
-	        </p>
-	      </div>
-	    </div>
-            	<a href="/Login_Registration/index.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Return to Home</a>
-            
-            <% }
-       }
-       %>
           </form>
             <div class="mt-4 text-sm text-gray-600 text-center">
               <p>Already have an account? <a href="/Login_Registration/login.jsp" class="text-black hover:underline">Login here</a>
@@ -296,17 +149,7 @@
       </div>
       <script>
 
-      if (toast) {
-          toast.style.display = 'flex';
-          setTimeout(() => {
-              toast.style.display = 'none';
-          }, 3000); // Hide after 3 seconds
-      }
-      document.getElementById('signupForm').addEventListener('submit', (e) => {
-    	    e.preventDefault();
-    	
-    	    
-    	});
+     
 
       </script>
 </body>

@@ -57,7 +57,7 @@ public class Login extends HttpServlet {
 				Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
 				// SQL select query to verify user credentials
-				String sql = "SELECT email FROM User WHERE username = ? AND password = ?";
+				String sql = "SELECT Email FROM User WHERE Username = ? AND Password = ?";
 
 				// Prepare statement
 				PreparedStatement preparedStatement = connection.prepareStatement(sql);

@@ -27,487 +27,23 @@
       name="keywords"
       content="calendar, events, reminders, javascript, html, css, open source coding"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
-      integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
+  
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="./node_modules/preline/dist/preline.js"></script>
+    
   </head>
   <style>
-    :root {
-  --primary-clr: #b38add;
-}
- @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+   @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
    * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
 }
-/* nice scroll bar */
-::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: #f5f5f5;
-  border-radius: 50px;
-}
-::-webkit-scrollbar-thumb {
-  background: var(--primary-clr);
-  border-radius: 50px;
-}
-
-
-.calendar {
-  border-radius: 5px;
-  background-color: #fff;
-}
-/* set after behind the main element */
-.calendar::before,
-.calendar::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  width: 12px;
-  height: 97%;
-  border-radius: 0 5px 5px 0;
-  background-color: #d3d4d6d7;
-  transform: translateY(-50%);
-}
-.calendar::before {
-  height: 94%;
-  left: calc(100% + 12px);
-  background-color: rgb(153, 153, 153);
-}
-.calendar .month {
-  width: 100%;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 50px;
-  font-size: 1.2rem;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-.calendar .month .prev,
-.calendar .month .next {
-  cursor: pointer;
-}
-.calendar .month .prev:hover,
-.calendar .month .next:hover {
-  color: var(--primary-clr);
-}
-.calendar .weekdays {
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: capitalize;
-}
-.weekdays div {
-  width: 14.28%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.calendar .days {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 0 20px;
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-.calendar .days .day {
-  width: 14.28%;
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--primary-clr);
-  border: 1px solid #f5f5f5;
-}
-.calendar .days .day:nth-child(7n + 1) {
-  border-left: 2px solid #f5f5f5;
-}
-.calendar .days .day:nth-child(7n) {
-  border-right: 2px solid #f5f5f5;
-}
-.calendar .days .day:nth-child(-n + 7) {
-  border-top: 2px solid #f5f5f5;
-}
-.calendar .days .day:nth-child(n + 29) {
-  border-bottom: 2px solid #f5f5f5;
-}
-
-.calendar .days .day:not(.prev-date, .next-date):hover {
-  color: #fff;
-  background-color: var(--primary-clr);
-}
-.calendar .days .prev-date,
-.calendar .days .next-date {
-  color: #b3b3b3;
-}
-.calendar .days .active {
-  position: relative;
-  font-size: 2rem;
-  color: #fff;
-  background-color: var(--primary-clr);
-}
-.calendar .days .active::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  box-shadow: 0 0 10px 2px var(--primary-clr);
-}
-.calendar .days .today {
-  font-size: 2rem;
-}
-.calendar .days .event {
-  position: relative;
-}
-.calendar .days .event::after {
-  content: "";
-  position: absolute;
-  bottom: 10%;
-  left: 50%;
-  width: 75%;
-  height: 6px;
-  border-radius: 30px;
-  transform: translateX(-50%);
-  background-color: var(--primary-clr);
-}
-.calendar .days .day:hover.event::after {
-  background-color: #fff;
-}
-.calendar .days .active.event::after {
-  background-color: #fff;
-  bottom: 20%;
-}
-.calendar .days .active.event {
-  padding-bottom: 10px;
-}
-.calendar .goto-today {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 5px;
-  padding: 0 20px;
-  margin-bottom: 20px;
-  color: var(--primary-clr);
-}
-.calendar .goto-today .goto {
-  display: flex;
-  align-items: center;
-  border-radius: 5px;
-  overflow: hidden;
-  border: 1px solid var(--primary-clr);
-}
-.calendar .goto-today .goto input {
-  width: 100%;
-  height: 30px;
-  outline: none;
-  border: none;
-  border-radius: 5px;
-  padding: 0 20px;
-  color: var(--primary-clr);
-  border-radius: 5px;
-}
-.calendar .goto-today button {
-  padding: 5px 10px;
-  border: 1px solid var(--primary-clr);
-  border-radius: 5px;
-  background-color: transparent;
-  cursor: pointer;
-  color: var(--primary-clr);
-}
-.calendar .goto-today button:hover {
-  color: #fff;
-  background-color: var(--primary-clr);
-}
-.calendar .goto-today .goto button {
-  border: none;
-  border-left: 1px solid var(--primary-clr);
-  border-radius: 0;
-}
-.container .right {
-  position: relative;
-  width: 40%;
-  min-height: 100%;
-  padding: 20px 0;
-}
-
-.right .today-date {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
-  padding-left: 70px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  text-transform: capitalize;
-}
-.right .today-date .event-day {
-  font-size: 2rem;
-  font-weight: 500;
-}
-.right .today-date .event-date {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #878895;
-}
-.events {
-  width: 100%;
-  height: 100%;
-  max-height: 600px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  padding-left: 4px;
-}
-.events .event {
-  position: relative;
-  width: 95%;
-  min-height: 70px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0 20px;
-  padding-left: 50px;
-  color: #fff;
-  background: linear-gradient(90deg, #3f4458, transparent);
-  cursor: pointer;
-}
-/* even event */
-.events .event:nth-child(even) {
-  background: transparent;
-}
-.events .event:hover {
-  background: linear-gradient(90deg, var(--primary-clr), transparent);
-}
-.events .event .title {
-  display: flex;
-  align-items: center;
-  pointer-events: none;
-}
-.events .event .title .event-title {
-  font-size: 1rem;
-  font-weight: 400;
-  margin-left: 20px;
-}
-.events .event i {
-  color: var(--primary-clr);
-  font-size: 0.5rem;
-}
-.events .event:hover i {
-  color: #fff;
-}
-.events .event .event-time {
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: #878895;
-  margin-left: 15px;
-  pointer-events: none;
-}
-.events .event:hover .event-time {
-  color: #fff;
-}
-/* add tick in event after */
-.events .event::after {
-  content: "✓";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  font-size: 3rem;
-  line-height: 1;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.3;
-  color: var(--primary-clr);
-  transform: translateY(-50%);
-}
-.events .event:hover::after {
-  display: flex;
-}
-.add-event {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  color: #878895;
-  border: 2px solid #878895;
-  opacity: 0.5;
-  border-radius: 50%;
-  background-color: transparent;
-  cursor: pointer;
-}
-.add-event:hover {
-  opacity: 1;
-}
-.add-event i {
-  pointer-events: none;
-}
-.events .no-event {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: #878895;
-}
-.add-event-wrapper {
-  position: absolute;
-  bottom: 100px;
-  left: 50%;
-  width: 90%;
-  max-height: 0;
-  overflow: hidden;
-  border-radius: 5px;
-  background-color: #fff;
-  transform: translateX(-50%);
-  transition: max-height 0.5s ease;
-}
-.add-event-wrapper.active {
-  max-height: 300px;
-}
-.add-event-header {
-  width: 100%;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  color: #373c4f;
-  border-bottom: 1px solid #f5f5f5;
-}
-.add-event-header .close {
-  font-size: 1.5rem;
-  cursor: pointer;
-}
-.add-event-header .close:hover {
-  color: var(--primary-clr);
-}
-.add-event-header .title {
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-.add-event-body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-  padding: 20px;
-}
-.add-event-body .add-event-input {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-}
-.add-event-body .add-event-input input {
-  width: 100%;
-  height: 100%;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid #f5f5f5;
-  padding: 0 10px;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #373c4f;
-}
-.add-event-body .add-event-input input::placeholder {
-  color: #a5a5a5;
-}
-.add-event-body .add-event-input input:focus {
-  border-bottom: 1px solid var(--primary-clr);
-}
-.add-event-body .add-event-input input:focus::placeholder {
-  color: var(--primary-clr);
-}
-.add-event-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.add-event-footer .add-event-btn {
-  height: 40px;
-  font-size: 1rem;
-  font-weight: 500;
-  outline: none;
-  border: none;
-  color: #fff;
-  background-color: var(--primary-clr);
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 5px 10px;
-  border: 1px solid var(--primary-clr);
-}
-.add-event-footer .add-event-btn:hover {
-  background-color: transparent;
-  color: var(--primary-clr);
-}
-
-
-.credits {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  text-align: center;
-  padding: 10px;
-  font-size: 12px;
-  color: #fff;
-  background-color: #b38add;
-}
-.credits a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-}
-.credits a:hover {
-  text-decoration: underline;
-}
   </style>
-  <body class="flex items-center justify-center bg-[#e2e1dc]">
+ 
+  <body class="flex w-full bg-purple-100 ">
     <aside
-      class="flex flex-col h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l"
+      class="flex w-[18%] flex-col h-screen px-4 py-8 overflow-y-hidden bg-[#433878] rtl:border-r-0 rtl:border-l "
     >
       <a href="/Login_Registration">
         <svg
@@ -524,11 +60,11 @@
       </a>
     
       <div class="flex flex-col items-center mt-6 -mx-2">
-        <img
-          class="object-cover w-24 h-24 mx-2 rounded-full"
-          src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-          alt="avatar"
-        />
+         <div
+				id="profile-icon"
+					class="w-[6rem] h-[6rem] flex items-center justify-center text-center rounded-full">
+					<h1 id="name" class="font-bold text-6xl text-white capitalize"><%=username.charAt(0)%></h1>
+				</div>
         <h4 class="mx-2 mt-2 font-medium text-white"><%=username %></h4>
         <p class="mx-2 mt-1 text-sm font-medium text-white"><%=emailid %></p>
       </div>
@@ -536,20 +72,11 @@
       <div class="flex flex-col justify-between flex-1 mt-6">
         <nav class="cursor-pointer">
           <p class="flex items-center px-4 py-2 text-white rounded-lg">
-            <svg
-              class="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19 11H5M19 11C20.1046 11 21 11.8954 21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V13C3 11.8954 3.89543 11 5 11M19 11V9C19 7.89543 18.1046 7 17 7M5 11V9C5 7.89543 5.89543 7 7 7M7 7V5C7 3.89543 7.89543 3 9 3H15C16.1046 3 17 3.89543 17 5V7M7 7H17"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+           <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 512 512">
+							<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+							<path fill="#ffffff"
+								d="M152.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 113C-2.3 103.6-2.3 88.4 7 79s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L7 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM224 96c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32l224 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-224 0c-17.7 0-32-14.3-32-32zM160 416c0-17.7 14.3-32 32-32l288 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-288 0c-17.7 0-32-14.3-32-32zM48 368a48 48 0 1 1 0 96 48 48 0 1 1 0-96z" /></svg>
     
             <a href="http://localhost:8080/Login_Registration/main.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Daily Tasks</a>
           </p>
@@ -557,28 +84,12 @@
             class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg"
             href="#"
           >
-            <svg
-              class="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-    
+            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 448 512">
+							<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+							<path fill="#ffffff"
+								d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z" /></svg>
+						
             <a href="http://localhost:8080/Task/schedule.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Schedule</a>
           </p>
     
@@ -586,56 +97,21 @@
             class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg"
             href="#"
           >
-            <svg
-              class="w-5 h-5"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
+           <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M339.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L568.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S517.7-4.4 499.1 9.6L262.4 187.2c-24 18-38.2 46.1-38.4 76.1L339.3 367.1zm-19.6 25.4l-116-104.4C143.9 290.3 96 339.6 96 400c0 3.9 .2 7.8 .6 11.6C98.4 429.1 86.4 448 68.8 448L64 448c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg>
     
-            <a href="http://localhost:8080/Task/paint.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Paint</a>
+            <a href="http://localhost:8080/Task/paint.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Whiteboard</a>
           </p>
     
           <p
           class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg"
           href="#"
         >
-          <svg
-            class="w-5 h-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+         <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 384 512">
+							<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
+							<path fill="#ffffff"
+								d="M320 464c8.8 0 16-7.2 16-16l0-288-80 0c-17.7 0-32-14.3-32-32l0-80L64 48c-8.8 0-16 7.2-16 16l0 384c0 8.8 7.2 16 16 16l256 0zM0 64C0 28.7 28.7 0 64 0L229.5 0c17 0 33.3 6.7 45.3 18.7l90.5 90.5c12 12 18.7 28.3 18.7 45.3L384 448c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64z" /></svg>
+         
     
           <a href="http://localhost:8080/Task/files.jsp?username=<%= username %>&email=<%= emailid %>" class="mx-4 font-medium">Files</a>
         </p>
@@ -644,77 +120,26 @@
         </nav>
       </div>
     </aside>
-    <div class="container relative w-3/4 m-auto flex p-[5px] rounded-lg text-white bg-[#373c4f]">
-      <div class="left w-[60%] p-[20px]">
-        <div class="calendar relative w-full h-full flex flex-col flex-wrap justify-between text-[#878895]">
-          <div class="month">
-            <i class="fas fa-angle-left prev"></i>
-            <div class="date">december 2015</div>
-            <i class="fas fa-angle-right next"></i>
-          </div>
-          <div class="weekdays">
-            <div>Sun</div>
-            <div>Mon</div>
-            <div>Tue</div>
-            <div>Wed</div>
-            <div>Thu</div>
-            <div>Fri</div>
-            <div>Sat</div>
-          </div>
-          <div class="days"></div>
-          <div class="goto-today">
-            <div class="goto">
-              <input type="text" placeholder="mm/yyyy" class="date-input" />
-              <button class="goto-btn">Go</button>
-            </div>
-            <button class="today-btn">Today</button>
-          </div>
-        </div>
-      </div>
-      <div class="right">
-        <div class="today-date">
-          <div class="event-day">wed</div>
-          <div class="event-date">12th december 2022</div>
-        </div>
-        <div class="events"></div>
-        <div class="add-event-wrapper">
-          <div class="add-event-header">
-            <div class="title">Add Work</div>
-            <i class="fas fa-times close"></i>
-          </div>
-          <div class="add-event-body">
-            <div class="add-event-input">
-              <input type="text" placeholder="Title" class="event-name" />
-            </div>
-            <div class="add-event-input">
-              <input
-                type="text"
-                placeholder="Work Time From"
-                class="event-time-from"
-              />
-            </div>
-            <div class="add-event-input">
-              <input
-                type="text"
-                placeholder="Work Time To"
-                class="event-time-to"
-              />
-            </div>
-          </div>
-          <div class="add-event-footer">
-            <button class="add-event-btn">Add Event</button>
-          </div>
-        </div>
-      </div>
-      <button class="add-event">
-        <i class="fas fa-plus"></i>
-      </button>
+    <div class="container relative  flex p-[5px] rounded-lg text-white  w-[82%] ">
+     
     </div>
 
 
     
-   <!--  <script>
-      const calendar = document.querySelector(".calendar"),
+     <script>
+     
+     const colors = ["#FF5722", "#D32F2F", "#388E3C"];
+
+		// Select a random color from the array
+		document.addEventListener("DOMContentLoaded", function() {
+			// Pick a random color
+			const randomColor = colors[Math.floor(Math.random() * colors.length)];
+			// Apply it to the background of the profile-icon
+			document.getElementById("profile-icon").style.backgroundColor = randomColor;
+		});
+     
+     
+   /*   const calendar = document.querySelector(".calendar"),
   date = document.querySelector(".date"),
   daysContainer = document.querySelector(".days"),
   prev = document.querySelector(".prev"),
@@ -1188,7 +613,7 @@ function convertTime(time) {
   timeHour = timeHour % 12 || 12;
   time = timeHour + ":" + timeMin + " " + timeFormat;
   return time;
-}
-    </script>-->
+}*/
+    </script>
   </body>
 </html>
