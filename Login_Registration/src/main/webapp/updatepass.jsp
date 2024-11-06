@@ -212,7 +212,7 @@
 	    </div>
             
             	<% }
-            else if(msg.equals("same-username-found")) {
+            else if(msg.equals("email-not-found")) {
             %>
               <div class="toast none flex p-4 bg-[#eee] rounded-lg">
 	      <div class="shrink-0">
@@ -222,7 +222,7 @@
 	      </div>
 	      <div class="ms-3">
 	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        User already exits
+	        Email Not Found
 	        </p>
 	      </div>
 	    </div>
@@ -237,7 +237,7 @@
 	      </div>
 	      <div class="ms-3">
 	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        Failed to signup
+	        Failed to Update Password Retry
 	        </p>
 	      </div>
 	    </div>
