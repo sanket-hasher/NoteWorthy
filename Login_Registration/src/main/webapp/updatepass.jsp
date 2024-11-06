@@ -1,14 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="java.net.URLEncoder"%>
-   <%@ page import ="jakarta.servlet.*" %>
-   <%@ page import ="jakarta.servlet.http.*" %>
-<%@ page session="true"%>
-<%
-String username =(String) session.getAttribute("username");
-System.out.println(username);
-%>
-    <!DOCTYPE html>
+ <% 
+ %>  
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -40,40 +34,6 @@ System.out.println(username);
 ::-webkit-scrollbar-thumb {
   background: var(--primary-clr);
   border-radius: 50px;
-}
-
-button:focus,
-input:focus{
-  outline: none;
-  box-shadow: none;
-}
-a,
-a:hover{
-  text-decoration: none;
-}
-
-body{
-  font-family: 'Roboto', sans-serif;
-}
-
-/*------------------  */
-.otp-form-group{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.otp-inputbar{
-    width: 50px;
-    height: 50px;
-    border-radius: 15px;
-    text-align: center;
-    margin-right: 10px;
-    font-size: 16px;
-    color: #333;
-}
-#errmsg
-{
-color: red;
 }
      
   </style>
@@ -166,53 +126,125 @@ color: red;
         </div>
         <!-- Right Pane -->
         <div class="w-full bg-gray-100 lg:w-1/2 flex items-center justify-center">
+        
           <div class="max-w-md w-full p-6">
-            <h1 class="text-3xl font-semibold mb-6 text-black text-center">OTP Verification</h1>
-            <h1 class="text-sm font-semibold mb-6 text-gray-500 text-center">Join to Our Community with all time access and free </h1>
-            <form  action="verifyotp" method="post" class="space-y-4">
-            <div class="form-group-input otp-form-group mb-3">
-                  <input name="a" type="text" minlength="1" maxlength="1" class="form-control otp-inputbar">
-                  <input name="b" type="text" minlength="1" maxlength="1" class="form-control otp-inputbar">
-                  <input name="c" type="text" minlength="1" maxlength="1" class="form-control otp-inputbar">
-                  <input name="d" type="text" minlength="1" maxlength="1" class="form-control otp-inputbar">
-                  <input name="e" type="text" minlength="1" maxlength="1" class="form-control otp-inputbar">
-                  <input name="f" type="text" minlength="1" maxlength="1" class="form-control otp-inputbar">
-                </div>
-             
-              
+          <form id="updateform" action="updatepass" method="post" class="space-y-4">
+          <div>
+                  <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                  <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
+                  <span class="error hidden" id="passwordError">Password must be at least 8 characters long and include at least one number and one special character.</span>
+              </div>
               <div>
-              <input id="submitbtn" value="Verify" type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300">
+                  <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                  <input type="password" id="password" name="password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
+                  <span class="error hidden" id="passwordError">Password must be at least 8 characters long and include at least one number and one special character.</span>
+              </div>
+              <div>
+                  <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+                  <input type="password" id="confirm-password" name="confirm-password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
+                  <span class="error hidden" id="confirmPasswordError">Passwords do not match.</span>
+              </div>
+              <div>
+                  <input type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300" value="Update Password">
               </div>
               <%
-              //String username = (String) session.getAttribute("username"); 
-				/*request.setAttribute("username", username);
-				RequestDispatcher dispatcher = request.getRequestDispatcher("updatepass");
-			    dispatcher.forward(request, response);*/
-              String received = (String) session.getAttribute("receivedotp");
-                 String otp = (String) session.getAttribute("otp");
-                 boolean otpVerified = false;
-                 if(received!=null){
-					//System.out.println(otp);
-					if(!otp.equals(received))
-					{%>
-						<div class="toast flex p-4 bg-[#eee] rounded-lg">
-            <div class="shrink-0">
-                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
-                </svg>
-            </div>
-            <div class="ms-3">
-                <p class="text-sm text-gray-700 font-semibold">Wrong OTP</p>
-            </div>
-        </div>
-        <a href="/Login_Registration/forgot.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Resend otp</a>
-				<% }
-					else if(otp.equals(received)){
-						otpVerified = true;
-						
-						%>
-						
-						<div class="toast none flex p-4 bg-[#eee] rounded-lg">
+   String msg = request.getParameter("msg"); 
+   if (msg != null) {
+       if (msg.equals("invalid")) {
+           // Invalid form input
+%>
+            	 <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Please fill out the form
+	        </p>
+	      </div>
+	    </div>
+            	<% }
+            else if (msg.equals("short-password")) {
+            %>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	          Password too short
+	        </p>
+	      </div>
+	    </div>
+            <% }
+            else if (msg.equals("weak-password")) {
+            %>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	         Password must contain at least one uppercase letter, one special character, and one digit
+	        </p>
+	      </div>
+	    </div>
+            	<% }
+            else if (msg.equals("password-mismatch")) {
+            %>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        Passwords Donot Match
+	        </p>
+	      </div>
+	    </div>
+            
+            	<% }
+            else if(msg.equals("email-not-found")) {
+            %>
+              <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        Email Not Found
+	        </p>
+	      </div>
+	    </div>
+            <% }
+            else if(msg.equals("update-failed")) {
+            %>
+             <div class="toast none flex p-4 bg-[#eee] rounded-lg">
+	      <div class="shrink-0">
+	        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+	          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+	        </svg>
+	      </div>
+	      <div class="ms-3">
+	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
+	        Failed to Update Password Retry
+	        </p>
+	      </div>
+	    </div>
+            <% } 
+            else {
+            	%>
+            	  <div class="toast none flex p-4 bg-[#eee] rounded-lg">
 	      <div class="shrink-0">
 	       <svg class="shrink-0 size-5 mt-0.2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
 <path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"></path>
@@ -220,84 +252,26 @@ color: red;
 	      </div>
 	      <div class="ms-3">
 	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        Verified
+	        Password Changed Sucessfully
 	        </p>
 	      </div>
 	    </div>
-	    <a href="http://localhost:8080/Login_Registration/updatepass.jsp?username=<%=username%>"
-						class="mx-4 font-medium">Update Password</a>
-						
-				
-				
-            	
-				
-				<%}
-					}%>	
-				
-					
-					
+            	<a href="/Login_Registration/login.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Return to Login</a>
+            
+            <% }
+       }
+       %>
           </form>
             <div class="mt-4 text-sm text-gray-600 text-center">
-              <p>Already have an account? <a href="/Login_Registration/login.jsp" class="text-black hover:underline">Login here</a>
-              </p>
+              <!--  <p>Already have an account? <a href="/Login_Registration/login.jsp" class="text-black hover:underline">Login here</a>
+              </p>-->
             </div>
           </div>
         </div>
       </div>
       <script>
 
-      if (toast) {
-          toast.style.display = 'flex';
-          setTimeout(() => {
-              toast.style.display = 'none';
-          }, 3000); // Hide after 3 seconds
-      }
-      document.getElementById('signupForm').addEventListener('submit', (e) => {
-    	    e.preventDefault();
-    	
-    	    
-    	});
-      
-      $(".otp-inputbar").keypress(function (e) {
-    	    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-    	        $("#errmsg").html("Digits Only").show().fadeOut("slow");
-    	        return false;
-    	    }
-    	});
-    	$(".otp-inputbar").on("keyup keydown keypress", function (e) {
-    	    if ($(this).val()) {
-    	        $(this).next().focus();
-    	    }
-    	    var KeyID = e.keyCode;
-    	    switch (KeyID) {
-    	        case 8:
-    	            $(this).val("");
-    	            $(this).prev().focus();
-    	            break;
-    	        case 46:
-    	            $(this).val("");
-    	            $(this).prev().focus();
-    	            break;
-    	        default:
-    	            break;
-    	    }
-    	});
-    	
-    	const toast = document.querySelector('.toast');
-        if (toast) {
-      	    toast.style.display = 'flex';
-      	    setTimeout(() => {
-      	        toast.style.display = 'none';
-      	    }, 3000); // Hide after 3 seconds
-      	}
-
-      	document.getElementById('myForm').addEventListener('submit', () => {
-      	   
-      	    toast.style.display = 'block';
-      	    setTimeout(() => {
-      	        toast.style.display = 'none';
-      	    }, 3000);
-      	});
+     
 
       </script>
 </body>

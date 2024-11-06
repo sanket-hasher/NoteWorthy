@@ -207,7 +207,16 @@ if (cookies != null) {
 						</div>
 					</div>
 				</div>
+				
 			</div>
+			<div>
+				<h2 class="font-bold text-xl mb-4">Audio Recorder</h2>
+  				<button class="mt-2 w-half bg-purple-600 text-white p-2 rounded" id="start">Start Recording</button>
+  				<button class="mt-2 w-half bg-purple-600 text-white p-2 rounded" id="stop" disabled>Stop Recording</button>
+  
+  				<h3 class="font-bold text-xl mb-4">Recordings:</h3>
+  				<ul id="recordingsList"></ul>
+				</div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -294,6 +303,53 @@ if (cookies != null) {
 		function removeTask(button) {
 			button.parentElement.remove();
 		}
+		
+		let mediaRecorder;
+		let audioChunks = [];
+		const recordingsList = document.getElementById("recordingsList");
+
+		document.getElementById("start").addEventListener("click", async () => {
+		  // Request permission and start recording
+		  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+		  mediaRecorder = new MediaRecorder(stream);
+		  audioChunks = [];
+
+		  // Collect audio data in chunks
+		  mediaRecorder.ondataavailable = event => {
+		    audioChunks.push(event.data);
+		  };
+
+		  // Handle stopping of recording
+		  mediaRecorder.onstop = () => {
+		    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+		    const audioUrl = URL.createObjectURL(audioBlob);
+
+		    // Create new audio element for playback
+		    const audioElement = document.createElement("audio");
+		    audioElement.controls = true;
+		    audioElement.src = audioUrl;
+
+		    // Create a download link
+		    const downloadLink = document.createElement("a");
+		    downloadLink.href = audioUrl;
+
+		    // Append audio and download link to the list
+		    const listItem = document.createElement("li");
+		    listItem.appendChild(audioElement);
+		    listItem.appendChild(document.createTextNode(" "));
+		    recordingsList.appendChild(listItem);
+		  };
+
+		  mediaRecorder.start();
+		  document.getElementById("start").disabled = true;
+		  document.getElementById("stop").disabled = false;
+		});
+
+		document.getElementById("stop").addEventListener("click", () => {
+		  mediaRecorder.stop();
+		  document.getElementById("start").disabled = false;
+		  document.getElementById("stop").disabled = true;
+		});
 	</script>
 </body>
 </html>

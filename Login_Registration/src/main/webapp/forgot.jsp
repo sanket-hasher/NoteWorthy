@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <% String msg=request.getParameter("msg"); %>
+
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -128,17 +128,49 @@
           <div class="max-w-md w-full p-6">
             <h1 class="text-3xl font-semibold mb-6 text-black text-center">Verify Yourself</h1>
             <h1 class="text-sm font-semibold mb-6 text-gray-500 text-center">Join to Our Community with all time access and free </h1>
-            <form  class="space-y-4">
+            <form  id="myForm" action="generateotp" method="post" class="space-y-4">
               <div>
                   <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                   <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
                   <span class="error hidden" id="emailError">Please enter a valid email.</span>
               </div>
               <div>
-              <a class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300" href="/Login_Registration/otp.jsp">
-                  Generate OTP
-              </a>
+              <input id="submitbtn" value="Generate Otp" type="submit" class="w-full bg-black text-white p-2 rounded-md hover:bg-gray-800 focus:bg-black focus:outline-none focus:ring-2 focus:ring-gray-900 transition duration-300">
               </div>
+              <% String email=request.getParameter("email");
+ 					if(email!=null){
+ 						if(email.equals("invalid")){%>
+ 						<div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                </svg>
+            </div>
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Enter Your registered Email</p>
+            </div>
+        </div>
+ 							
+ 						<% } else if(email.equals("notfound")) { %>
+ 						<div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                </svg>
+            </div>
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Wrong Email Id</p>
+            </div>
+        </div>
+ 						<% }
+ 						else
+ 						{
+ 							String username = (String) session.getAttribute("username");
+ 							System.out.println(username);
+ 							String otp=(String) session.getAttribute("otp");
+ 						}
+ 					 } %>
+              
           </form>
             <div class="mt-4 text-sm text-gray-600 text-center">
               <p>Already have an account? <a href="/Login_Registration/login.jsp" class="text-black hover:underline">Login here</a>
@@ -148,9 +180,26 @@
         </div>
       </div>
       <script>
-
+      document.getElementById("submitBtn").addEventListener("click", function(event) {
+    	    event.preventDefault(); // Prevent default form submission
+    	    window.location.href = "/Login_Registration/otp.jsp"; // Redirect to the OTP page
+    	});
      
+      const toast = document.querySelector('.toast');
+      if (toast) {
+    	    toast.style.display = 'flex';
+    	    setTimeout(() => {
+    	        toast.style.display = 'none';
+    	    }, 3000); // Hide after 3 seconds
+    	}
 
+    	document.getElementById('myForm').addEventListener('submit', () => {
+    	   
+    	    toast.style.display = 'block';
+    	    setTimeout(() => {
+    	        toast.style.display = 'none';
+    	    }, 3000);
+    	});
       </script>
 </body>
 

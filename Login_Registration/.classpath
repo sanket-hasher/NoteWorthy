@@ -21,6 +21,8 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/json-20240303.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/slf4j-api-2.0.16.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/slf4j-simple-2.0.16.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/jakarta.activation-2.0.1.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/jakarta.mail-2.0.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-21">
 		<attributes>
 			<attribute name="module" value="true"/>
