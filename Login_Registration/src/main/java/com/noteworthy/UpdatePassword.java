@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
@@ -83,9 +84,16 @@ public class UpdatePassword extends HttpServlet {
 	            if (connection != null) 
 	                System.out.println("Connection to the database was successful!");
 	            // SQL insert query
-	     
+	            String sql_usercheck="Select Username from User where Email = ?";
 	            String sql_register = "Update User Set Password=? where email=?";
-	            
+	            PreparedStatement preparedStatement1 = connection.prepareStatement(sql_usercheck);
+	            preparedStatement1.setString(1, email);
+	            ResultSet resultSet = preparedStatement1.executeQuery();
+	            if (!resultSet.next()) {
+//	            	out.println("<h3> Same Username found </h3>");
+	            	response.sendRedirect("updatepass.jsp?msg=email-not-found");
+	            	return;
+	            }
 	            // Prepare statement
 	            PreparedStatement preparedStatement2 = connection.prepareStatement(sql_register);
 	            preparedStatement2.setString(1, password);
@@ -107,7 +115,7 @@ public class UpdatePassword extends HttpServlet {
 
 	            // Close resources
 	            preparedStatement2.close();
-	           
+	            preparedStatement1.close();
 	            connection.close();
 	        } catch (ClassNotFoundException e) {
 	            e.printStackTrace();
