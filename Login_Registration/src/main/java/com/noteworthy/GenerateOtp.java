@@ -27,12 +27,12 @@ import jakarta.servlet.http.HttpSession;
 public class GenerateOtp extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
-    private static final String DB_USER = "Sanket";
-    private static final String DB_PASSWORD = "Sanket7044";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "anuska";
 
     // Email configuration for sending OTP
-    private static final String EMAIL = "sanketdeyng11c@gmail.com"; // Replace with your email
-    private static final String EMAIL_PASSWORD = "glrd unwo pbmh zfqd"; // Replace with your email password
+    private static final String EMAIL = "eduler.notes@gmail.com"; // Replace with your email
+    private static final String EMAIL_PASSWORD = "clki pyqk gcay zmbk"; // Replace with your email password
 
     public GenerateOtp() {
         super();
