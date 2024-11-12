@@ -85,14 +85,26 @@
           <a href="/Login_Registration" class="text-4xl font-bold">Eduler</a>
     </div>
 
-      <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
+      <ul class="flex w-[30%] justify-evenly items-center font-semibold uppercase">
         <li class="relative">
           <div class="group">
-            <a class="cursor-pointer">EXPLORE</a>
-            <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 "></div>
+          <div class="flex justify-center gap-x-1.5 px-3 py-2 border border-white  cursor-pointer" id="exploreBtn">
+                      <a class="cursor-pointer">EXPLORE</a>
+          
+           <svg class="-mr-1 h-5 w-5 text-white " viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+      </svg>
           </div>
+          </div>
+          <div class="absolute  z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+    <div class=" cursor-pointer  max-h-0 overflow-hidden transition-all duration-500 ease-in-out" id="exploreContainer">
+      <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700">Task</a>
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700" >Files</a>
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700">Whiteboard</a>
+    </div>
         </li>
-         
+
         <li class="relative">
           <div class="group">
             <a href="#service" class="cursor-pointer">about</a>
@@ -132,9 +144,10 @@
             and schedule all in one place.
           </p>
           <a id="get-started-btn"  href="/Login_Registration/main.jsp"
-            class="px-8 py-4 rounded-md shadow-xl text-white   uppercase bg-[#7E60BF]">
+            class="inline-flex items-center justify-center px-8 py-4 rounded-md shadow-xl text-white   uppercase bg-[#7E60BF] transition-all shadow-md hover:shadow-lg focus:bg-slate-[#AD88C6] focus:shadow-none active:bg-slate-[#AD88C6] hover:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
 
             Get Started
+             <svg class="w-4 h-4 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
           </a>
           <div id="show-login" class="mt-8 underline font-semibold none">
             <a href="http://localhost:8080/Login_Registration/login.jsp">Already have an account? </a><a
@@ -313,7 +326,7 @@
                   placeholder="Email">
                 <textarea name="" id="text"
                   class="bg-white w-full h-48 shadow-sm resize-none text-gray-600 placeholder-text-400 text-lg font-normal leading-7 rounded-2xl border border-gray-200 focus:outline-none px-4 py-4 mb-8"
-                  placeholder="Phone"></textarea>
+                  placeholder="Comment"></textarea>
                 <button
                   class="w-full h-12 text-center text-white text-base font-semibold leading-6 rounded-full bg-indigo-600 shadow transition-all duration-700 hover:bg-indigo-800">Submit</button>
               </form>
@@ -486,6 +499,20 @@
       integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
       crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+    
+    document.getElementById("exploreBtn").addEventListener("click", () => {
+        const exploreContainer = document.getElementById('exploreContainer');
+        
+        if (exploreContainer.classList.contains('max-h-0')) {
+            exploreContainer.classList.remove('max-h-0');
+            exploreContainer.classList.add('max-h-screen'); // Arbitrary large height for full expansion
+        } else {
+            exploreContainer.classList.remove('max-h-screen');
+            exploreContainer.classList.add('max-h-0');
+        }
+    });
+
+    
     /*document.addEventListener("DOMContentLoaded", function() {
         fetch('loadReviews')
             .then(response => {

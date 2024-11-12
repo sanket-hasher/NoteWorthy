@@ -88,4 +88,54 @@
     <servlet-name>UpdatePassword</servlet-name>
     <url-pattern>/UpdatePassword</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddTask</display-name>
+    <servlet-name>AddTask</servlet-name>
+    <servlet-class>com.noteworthy.AddTask</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddTask</servlet-name>
+    <url-pattern>/AddTask</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MoveToInProgressServlet</display-name>
+    <servlet-name>MoveToInProgressServlet</servlet-name>
+    <servlet-class>com.noteworthy.MoveToInProgressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoveToInProgressServlet</servlet-name>
+    <url-pattern>/MoveToInProgressServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MoveToDoneServlet</display-name>
+    <servlet-name>MoveToDoneServlet</servlet-name>
+    <servlet-class>com.noteworthy.MoveToDoneServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MoveToDoneServlet</servlet-name>
+    <url-pattern>/MoveToDoneServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteTaskServlet</display-name>
+    <servlet-name>DeleteTaskServlet</servlet-name>
+    <servlet-class>com.noteworthy.DeleteTaskServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteTaskServlet</servlet-name>
+    <url-pattern>/DeleteTaskServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoadTasksServlet</display-name>
+    <servlet-name>LoadTasksServlet</servlet-name>
+    <servlet-class>com.noteworthy.LoadTasksServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoadTasksServlet</servlet-name>
+    <url-pattern>/LoadTasksServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
