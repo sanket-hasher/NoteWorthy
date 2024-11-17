@@ -40,7 +40,9 @@ public class VerifyOtp extends HttpServlet {
 		System.out.println(receivedotp);
 		HttpSession session = request.getSession();
         session.setAttribute("receivedotp", receivedotp);
-        response.sendRedirect("otp.jsp");
+        String otp = (String) session.getAttribute("otp");
+        if(receivedotp.equals(otp))
+        response.sendRedirect("updatepass.jsp");
 	}
 
 	/**

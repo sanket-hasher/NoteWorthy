@@ -27,8 +27,8 @@ import jakarta.servlet.http.HttpSession;
 public class GenerateOtp extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "anuska";
+    private static final String DB_USER = "Sanket";
+    private static final String DB_PASSWORD = "Sanket7044";
 
     // Email configuration for sending OTP
     private static final String EMAIL = "eduler.notes@gmail.com"; // Replace with your email
@@ -66,6 +66,7 @@ public class GenerateOtp extends HttpServlet {
                     String username = resultSet.getString("username");
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
+                    session.setAttribute("email",email );
 
                     // Generate OTP
                     int otp = generateOtp();

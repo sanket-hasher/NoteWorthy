@@ -126,11 +126,6 @@
         
           <div class="max-w-md w-full p-6">
           <form id="updateform" action="updatepass" method="post" class="space-y-4">
-          <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                  <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
-                  <span class="error hidden" id="passwordError">Password must be at least 8 characters long and include at least one number and one special character.</span>
-              </div>
               <div>
                   <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                   <input type="password" id="password" name="password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">

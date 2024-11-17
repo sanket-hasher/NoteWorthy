@@ -46,19 +46,24 @@ if (cookies != null) {
 	font-family: "Poppins", sans-serif;
 }
 
-::-webkit-scrollbar {
-	width: 5px;
+
+*:hover {
+    scrollbar-color: auto;
 }
 
-::-webkit-scrollbar-track {
-	background: #f5f5f5;
-	border-radius: 50px;
-}
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
-::-webkit-scrollbar-thumb {
-	background: var(--primary-clr);
-	border-radius: 50px;
-}
+    ::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 50px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #7f77a7;
+      border-radius: 50px;
+    }
 </style>
 <body>
 	<div class="flex w-full">
@@ -168,7 +173,7 @@ if (cookies != null) {
         <input class="border rounded p-2 w-full" id="new-task-todo" type="text" placeholder="Add new task" />
         <button class="mt-2 w-full bg-purple-600 text-white p-2 rounded" onclick="addTask('todo')">Add Task</button>
     </div>
-    <div id="todo" class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg">
+    <div id="todo" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg">
         <!-- Sample Task -->
         <div class="flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer">
             <p>Task 1</p>
@@ -183,13 +188,13 @@ if (cookies != null) {
 <!-- In Progress Column -->
 <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
     <h2 class="font-bold text-xl mb-4">In Progress</h2>
-    <div id="inprogress" class="min-h-[400px] p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+    <div id="inprogress" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
 </div>
 
 <!-- Done Column -->
 <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
     <h2 class="font-bold text-xl mb-4">Done</h2>
-    <div id="done" class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+    <div id="done" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
 </div>
 				
 				
@@ -429,6 +434,7 @@ if (cookies != null) {
 		            };
 		            buttonContainer.appendChild(doneButton);
 		        }
+		        taskElement.appendChild(buttonContainer);
 
 		        // Add the green checkmark icon for completed tasks in the 'done' status
 		        if (task.status === 'done') {

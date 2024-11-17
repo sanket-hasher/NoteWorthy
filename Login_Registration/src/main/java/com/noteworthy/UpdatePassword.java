@@ -40,11 +40,13 @@ public class UpdatePassword extends HttpServlet {
 		//response.getWriter().append("Served at: Sanket Dey ' server ").append(request.getContextPath());
 		 response.setContentType("text/html");
 	        PrintWriter out = response.getWriter();
-	        String email = request.getParameter("email");
-	        System.out.println(email);
+	        //String email = request.getParameter("email");
+	        //System.out.println(email);
 	        String password = request.getParameter("password");
 	        String confirmPassword = request.getParameter("confirm-password");
 	        String passwordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=\\-{}|:;'<>,.?/]).+$";
+	        String email=(String)request.getSession().getAttribute("email");
+	        System.out.println(email);
 
 	        // Validate the input data
 	        if ( email == null || email.isEmpty() ||
