@@ -96,12 +96,14 @@
       </svg>
           </div>
           </div>
-          <div class="absolute  z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+          <div class="absolute  z-10 mt-2 w-56  rounded-md bg-white shadow-lg ">
     <div class=" cursor-pointer  max-h-0 overflow-hidden transition-all duration-500 ease-in-out" id="exploreContainer">
       <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700">Task</a>
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700" >Files</a>
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700">Whiteboard</a>
+      <a href="/Login_Registration/main.jsp" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md">Task</a>
+      <a href="http://localhost:8080/Task/files.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Files</a>
+      <a href="http://localhost:8080/Task/paint.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Whiteboard</a>
+       <a href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Notes</a>
+        <a href="http://localhost:8080/Task/schedule.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" >Schedule</a>
     </div>
         </li>
 
@@ -165,103 +167,95 @@
       <div id="service" class="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10 "></div>
       <div id="anime1" class="relative z-20 w-full">
         <h2 class="text-center text-4xl font-bold mb-8 text-white">Services</h2>
-        <div class="grid grid-cols-5 text-start gap-16">
+        <div class="grid grid-cols-5 text-start gap-4">
           <div
-            class=" relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-[25rem]">
-            <div class=" p-4">
-              <h5 class="mb-2 text-slate-800 text-xl font-semibold">
-                Website Review Check Update from Our Team in San Francisco
-              </h5>
-              <p class="text-slate-600 leading-normal font-light">
-                The place is close to Barceloneta Beach and bus stop just 2 min by
-                walk and near to Naviglio where you can enjoy the main nightlife
-                in Barcelona.
-              </p>
-              <button
-                class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-[#AD88C6] focus:shadow-none active:bg-slate-[#AD88C6] hover:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                Read more
-              </button>
-            </div>
+            class=" relative flex flex-col my-6 ">
+           <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem]">
+    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Progress Tracker</h5>
+    <p class="text-slate-600 leading-normal font-light">
+      <span class="defaultText">Our study planner helps students stay focused and keep you on top of your academic goals with an integrated progress tracker. This feature lets students break down their study goals into manageable tasks, track their completion in real-time.</span>
+      <span class="moreText hidden">and see visual representations of their progress. By regularly updating the tracker, students can stay organized, celebrate their accomplishments, and easily adjust their study plans as needed.</span>
+    </p>
+    <button
+      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      type="button"
+      onclick="toggleText(this)">
+      Read more
+    </button>
+  </div>
           </div>
 		<div
-            class=" relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-[25rem]">
-            <div class=" p-4">
-              <h5 class="mb-2 text-slate-800 text-xl font-semibold">
-                Website Review Check Update from Our Team in San Francisco
-              </h5>
-              <p class="text-slate-600 leading-normal font-light">
-                The place is close to Barceloneta Beach and bus stop just 2 min by
-                walk and near to Naviglio where you can enjoy the main nightlife
-                in Barcelona.
-              </p>
-              <button
-                class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-[#AD88C6] focus:shadow-none active:bg-slate-[#AD88C6] hover:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                Read more
-              </button>
-            </div>
+            class=" relative flex flex-col my-6 ">
+             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem]">
+    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Whiteboard Support</h5>
+    <p class="text-slate-600 leading-normal font-light">
+      <span class="defaultText"> Our study planner includes whiteboard support, allowing students to brainstorm, organize, and visualize ideas, and map out complex topics interactively. This feature mimics a physical whiteboard, making it easy to draw diagrams </span>
+      <span class="moreText hidden">,connect concepts, and organize thoughts.Perfect for collaborative or individual study, it enhances comprehension, simplifies revision, and brings creative flexibility to the planning process for more effective learning.</span>
+    </p>
+    <button
+      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      type="button"
+      onclick="toggleText(this)">
+      Read more
+    </button>
+  </div>
           </div>
 		
           <div
-            class=" relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-[25rem]">
-            <div class=" p-4">
-              <h5 class="mb-2 text-slate-800 text-xl font-semibold">
-                Website Review Check Update from Our Team in San Francisco
-              </h5>
-              <p class="text-slate-600 leading-normal font-light">
-                The place is close to Barceloneta Beach and bus stop just 2 min by
-                walk and near to Naviglio where you can enjoy the main nightlife
-                in Barcelona.
-              </p>
-              <button
-                class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-[#AD88C6] focus:shadow-none active:bg-slate-[#AD88C6] hover:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                Read more
-              </button>
-            </div>
+            class=" relative flex flex-col my-6 ">
+             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem]">
+    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Notes Editor</h5>
+    <p class="text-slate-600 leading-normal font-light">
+      <span class="defaultText"> Our study planner’s notes editor feature offers students to organize their study materials in one convenient place. The notes editor allows for easy formatting, categorizing, and updating of study notes, making it simple to review key points and </span>
+      <span class="moreText hidden">stay on top of course content.This feature supports efficient learning by enabling students to personalize notes, highlight important information, and quickly access them during study sessions.</span>
+    </p>
+    <button
+      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      type="button"
+      onclick="toggleText(this)">
+      Read more
+    </button>
+  </div>
           </div>
 
           <div
-            class=" relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-[25rem]">
-            <div class=" p-4">
-              <h5 class="mb-2 text-slate-800 text-xl font-semibold">
-                Website Review Check Update from Our Team in San Francisco
-              </h5>
-              <p class="text-slate-600 leading-normal font-light">
-                The place is close to Barceloneta Beach and bus stop just 2 min by
-                walk and near to Naviglio where you can enjoy the main nightlife
-                in Barcelona.
-              </p>
-              <button
-                class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-[#AD88C6] focus:shadow-none active:bg-slate-[#AD88C6] hover:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                Read more
-              </button>
-            </div>
+            class=" relative flex flex-col my-6 ">
+             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem]">
+    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Personal Scheduler</h5>
+    <p class="text-slate-600 leading-normal font-light">
+      <span class="defaultText"> Personal scheduler empowers students to effectively manage their time by setting up a personalized study timetable. With this tool, students can allocate specific times for subjects, assignments, and breaks, creating a balanced study </span>
+      <span class="moreText hidden">routine that fits their unique needs.The scheduler encourages consistency, helps prevent last-minute cramming, and ensures steady progress toward academic goals, reducing stress and enhancing productivity.</span>
+    </p>
+    <button
+      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      type="button"
+      onclick="toggleText(this)">
+      Read more
+    </button>
+  </div>
           </div>
           <div
-            class=" relative flex flex-col my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-[25rem]">
-            <div class=" p-4">
-              <h5 class="mb-2 text-slate-800 text-xl font-semibold">
-                Website Review Check Update from Our Team in San Francisco
-              </h5>
-              <p class="text-slate-600 leading-normal font-light">
-                The place is close to Barceloneta Beach and bus stop just 2 min by
-                walk and near to Naviglio where you can enjoy the main nightlife
-                in Barcelona.
-              </p>
-              <button
-                class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-[#AD88C6] focus:shadow-none active:bg-slate-[#AD88C6] hover:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                type="button">
-                Read more
-              </button>
-            </div>
+            class=" relative flex flex-col my-6 ">
+             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem]">
+    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Pdf Viewer</h5>
+    <p class="text-slate-600 leading-normal font-light">
+      <span class="defaultText"> Our study planner’s PDF viewer enables students to access and read study materials directly within the platform . With the integrated PDF viewer, students can open, annotate, and highlight documents without switching between apps.</span>
+      <span class="moreText hidden"> This feature makes reviewing notes, textbooks, and resources more efficient, keeping all essential study tools in one place for a seamless learning experience.</span>
+    </p>
+    <button
+      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      type="button"
+      onclick="toggleText(this)">
+      Read more
+    </button>
+  </div>
           </div>
         </div>
       </div>
     </div>
-
+    <div class="flex max-w-[90%] m-auto mb-8 ">
+    
+    </div>
     <div class=" max-w-[90%]  m-auto mb-8 ">
       <h2 class="text-center text-4xl font-bold mb-8">Customer Reviews</h2>
       <div id="anime3" class="flex w-full items-start">
@@ -529,6 +523,30 @@
             exploreContainer.classList.add('max-h-0');
         }
     });
+ 
+    function toggleText(button) {
+    	  const card = button.closest('.relative'); // Find the clicked card
+    	  const moreText = card.querySelector(".moreText"); // Find the text within the card
+    	  const readMoreBtn = button; // Use the passed button element directly
+
+    	  // First, reset the height of all cards to their default height
+    	  const allCards = document.querySelectorAll('.relative');
+    	  allCards.forEach((card) => {
+    	    card.style.height = ''; // Reset height for all cards
+    	  });
+
+    	  // If the clicked card's moreText is hidden, show it and increase the height
+    	  if (moreText.classList.contains("hidden")) {
+    	    moreText.classList.remove("hidden"); // Show the extra content
+    	    readMoreBtn.textContent = "Read less"; // Change button text
+    	    card.style.height = 'auto'; // Increase the height of the clicked card
+    	  } else {
+    	    moreText.classList.add("hidden"); // Hide the extra content
+    	    readMoreBtn.textContent = "Read more"; // Reset button text
+    	    card.style.height = ''; // Reset the height to default (collapsed state)
+    	  }
+    	}
+
 
     
     /*document.addEventListener("DOMContentLoaded", function() {
@@ -635,13 +653,18 @@
     
     document.addEventListener("DOMContentLoaded", function() {
         var getStartedButton = document.getElementById('get-started-btn');
+        const features = document.querySelectorAll(".features");
         
         if (username) {
             getStartedButton.href = "/Login_Registration/main.jsp";
         } else {
             getStartedButton.href = "/Login_Registration/login.jsp";
+            features.forEach(function(feature) {
+                feature.href = "/Login_Registration/login.jsp";
+            });
         }
     });
+
 
 gsap.registerPlugin(ScrollTrigger);
 

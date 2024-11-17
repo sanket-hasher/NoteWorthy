@@ -88,7 +88,7 @@ if (cookies != null) {
 
 			<div class="flex flex-col justify-between flex-1 mt-6">
 				<nav class="cursor-pointer">
-					<p class="flex items-center px-4 py-2 text-white rounded-lg">
+					<p class="flex items-center px-4 py-2 text-white rounded-lg bg-[#2E073F]">
 						<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 512 512">
 							<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -145,13 +145,18 @@ if (cookies != null) {
 						
 						<a
 							href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>"
-							class="mx-4 font-medium">Editor</a>
+							class="mx-4 font-medium">Notes</a>
 					</p>
 					
 
 					<!-- Repeat similarly for other menu items like March, April, May, etc. -->
 				</nav>
 			</div>
+			 <div id="logout-container"  style="display: none">
+        <form action="logout" method="post">
+            <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
+             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+        </form>
 		</aside>
 		<div class="bg-purple-100 mx-auto w-[82%]">
 			<div class="flex space-x-4 mt-8 justify-center">
@@ -433,7 +438,7 @@ if (cookies != null) {
 		            `;
 		        }
 
-		        taskElement.appendChild(buttonContainer);
+		        
 
 		        // Append task to the appropriate column
 		        const columnId = task.status; // Get column based on status
@@ -447,7 +452,15 @@ if (cookies != null) {
 
 
 
-
+		 var username = "<%= username != null ? username : "" %>";
+		    
+		    if (username) {
+		        document.getElementById('logout-container').style.display = 'block';
+		  
+		    } else {
+		        document.getElementById('logout-container').style.display = 'none';
+		       
+		    }
 
 
 
