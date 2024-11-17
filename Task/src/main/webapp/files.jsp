@@ -103,7 +103,7 @@
       </p>
 
       <p
-      class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg"
+      class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg bg-[#2E073F]"
       href="#"
     >
       <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
@@ -115,27 +115,50 @@
 
       <a class="mx-4 font-medium">Files</a>
     </p>
+    
+    <p
+						class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg"
+						href="#">
+												<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152L0 424c0 48.6 39.4 88 88 88l272 0c48.6 0 88-39.4 88-88l0-112c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 22.1-17.9 40-40 40L88 464c-22.1 0-40-17.9-40-40l0-272c0-22.1 17.9-40 40-40l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64z"/></svg>
+						
+						<a
+							href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>"
+							class="mx-4 font-medium">Notes</a>
+					</p>
 
       <!-- Repeat similarly for other menu items like March, April, May, etc. -->
     </nav>
   </div>
+   <div id="logout-container"  style="display: none">
+        <form action="logout" method="post">
+            <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
+             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+        </form>
 </aside>
 
     <!------------------------------File upload---------------------->
-    <div class="container  p-6  flex flex-col  w-[82%]">
+    <div class=" p-6  flex flex-col  w-[82%]">
         <h2 class="text-2xl font-bold mb-4 text-center">File Manager</h2>
-        <div class="flex space-x-4 mb-4">
+        <div class="flex mb-4">
             <input type="file" id="fileInput" class="hidden" multiple />
-            <button id="uploadFileBtn" class="bg-green-500 text-white py-2 px-4 rounded">Upload File</button>
+            <div class="flex justify-between items-center w-[16vw] shadow-2xl bg-[#F5EFFF] py-2 px-4 ">
+            <p>0 elements</p>
+            <div class="flex gap-2 items-center">
+                                    <svg id="uploadFileBtn" class="h-5 w-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"/></svg></button>
+            
+            <svg class="h-5 w-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8L32 224c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8l256 0c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
+            </div>
+            
+            </div>
         </div>
-        <div class="flex h-full">
+        <div class="flex h-full w-full">
             <!-- File List Container -->
-            <div id="fileContainer" class="bg-gray-50 p-4 rounded w-1/2">
+            <div id="fileContainer" class="bg-[#F5EFFF] drop-shadow-2xl p-4 rounded w-[20%]">
                 <h3 class="text-lg font-semibold mb-2">Uploaded Files</h3>
                 <div id="files" class="flex flex-wrap gap-4"></div>
             </div>
             <!-- File Preview Container -->
-            <div id="filePreview" class="bg-gray-50 p-4 rounded w-1/2 ml-4">
+            <div id="filePreview" class="bg-[#F5EFFF] drop-shadow-2xl p-4 rounded w-[80%] ml-4">
                 <h3 class="text-lg font-semibold mb-2">File Preview</h3>
                 <iframe id="fileViewer" class="w-full h-full  rounded" src=""></iframe>
             </div>
@@ -190,10 +213,9 @@ function getFileIcon(extension) {
     }
 }
 
-function truncateFileName(name, wordLimit = 3) {
-    const words = name.split(' ');
-    if (words.length > wordLimit) {
-        return words.slice(0, wordLimit).join(' ') + '';
+function truncateFileName(name, charLimit = 10) {
+    if (name.length > charLimit) {
+        return name.slice(0, charLimit) + '...'; // Truncate to charLimit and add ellipsis
     }
     return name;
 }
@@ -202,11 +224,13 @@ function renderFiles() {
     const filesContainer = document.getElementById('files');
     const filePreview = document.getElementById('filePreview');
     const fileViewer = document.getElementById('fileViewer');
+    const elementCountDisplay = document.querySelector(".flex.mb-4 p");
+    elementCountDisplay.textContent = filesList.length + " element" + (filesList.length !== 1 ? "s" : "");
     filesContainer.innerHTML = '';
 
     filesList.forEach(file => {
         const fileDiv = document.createElement('div');
-        fileDiv.className = 'p-4 bg-gray-100 rounded cursor-pointer flex flex-col items-center w-24 h-32';
+        fileDiv.className = 'p-4 bg-gray-200 drop-shadow-md border border-[#CDC1FF] rounded-md cursor-pointer flex flex-col items-center w-28 h-32';
 
         // Get file extension
         const extension = file.name.split('.').pop();
@@ -220,7 +244,7 @@ function renderFiles() {
 
         // Create file title element
         const fileTitle = document.createElement('div');
-        fileTitle.className = 'text-sm font-semibold text-center';
+        fileTitle.className = 'text-sm font-light text-center';
         fileTitle.textContent = truncateFileName(file.name);
 
         // Add click event for previewing the file
@@ -240,6 +264,17 @@ function renderFiles() {
         filesContainer.appendChild(fileDiv);
     });
 }
+
+var username = "<%= username != null ? username : "" %>";
+
+if (username) {
+    document.getElementById('logout-container').style.display = 'block';
+
+} else {
+    document.getElementById('logout-container').style.display = 'none';
+   
+}
+
 
     </script>
 </body>
