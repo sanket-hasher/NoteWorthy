@@ -42,13 +42,10 @@
     <nav
     class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50"
   >
-    <a href="/Login_Registration" class="text-4xl font-bold">LOGO</a>
-    <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
-      <a>EXPLORE</a>
-      <a>about</a>
-      <a>contact</a>
-      <a href="/Login_Registration/login.jsp">login</a>
-    </ul>
+   <div class="flex items-center gap-4">
+    <img class="h-[4rem] stroke-black stroke-2 relative bottom-[7px]" src="Assets/logo1.png" />
+          <a href="/Login_Registration" class="text-4xl font-bold">Eduler</a>
+    </div>
   </nav>
     <div class="flex h-screen">
         <!-- Left Pane -->
@@ -129,11 +126,6 @@
         
           <div class="max-w-md w-full p-6">
           <form id="updateform" action="updatepass" method="post" class="space-y-4">
-          <div>
-                  <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                  <input type="email" id="email" name="email" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">
-                  <span class="error hidden" id="passwordError">Password must be at least 8 characters long and include at least one number and one special character.</span>
-              </div>
               <div>
                   <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                   <input type="password" id="password" name="password" class="mt-1 p-2 w-full border border-gray-300 rounded-md focus:border-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-500 transition duration-200">

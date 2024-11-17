@@ -15,6 +15,8 @@ System.out.println(username);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Document</title>
+   
+    
     <style>
      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
    * {
@@ -82,13 +84,10 @@ color: red;
     <nav
     class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50"
   >
-    <a href="/Login_Registration" class="text-4xl font-bold">LOGO</a>
-    <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
-      <a>EXPLORE</a>
-      <a>about</a>
-      <a>contact</a>
-      <a href="/Login_Registration/login.jsp">login</a>
-    </ul>
+   <div class="flex items-center gap-4">
+    <img class="h-[4rem] stroke-black stroke-2 relative bottom-[7px]" src="Assets/logo1.png" />
+          <a href="/Login_Registration" class="text-4xl font-bold">Eduler</a>
+    </div>
   </nav>
     <div class="flex h-screen">
         <!-- Left Pane -->
@@ -245,43 +244,55 @@ color: red;
         </div>
       </div>
       <script>
+      document.addEventListener("DOMContentLoaded", () => {
+    	  const otpInputs = document.querySelectorAll(".otp-inputbar");
+    	  const errorMessage = document.getElementById("errmsg");
 
-      if (toast) {
-          toast.style.display = 'flex';
-          setTimeout(() => {
-              toast.style.display = 'none';
-          }, 3000); // Hide after 3 seconds
-      }
-      document.getElementById('signupForm').addEventListener('submit', (e) => {
-    	    e.preventDefault();
-    	
-    	    
+    	  otpInputs.forEach((input, index) => {
+    	    // Restrict input to digits only
+    	    input.addEventListener("keypress", (e) => {
+    	      const isDigit = e.key >= "0" && e.key <= "9";
+    	      const isBackspace = e.key === "Backspace";
+    	      const isDelete = e.key === "Delete";
+
+    	      if (!isDigit && !isBackspace && !isDelete) {
+    	        showErrorMessage("Digits Only");
+    	        e.preventDefault();
+    	      }
+    	    });
+
+    	    // Handle navigation between fields
+    	    input.addEventListener("keyup", (e) => {
+    	      const currentInput = e.target;
+
+    	      if (e.key === "Backspace" || e.key === "Delete") {
+    	        // Clear current field and move focus to the previous one
+    	        currentInput.value = "";
+    	        if (index > 0) otpInputs[index - 1].focus();
+    	      } else if (currentInput.value.length === 1) {
+    	        // Move focus to the next field if a digit is entered
+    	        if (index < otpInputs.length - 1) otpInputs[index + 1].focus();
+    	      }
+    	    });
+
+    	    // Ensure only a single character is allowed
+    	    input.addEventListener("input", () => {
+    	      if (input.value.length > 1) {
+    	        input.value = input.value.slice(0, 1);
+    	      }
+    	    });
+    	  });
+
+    	  // Helper function to show error messages
+    	  function showErrorMessage(message) {
+    	    errorMessage.textContent = message;
+    	    errorMessage.style.display = "block";
+    	    setTimeout(() => {
+    	      errorMessage.style.display = "none";
+    	    }, 2000);
+    	  }
     	});
-      
-      $(".otp-inputbar").keypress(function (e) {
-    	    if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-    	        $("#errmsg").html("Digits Only").show().fadeOut("slow");
-    	        return false;
-    	    }
-    	});
-    	$(".otp-inputbar").on("keyup keydown keypress", function (e) {
-    	    if ($(this).val()) {
-    	        $(this).next().focus();
-    	    }
-    	    var KeyID = e.keyCode;
-    	    switch (KeyID) {
-    	        case 8:
-    	            $(this).val("");
-    	            $(this).prev().focus();
-    	            break;
-    	        case 46:
-    	            $(this).val("");
-    	            $(this).prev().focus();
-    	            break;
-    	        default:
-    	            break;
-    	    }
-    	});
+
     	
     	const toast = document.querySelector('.toast');
         if (toast) {

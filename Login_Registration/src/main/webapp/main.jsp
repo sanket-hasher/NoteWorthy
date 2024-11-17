@@ -46,19 +46,24 @@ if (cookies != null) {
 	font-family: "Poppins", sans-serif;
 }
 
-::-webkit-scrollbar {
-	width: 5px;
+
+*:hover {
+    scrollbar-color: auto;
 }
 
-::-webkit-scrollbar-track {
-	background: #f5f5f5;
-	border-radius: 50px;
-}
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
-::-webkit-scrollbar-thumb {
-	background: var(--primary-clr);
-	border-radius: 50px;
-}
+    ::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 50px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #7f77a7;
+      border-radius: 50px;
+    }
 </style>
 <body>
 	<div class="flex w-full">
@@ -88,7 +93,7 @@ if (cookies != null) {
 
 			<div class="flex flex-col justify-between flex-1 mt-6">
 				<nav class="cursor-pointer">
-					<p class="flex items-center px-4 py-2 text-white rounded-lg">
+					<p class="flex items-center px-4 py-2 text-white rounded-lg bg-[#2E073F]">
 						<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 512 512">
 							<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -145,13 +150,18 @@ if (cookies != null) {
 						
 						<a
 							href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>"
-							class="mx-4 font-medium">Editor</a>
+							class="mx-4 font-medium">Notes</a>
 					</p>
 					
 
 					<!-- Repeat similarly for other menu items like March, April, May, etc. -->
 				</nav>
 			</div>
+			 <div id="logout-container"  style="display: none">
+        <form action="logout" method="post">
+            <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
+             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+        </form>
 		</aside>
 		<div class="bg-purple-100 mx-auto w-[82%]">
 			<div class="flex space-x-4 mt-8 justify-center">
@@ -163,7 +173,7 @@ if (cookies != null) {
         <input class="border rounded p-2 w-full" id="new-task-todo" type="text" placeholder="Add new task" />
         <button class="mt-2 w-full bg-purple-600 text-white p-2 rounded" onclick="addTask('todo')">Add Task</button>
     </div>
-    <div id="todo" class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg">
+    <div id="todo" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg">
         <!-- Sample Task -->
         <div class="flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer">
             <p>Task 1</p>
@@ -178,13 +188,13 @@ if (cookies != null) {
 <!-- In Progress Column -->
 <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
     <h2 class="font-bold text-xl mb-4">In Progress</h2>
-    <div id="inprogress" class="min-h-[400px] p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+    <div id="inprogress" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
 </div>
 
 <!-- Done Column -->
 <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
     <h2 class="font-bold text-xl mb-4">Done</h2>
-    <div id="done" class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+    <div id="done" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
 </div>
 				
 				
@@ -424,6 +434,7 @@ if (cookies != null) {
 		            };
 		            buttonContainer.appendChild(doneButton);
 		        }
+		        taskElement.appendChild(buttonContainer);
 
 		        // Add the green checkmark icon for completed tasks in the 'done' status
 		        if (task.status === 'done') {
@@ -433,7 +444,7 @@ if (cookies != null) {
 		            `;
 		        }
 
-		        taskElement.appendChild(buttonContainer);
+		        
 
 		        // Append task to the appropriate column
 		        const columnId = task.status; // Get column based on status
@@ -447,7 +458,15 @@ if (cookies != null) {
 
 
 
-
+		 var username = "<%= username != null ? username : "" %>";
+		    
+		    if (username) {
+		        document.getElementById('logout-container').style.display = 'block';
+		  
+		    } else {
+		        document.getElementById('logout-container').style.display = 'none';
+		       
+		    }
 
 
 

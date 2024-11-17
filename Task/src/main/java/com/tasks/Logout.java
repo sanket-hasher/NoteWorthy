@@ -1,25 +1,26 @@
-package com.noteworthy;
+package com.tasks;
 
 import java.io.IOException;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class VerifyOtp
+ * Servlet implementation class Logout
  */
-@WebServlet("/verifyotp")
-public class VerifyOtp extends HttpServlet {
+@WebServlet("/logout")
+public class Logout extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VerifyOtp() {
+    public Logout() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,19 +31,20 @@ public class VerifyOtp extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		String a = request.getParameter("a");
-		String b = request.getParameter("b");
-		String c = request.getParameter("c");
-		String d = request.getParameter("d");
-		String e = request.getParameter("e");
-		String f = request.getParameter("f");
-		String receivedotp=a+b+c+d+e+f;
-		System.out.println(receivedotp);
+		Cookie usernameCookie = new Cookie("username", null);
+		usernameCookie.setMaxAge(0); // Delete the cookie
+		response.addCookie(usernameCookie);
+
+		Cookie emailCookie = new Cookie("email", null);
+		emailCookie.setMaxAge(0); // Delete the cookie
+		response.addCookie(emailCookie);
+
+		// Invalidate session
 		HttpSession session = request.getSession();
-        session.setAttribute("receivedotp", receivedotp);
-        String otp = (String) session.getAttribute("otp");
-        if(receivedotp.equals(otp))
-        response.sendRedirect("updatepass.jsp");
+		session.invalidate();
+
+		// Redirect to login page
+		response.sendRedirect("/Login_Registration/login.jsp");
 	}
 
 	/**
@@ -54,3 +56,4 @@ public class VerifyOtp extends HttpServlet {
 	}
 
 }
+

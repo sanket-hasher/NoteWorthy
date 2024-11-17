@@ -31,8 +31,8 @@ public class GenerateOtp extends HttpServlet {
     private static final String DB_PASSWORD = "Sanket7044";
 
     // Email configuration for sending OTP
-    private static final String EMAIL = "sanketdeyng11c@gmail.com"; // Replace with your email
-    private static final String EMAIL_PASSWORD = "glrd unwo pbmh zfqd"; // Replace with your email password
+    private static final String EMAIL = "eduler.notes@gmail.com"; // Replace with your email
+    private static final String EMAIL_PASSWORD = "clki pyqk gcay zmbk"; // Replace with your email password
 
     public GenerateOtp() {
         super();
@@ -66,6 +66,7 @@ public class GenerateOtp extends HttpServlet {
                     String username = resultSet.getString("username");
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
+                    session.setAttribute("email",email );
 
                     // Generate OTP
                     int otp = generateOtp();
