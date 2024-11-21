@@ -20,9 +20,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/updatepass")
 public class UpdatePassword extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	  private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
-	    private static final String DB_USER = "Sanket";
-	    private static final String DB_PASSWORD = "password";
+	private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
+    private static final String DB_USER = "Sanket";
+    private static final String DB_PASSWORD = "password";
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,11 +40,13 @@ public class UpdatePassword extends HttpServlet {
 		//response.getWriter().append("Served at: Sanket Dey ' server ").append(request.getContextPath());
 		 response.setContentType("text/html");
 	        PrintWriter out = response.getWriter();
-	        String email = request.getParameter("email");
-	        System.out.println(email);
+	        //String email = request.getParameter("email");
+	        //System.out.println(email);
 	        String password = request.getParameter("password");
 	        String confirmPassword = request.getParameter("confirm-password");
 	        String passwordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=\\-{}|:;'<>,.?/]).+$";
+	        String email=(String)request.getSession().getAttribute("email");
+	        System.out.println(email);
 
 	        // Validate the input data
 	        if ( email == null || email.isEmpty() ||
@@ -85,7 +87,7 @@ public class UpdatePassword extends HttpServlet {
 	                System.out.println("Connection to the database was successful!");
 	            // SQL insert query
 	            String sql_usercheck="Select Username from User where Email = ?";
-	            String sql_register = "Update User Set Password=? where Email=?";
+	            String sql_register = "Update User Set Password=? where email=?";
 	            PreparedStatement preparedStatement1 = connection.prepareStatement(sql_usercheck);
 	            preparedStatement1.setString(1, email);
 	            ResultSet resultSet = preparedStatement1.executeQuery();

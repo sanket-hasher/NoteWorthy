@@ -46,19 +46,24 @@ if (cookies != null) {
 	font-family: "Poppins", sans-serif;
 }
 
-::-webkit-scrollbar {
-	width: 5px;
+
+*:hover {
+    scrollbar-color: auto;
 }
 
-::-webkit-scrollbar-track {
-	background: #f5f5f5;
-	border-radius: 50px;
-}
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
 
-::-webkit-scrollbar-thumb {
-	background: var(--primary-clr);
-	border-radius: 50px;
-}
+    ::-webkit-scrollbar-track {
+      background: #f5f5f5;
+      border-radius: 50px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #7f77a7;
+      border-radius: 50px;
+    }
 </style>
 <body>
 	<div class="flex w-full">
@@ -83,12 +88,12 @@ if (cookies != null) {
 
 
 				<h4 class="mx-2 mt-2 font-medium text-white"><%=username%></h4>
-				
+				<p class="mx-2 mt-1 text-sm font-medium text-white"><%=emailid %></p>
 			</div>
 
 			<div class="flex flex-col justify-between flex-1 mt-6">
 				<nav class="cursor-pointer">
-					<p class="flex items-center px-4 py-2 text-white rounded-lg">
+					<p class="flex items-center px-4 py-2 text-white rounded-lg bg-[#2E073F]">
 						<svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
 							viewBox="0 0 512 512">
 							<!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
@@ -137,76 +142,61 @@ if (cookies != null) {
 							href="http://localhost:8080/Task/files.jsp?username=<%=username%>&email=<%=emailid%>"
 							class="mx-4 font-medium">Files</a>
 					</p>
+					
+					<p
+						class="flex items-center px-4 py-2 mt-5 text-white transition-colors duration-300 transform rounded-lg"
+						href="#">
+												<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M441 58.9L453.1 71c9.4 9.4 9.4 24.6 0 33.9L424 134.1 377.9 88 407 58.9c9.4-9.4 24.6-9.4 33.9 0zM209.8 256.2L344 121.9 390.1 168 255.8 302.2c-2.9 2.9-6.5 5-10.4 6.1l-58.5 16.7 16.7-58.5c1.1-3.9 3.2-7.5 6.1-10.4zM373.1 25L175.8 222.2c-8.7 8.7-15 19.4-18.3 31.1l-28.6 100c-2.4 8.4-.1 17.4 6.1 23.6s15.2 8.5 23.6 6.1l100-28.6c11.8-3.4 22.5-9.7 31.1-18.3L487 138.9c28.1-28.1 28.1-73.7 0-101.8L474.9 25C446.8-3.1 401.2-3.1 373.1 25zM88 64C39.4 64 0 103.4 0 152L0 424c0 48.6 39.4 88 88 88l272 0c48.6 0 88-39.4 88-88l0-112c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 112c0 22.1-17.9 40-40 40L88 464c-22.1 0-40-17.9-40-40l0-272c0-22.1 17.9-40 40-40l112 0c13.3 0 24-10.7 24-24s-10.7-24-24-24L88 64z"/></svg>
+						
+						<a
+							href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>"
+							class="mx-4 font-medium">Notes</a>
+					</p>
+					
 
 					<!-- Repeat similarly for other menu items like March, April, May, etc. -->
 				</nav>
 			</div>
+			 <div id="logout-container"  style="display: none">
+        <form action="logout" method="post">
+            <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
+             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
+        </form>
 		</aside>
 		<div class="bg-purple-100 mx-auto w-[82%]">
 			<div class="flex space-x-4 mt-8 justify-center">
 				<!-- To Do Column -->
-				<div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
-					<h2 class="font-bold text-xl mb-4">To Do</h2>
-					<div class="mb-4" id="todo-column">
-						<input class="border rounded p-2 w-full" id="new-task-todo"
-							type="text" placeholder="Add new task" />
-						<button class="mt-2 w-full bg-purple-600 text-white p-2 rounded"
-							onclick="addTask('todo')">Add Task</button>
-					</div>
-					<div id="todo"
-						class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg"
-						ondrop="drop(event)" ondragover="allowDrop(event)">
-						<div class="task bg-blue-100 p-4 rounded-md cursor-pointer"
-							draggable="true" ondragstart="drag(event)">
-							Task 1
-							<button onclick="removeTask(this)"
-								class="float-right text-red-500">x</button>
-						</div>
-					</div>
-				</div>
+				
+<div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
+    <h2 class="font-bold text-xl mb-4">To Do</h2>
+    <div class="mb-4" id="todo-column">
+        <input class="border rounded p-2 w-full" id="new-task-todo" type="text" placeholder="Add new task" />
+        <button class="mt-2 w-full bg-purple-600 text-white p-2 rounded" onclick="addTask('todo')">Add Task</button>
+    </div>
+    <div id="todo" class="h-[300px] overflow-y-scroll p-2 space-y-2 bg-gray-50 rounded-lg">
+        <!-- Sample Task -->
+        <div class="flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer">
+            <p>Task 1</p>
+            <div class="flex gap-2">
+                <button class="bg-green-500 rounded-md py-1 px-3 text-white" onclick="moveTask(this.parentElement.parentElement, 'inprogress')">Start</button>
+                <button onclick="removeTask(this)"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ff0000" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32s-14.3-32-32-32H135.2zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></button>
+            </div>
+        </div>
+    </div>
+</div>
 
-				<!-- In Progress Column -->
-				<div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
-					<h2 class="font-bold text-xl mb-4">In Progress</h2>
-					<div class="mb-4" id="in-progress-column">
-						<input class="border rounded p-2 w-full" id="new-task-inprogress"
-							type="text" placeholder="Add new task" />
-						<button class="mt-2 w-full bg-purple-600 text-white p-2 rounded"
-							onclick="addTask('inprogress')">Add Task
-						</button>
-					</div>
-					<div id="inprogress"
-						class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg"
-						ondrop="drop(event)" ondragover="allowDrop(event)">
-						<div class="task bg-yellow-100 p-4 rounded-md cursor-pointer"
-							draggable="true" ondragstart="drag(event)">
-							Task 2
-							<button onclick="removeTask(this)"
-								class="float-right text-red-500">x</button>
-						</div>
-					</div>
-				</div>
+<!-- In Progress Column -->
+<div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
+    <h2 class="font-bold text-xl mb-4">In Progress</h2>
+    <div id="inprogress" class="h-[400px]  overflow-y-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+</div>
 
-				<!-- Done Column -->
-				<div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
-					<h2 class="font-bold text-xl mb-4">Done</h2>
-					<div class="mb-4" id="done-column">
-						<input id="new-task-done" type="text" placeholder="Add new task"
-							class="border rounded p-2 w-full" />
-						<button class="mt-2 w-full bg-purple-600 text-white p-2 rounded"
-							onclick="addTask('done')">Add Task</button>
-					</div>
-					<div id="done"
-						class="min-h-[300px] p-2 space-y-2 bg-gray-50 rounded-lg"
-						ondrop="drop(event)" ondragover="allowDrop(event)">
-						<div class="task bg-green-100 p-4 rounded-md cursor-pointer"
-							draggable="true" ondragstart="drag(event)">
-							Task 3
-							<button onclick="removeTask(this)"
-								class="float-right text-red-500">x</button>
-						</div>
-					</div>
-				</div>
+<!-- Done Column -->
+<div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
+    <h2 class="font-bold text-xl mb-4">Done</h2>
+    <div id="done" class="h-[400px]  overflow-y-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+</div>
+				
 				
 			</div>
 			<div>
@@ -233,76 +223,257 @@ if (cookies != null) {
 			document.getElementById("profile-icon").style.backgroundColor = randomColor;
 		});
 
-		function drag(event) {
-			event.dataTransfer.setData("text", event.target.id);
-			event.target.classList.add("dragging");
-		}
-
-		function drop(event) {
-			event.preventDefault();
-			const data = event.dataTransfer.getData("text");
-			const task = document.getElementById(data);
-			event.target.appendChild(task);
-			task.classList.remove("dragging");
-		}
 
 		function addTask(column) {
-			console.log("column name", column)
-			const taskInput = document.getElementById('new-task-' + column);
-			console.log("Task Input element:", taskInput);
-			if (!taskInput) {
-				//console.error(Input element with ID 'new-task-${column}' not found.);
-				return;
-			}
-			const taskText = taskInput.value.trim();
-			if (taskText === "")
-				return;
+		    const taskInput = document.getElementById('new-task-' + column);
+		    if (!taskInput) return;
 
-			const taskId = `task-${Date.now()}`;
+		    const taskText = taskInput.value.trim();
+		    if (taskText === "") return; // Avoid adding empty tasks
+		    
+		    const taskId = 'task-' + new Date().getTime();
 
-			// Create new task element
 
-			const taskElement = document.createElement("div");
+		    console.log(taskId);
 
-			switch (column) {
-			case 'todo':
-				taskElement.className = "task bg-blue-100 p-4 rounded-md cursor-pointer"; // To Do
-				break;
-			case 'inprogress':
-				taskElement.className = "task bg-yellow-100 p-4 rounded-md cursor-pointer"; // In Progress
-				break;
-			case 'done':
-				taskElement.className = "task bg-green-100 p-4 rounded-md cursor-pointer"; // Done
-				break;
-			default:
-				taskElement.className = "task bg-gray-100 p-4 rounded-md cursor-pointer"; // Default color
-			}
-			taskElement.draggable = true;
-			taskElement.ondragstart = drag;
-			taskElement.id = taskId;
+		    // Send data to the server (AddTask servlet)
+		    fetch('addtask', {
+		        method: 'POST',
+		        headers: {
+		            'Content-Type': 'application/json'
+		        },
+		        body: JSON.stringify({ taskName: taskText,taskId: taskId }) // Send taskName to the server
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		            // Proceed with UI updates only if the server insert was successful
+		            // Create task container
+		            const taskElement = document.createElement("div");
+		            taskElement.className = `flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer mb-2`;
+		            taskElement.id = taskId;
 
-			// Add task text
-			taskElement.textContent = taskText;
+		            // Create the task text
+		            const taskTextElement = document.createElement("p");
+		            taskTextElement.textContent = taskText;
+		            taskElement.appendChild(taskTextElement);
 
-			// Add remove button
-			const removeButton = document.createElement("button");
-			removeButton.textContent = "x";
-			removeButton.className = "float-right text-red-500";
-			removeButton.onclick = function() {
-				removeTask(removeButton);
-			};
-			taskElement.appendChild(removeButton);
+		            // Create a div for the buttons
+		            const buttonContainer = document.createElement("div");
+		            buttonContainer.className = "flex gap-2";
 
-			// Add task to the appropriate column
-			document.getElementById(column).appendChild(taskElement);
+		            // Add "Start" button for tasks in the "To Do" column
+		            if (column === 'todo') {
+		                const startButton = document.createElement("button");
+		                startButton.textContent = "Start";
+		                startButton.className = "bg-green-500 rounded-md py-1 px-3 text-white";
+		                startButton.onclick = function() {
+		                    moveTask(taskElement, 'inprogress');
+		                };
+		                buttonContainer.appendChild(startButton);
+		            }
 
-			// Clear input
-			taskInput.value = "";
+		            // Add remove button
+		            const removeButton = document.createElement("button");
+		            removeButton.innerHTML = '<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ff0000" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32s-14.3-32-32-32H135.2zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>';
+		            removeButton.onclick = function() {
+		                removeTask(removeButton);
+		            };
+		            buttonContainer.appendChild(removeButton);
+
+		            // Append button container to the task element
+		            taskElement.appendChild(buttonContainer);
+
+		            // Add the task to the appropriate column
+		            document.getElementById(column).appendChild(taskElement);
+
+		            // Clear input field
+		            taskInput.value = "";
+		        } else {
+		            // Handle failure response
+		            console.error('Failed to add task:', data.message);
+		        }
+		    })
+		    .catch(error => console.error('Error:', error));
+		}
+
+		function moveTask(taskElement, targetColumnId) {
+		    const taskId = taskElement.id; // Use the unique ID as the task ID
+		    const taskDescription = taskElement.querySelector("p").textContent; // Get task description
+
+		    // Define the URL for moving tasks based on the target column
+		    const url = targetColumnId === 'inprogress' ? 'movetoinprogress' : 'movetodone';
+
+		    // Send a fetch request to move the task in the database
+		    fetch(url, {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/json' },
+		        body: JSON.stringify({ taskId, taskDescription })
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		            // Update the task element class based on the target column
+		            if (targetColumnId === 'inprogress') {
+		                taskElement.className = "flex justify-between items-center task bg-yellow-100 p-4 rounded-md cursor-pointer mb-2";
+		            } else if (targetColumnId === 'done') {
+		                taskElement.className = "flex justify-between items-center task bg-green-100 p-4 rounded-md cursor-pointer mb-2";
+		                taskElement.innerHTML += `
+		                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#04ff00" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>`;
+		            }
+
+		            let buttonContainer = taskElement.querySelector('div');
+		            if (buttonContainer) {
+		                buttonContainer.innerHTML = '';
+		            } else {
+		                buttonContainer = document.createElement('div');
+		                buttonContainer.className = 'flex gap-2';
+		                taskElement.appendChild(buttonContainer);
+		            }
+
+		            if (targetColumnId === 'inprogress') {
+		                const doneButton = document.createElement("button");
+		                doneButton.textContent = "Done";
+		                doneButton.className = "float-right bg-green-500 rounded-md py-1 px-3 text-white";
+		                doneButton.onclick = function() {
+		                    moveTask(taskElement, 'done');
+		                };
+		                buttonContainer.appendChild(doneButton);
+		            }
+
+		            document.getElementById(targetColumnId).appendChild(taskElement);
+		        } else {
+		            console.error('Failed to move task:', data.message);
+		        }
+		    })
+		    .catch(error => console.error('Error:', error));
 		}
 
 		function removeTask(button) {
-			button.parentElement.remove();
+		    const taskElement = button.closest('.task');
+		    const taskId = taskElement.id;
+
+		    // Send request to remove the task from the database
+		    fetch('deletetask', {
+		        method: 'POST',
+		        headers: { 'Content-Type': 'application/json' },
+		        body: JSON.stringify({ taskId })
+		    })
+		    .then(response => response.json())
+		    .then(data => {
+		        if (data.success) {
+		            taskElement.remove();
+		        } else {
+		            console.error('Failed to delete task:', data.message);
+		        }
+		    })
+		    .catch(error => console.error('Error:', error));
 		}
+		
+		document.addEventListener('DOMContentLoaded', function() {
+		    fetchTasks();
+		});
+
+		function fetchTasks() {
+		    fetch('loadTasks') // Assuming this is the endpoint to get tasks from the database
+		        .then(response => response.json())
+		        .then(data => {
+		            if (data.success) {
+		                // Ensure tasks is an array and loop through it
+		                const tasks = Array.isArray(data.tasks) ? data.tasks : [];
+		                populateTasks(tasks);
+		            } else {
+		                console.error('Error fetching tasks:', data.message);
+		            }
+		        })
+		        .catch(error => console.error('Error:', error));
+		}
+
+		function populateTasks(tasks) {
+		    // Clear current tasks
+		    document.getElementById('todo').innerHTML = '';
+		    document.getElementById('inprogress').innerHTML = '';
+		    document.getElementById('done').innerHTML = '';
+
+		    tasks.forEach(task => {
+		        const taskElement = document.createElement("div");
+		        taskElement.className = `flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer mb-2`;
+		        taskElement.id = task.taskid;
+
+		        const taskTextElement = document.createElement("p");
+		        taskTextElement.textContent = task.description;
+		        taskElement.appendChild(taskTextElement);
+
+		        const buttonContainer = document.createElement("div");
+		        buttonContainer.className = "flex gap-2";
+
+		        // Add buttons based on the task status
+		        if (task.status === 'todo') {
+		            const startButton = document.createElement("button");
+		            startButton.textContent = "Start";
+		            startButton.className = "bg-green-500 rounded-md py-1 px-3 text-white";
+		            startButton.onclick = function() {
+		                moveTask(taskElement, 'inprogress');
+		            };
+		            buttonContainer.appendChild(startButton);
+
+		            // Add remove button only for 'todo' tasks
+		            const removeButton = document.createElement("button");
+		            removeButton.innerHTML = '<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ff0000" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32s-14.3-32-32-32H135.2zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>';
+		            removeButton.onclick = function() {
+		                removeTask(removeButton);
+		            };
+		            buttonContainer.appendChild(removeButton);
+		        } else if (task.status === 'inprogress') {
+		            taskElement.className = "flex justify-between items-center task bg-yellow-100 p-4 rounded-md cursor-pointer mb-2";
+		            const doneButton = document.createElement("button");
+		            doneButton.textContent = "Done";
+		            doneButton.className = "float-right bg-green-500 rounded-md py-1 px-3 text-white";
+		            doneButton.onclick = function() {
+		                moveTask(taskElement, 'done');
+		            };
+		            buttonContainer.appendChild(doneButton);
+		        }
+		        taskElement.appendChild(buttonContainer);
+
+		        // Add the green checkmark icon for completed tasks in the 'done' status
+		        if (task.status === 'done') {
+		            taskElement.className = "flex justify-between items-center task bg-green-100 p-4 rounded-md cursor-pointer mb-2";
+		            taskElement.innerHTML += `
+		                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#04ff00" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
+		            `;
+		        }
+
+		        
+
+		        // Append task to the appropriate column
+		        const columnId = task.status; // Get column based on status
+		        document.getElementById(columnId).appendChild(taskElement);
+		    });
+		}
+
+
+
+
+
+
+
+		 var username = "<%= username != null ? username : "" %>";
+		    
+		    if (username) {
+		        document.getElementById('logout-container').style.display = 'block';
+		  
+		    } else {
+		        document.getElementById('logout-container').style.display = 'none';
+		       
+		    }
+
+
+
+
+
+		
+
 		
 		let mediaRecorder;
 		let audioChunks = [];

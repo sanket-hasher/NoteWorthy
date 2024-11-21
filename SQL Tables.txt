@@ -1,4 +1,4 @@
-CREATE TABLE User (Username VARCHAR(30) UNIQUE Primary Key,Email VARCHAR(20),Password VARCHAR(20));
+CREATE TABLE User (Username VARCHAR(30) UNIQUE Primary Key,Email VARCHAR(50),Password VARCHAR(20));
 
 CREATE TABLE review (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -6,4 +6,34 @@ CREATE TABLE review (
     stars INT CHECK (stars >= 1 AND stars <= 5),
     comment VARCHAR(300)
 );
+CREATE TABLE tasks (
+    taskid VARCHAR(50) NOT NULL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    FOREIGN KEY (username) REFERENCES user(username)
+);
+
+CREATE TABLE todo (
+    taskid VARCHAR(50) NOT NULL PRIMARY KEY,
+    description VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE inprogress (
+    taskid VARCHAR(50) NOT NULL PRIMARY KEY,
+    description VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE done (
+    taskid VARCHAR(50) NOT NULL PRIMARY KEY,
+    description VARCHAR(100) NOT NULL
+);
+
+CREATE TABLE user_files (
+    fileid INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    filename VARCHAR(255) NOT NULL,
+    filetype VARCHAR(50) NOT NULL,
+    filedata LONGBLOB NOT NULL,
+    FOREIGN KEY (username) REFERENCES user(username)
+);
+
 

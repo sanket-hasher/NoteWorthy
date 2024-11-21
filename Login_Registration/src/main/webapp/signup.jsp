@@ -39,16 +39,13 @@
 </head>
 <body>
     <nav
-    class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50"
-  >
-    <a href="/Login_Registration" class="text-4xl font-bold">LOGO</a>
-    <ul class="flex w-[30%] justify-evenly font-semibold uppercase">
-      <a>EXPLORE</a>
-      <a>about</a>
-      <a>contact</a>
-      <a href="/Login_Registration/login.jsp">login</a>
-    </ul>
-  </nav>
+      class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50"
+    >
+       <div class="flex items-center gap-4">
+    <img class="h-[4rem] stroke-black stroke-2 relative bottom-[7px]" src="Assets/logo1.png" />
+          <a href="/Login_Registration" class="text-4xl font-bold">Eduler</a>
+    </div>
+    </nav>
     <div class="flex h-screen">
         <!-- Left Pane -->
         <div class="hidden lg:flex items-center justify-center flex-1 bg-[#7E60BF]  text-black">

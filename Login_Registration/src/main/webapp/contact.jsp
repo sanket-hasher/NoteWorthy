@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
     String username = null;
     String emailid = null;
@@ -15,19 +16,16 @@
         }
     }
 %>
-  <!DOCTYPE html>
-  <html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.13/dist/full.min.css" rel="stylesheet" type="text/css" />
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-  </head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
     * {
       margin: 0;
@@ -35,55 +33,9 @@
       box-sizing: border-box;
       font-family: "Poppins", sans-serif;
     }
-    *,
-*:hover {
-    scrollbar-color: auto;
-}
-
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #f5f5f5;
-      border-radius: 50px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #7f77a7;
-      border-radius: 50px;
-    }
-
-    .swiper {
-      width: 100%;
-    }
-
-    .swiper-slide {
-      background-position: center;
-      background-size: cover;
-      width: 300px;
-    }
-
-    .swiper-slide img {
-      display: block;
-      width: 100%;
-    }
-
-    .swiper-button-prev {
-      left: -40px;
-    }
-
-    .swiper-button-next {
-      right: -40px;
-    }
-    
-     #get-started-btn:hover svg {
-    transform: rotate(360deg);
-  }
-  </style>
-
-  <body class="bg-white text-black">
-    <nav class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50">
+</style>
+<body>
+<nav class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white relative top-0 z-50">
     <div class="flex items-center gap-4">
     <img class="h-[4rem] stroke-black stroke-2 relative bottom-[7px]" src="Assets/logo1.png" />
           <a href="/Login_Registration" class="text-4xl font-bold">Eduler</a>
@@ -137,199 +89,8 @@
         </li>
       </ul>
     </nav>
-    
-    <div class="container h-screen max-w-[90%] m-auto ">
-      <div id="anime2" class="flex w-full h-full justify-evenly items-center">
-        <div >
-          <h2 class="text-6xl font-bold mb-8">
-            What are you aiming to
-            <span class="text-[#674188]">accomplish </span>today?
-          </h2>
-          <p class="text-2xl font-medium mb-8">
-            Remember everything and tackle any project with your notes, tasks,
-            and schedule all in one place.
-          </p>
-         <a id="get-started-btn" href="/Login_Registration/main.jsp"
-  class="inline-flex items-center justify-center px-8 py-4 rounded-md shadow-xl text-white uppercase bg-[#7E60BF] transition-all shadow-md hover:shadow-lg hover:border hover:border-[#7E60BF] hover:text-[#7E60BF]  hover:bg-white focus:bg-[#AD88C6] active:bg-[#AD88C6] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
-  
-  Get Started
-  <svg class="w-4 h-4 ml-1 transition-transform duration-500 ease-in-out" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-    <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-  </svg>
-</a>
-         
-          <div id="show-login" class="mt-8 underline font-semibold none">
-            <a href="http://localhost:8080/Login_Registration/login.jsp">Already have an account? </a><a
-              href="http://localhost:8080/Login_Registration/login.jsp">Login</a>
-          </div>
-        </div>
-        <img class="h-[42rem]" src="Assets/bg.jpg" />
-      </div>
-    </div>
-    <div class="relative flex flex-col items-center w-full  mb-8 p-8">
-      <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
-        <source src="Assets/file.mp4" type="video/mp4">
-
-      </video>
-      <div id="service" class="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10 "></div>
-      <div id="anime1" class="relative z-20 w-full">
-        <h2 class="text-center text-4xl font-bold mb-8 text-white">Services</h2>
-        <div class="grid grid-cols-5 text-start gap-4 cursor-pointer">
-          <div
-            class=" relative flex flex-col my-6 ">
-           <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
-    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Progress Tracker</h5>
-    <p class="text-slate-600 leading-normal font-light">
-      <span class="defaultText">Our study planner helps students stay focused and keep you on top of your academic goals with an integrated progress tracker. This feature lets students break down their study goals into manageable tasks, track their completion in real-time.</span>
-      <span class="moreText hidden">and see visual representations of their progress. By regularly updating the tracker, students can stay organized, celebrate their accomplishments, and easily adjust their study plans as needed.</span>
-    </p>
-    <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
-      type="button"
-      onclick="toggleText(this)">
-      Read more
-    </button>
-  </div>
-          </div>
-		<div
-            class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
-    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Whiteboard Support</h5>
-    <p class="text-slate-600 leading-normal font-light">
-      <span class="defaultText"> Our study planner includes whiteboard support, allowing students to brainstorm, organize, and visualize ideas, and map out complex topics interactively. This feature mimics a physical whiteboard, making it easy to draw diagrams </span>
-      <span class="moreText hidden">,connect concepts, and organize thoughts.Perfect for collaborative or individual study, it enhances comprehension, simplifies revision, and brings creative flexibility to the planning process for more effective learning.</span>
-    </p>
-    <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
-      type="button"
-      onclick="toggleText(this)">
-      Read more
-    </button>
-  </div>
-          </div>
-		
-          <div
-            class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
-    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Notes Editor</h5>
-    <p class="text-slate-600 leading-normal font-light">
-      <span class="defaultText"> Our study planner’s notes editor feature offers students to organize their study materials in one convenient place. The notes editor allows for easy formatting, categorizing, and updating of study notes, making it simple to review key points and </span>
-      <span class="moreText hidden">stay on top of course content.This feature supports efficient learning by enabling students to personalize notes, highlight important information, and quickly access them during study sessions.</span>
-    </p>
-    <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
-      type="button"
-      onclick="toggleText(this)">
-      Read more
-    </button>
-  </div>
-          </div>
-
-          <div
-            class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
-    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Personal Scheduler</h5>
-    <p class="text-slate-600 leading-normal font-light">
-      <span class="defaultText"> Personal scheduler empowers students to effectively manage their time by setting up a personalized study timetable. With this tool, students can allocate specific times for subjects, assignments, and breaks, creating a balanced study </span>
-      <span class="moreText hidden">routine that fits their unique needs.The scheduler encourages consistency, helps prevent last-minute cramming, and ensures steady progress toward academic goals, reducing stress and enhancing productivity.</span>
-    </p>
-    <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
-      type="button"
-      onclick="toggleText(this)">
-      Read more
-    </button>
-  </div>
-          </div>
-          <div
-            class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
-    <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Pdf Viewer</h5>
-    <p class="text-slate-600 leading-normal font-light">
-      <span class="defaultText"> Our study planner’s PDF viewer enables students to access and read study materials directly within the platform . With the integrated PDF viewer, students can open, annotate, and highlight documents without switching between apps.</span>
-      <span class="moreText hidden"> This feature makes reviewing notes, textbooks, and resources more efficient, keeping all essential study tools in one place for a seamless learning experience.</span>
-    </p>
-    <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
-      type="button"
-      onclick="toggleText(this)">
-      Read more
-    </button>
-  </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="flex max-w-[90%] m-auto mb-8 ">
-    
-    </div>
-    <div class=" max-w-[90%]  m-auto mb-8 ">
-      <h2 class="text-center text-4xl font-bold mb-8">Customer Reviews</h2>
-      <div id="anime3" class="flex w-full items-start">
-        <div class="w-[60%]">
-          <img class="h-[35rem]" src="Assets/customer.jpg" />
-        </div>
-
-        <div class="flex flex-col gap-4 w-[40%] ">
-          <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-            <!-- Slides will be dynamically inserted here -->
-        </div>
-        <div class="swiper-pagination"></div>
-        <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div>
-    </div>
-       
-        
-          <div>
-
-          </div>
-          <div id="message" style="display: none;"></div>
-          <form id="reviewForm" onsubmit="submitReview(event)">
-            <!-- Name Field -->
-            <div>
-              <label for="Name" class="block text-sm font-medium text-gray-700">Name</label>
-              <input type="text" id="Name" name="Name" class="mt-1 p-2 w-full border rounded-md bg-white  focus:border-2 focus:border-gray-900  focus:outline-0"
-                required />
-            </div>
-
-            <!-- Review Text Area -->
-            <div class="relative mt-8">
-              <div class="relative w-full min-w-[200px]">
-                <textarea rows="8"
-                  name="comment"
-                  class="peer h-full min-h-[100px] w-full !resize-none  rounded-[7px] border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
-                  placeholder=" "></textarea>
-                <label
-                  class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                  Your Review
-                </label>
-              </div>
-
-              <!-- Rating Radio Buttons -->
-              <div class="flex w-full justify-between py-1.5">
-                <div class="rating">
-                  <input type="radio" name="rating-2" value="1" class="mask mask-star-2 bg-orange-400" required />
-                  <input type="radio" name="rating-2" value="2" class="mask mask-star-2 bg-orange-400" />
-                  <input type="radio" name="rating-2" value="3" class="mask mask-star-2 bg-orange-400" />
-                  <input type="radio" name="rating-2" value="4" class="mask mask-star-2 bg-orange-400" />
-                  <input type="radio" name="rating-2" value="5" class="mask mask-star-2 bg-orange-400" />
-                </div>
-
-                <!-- Submit Button -->
-                <div class="flex gap-2">
-                  <input
-                    class="select-none rounded-md bg-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                    type="submit" value="Submit Review" />
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!--  <section>
-      <div class=" w-full bg-[#D4BEE4]">
+ <section>
+      <div class="h-[80vh] w-full bg-[#D4BEE4]">
         <div class="flex justify-center items-center gap-[10rem] p-8">
           <div class="flex items-center lg:mb-0 mb-10">
             <div id="contact">
@@ -433,10 +194,8 @@
           </div>
         </div>
       </div>
-    </section>-->
-
-
-    <footer class="bg-[#7E60BF] w-full">
+    </section>
+ <footer class="bg-[#7E60BF] w-full absolute bottom-0">
       <div class="w-full space-y-8 px-4 py-4 sm:px-6 lg:space-y-16 lg:px-8">
         <div class="sm:flex sm:items-center sm:justify-between">
          <div class="flex items-center gap-4 text-white">
@@ -512,12 +271,18 @@
         </p>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"
-      integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg=="
-      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+ var username = "<%= username != null ? username : "" %>";
+    
+    if (username) {
+        document.getElementById('logout-container').style.display = 'block';
+    
+        document.getElementById('login-container').style.display = 'none';
+    } else {
+        document.getElementById('logout-container').style.display = 'none';
+       
+        document.getElementById('login-container').style.display = 'block';
+    }
     
     document.getElementById("exploreBtn").addEventListener("click", () => {
         const exploreContainer = document.getElementById('exploreContainer');
@@ -530,280 +295,6 @@
             exploreContainer.classList.add('max-h-0');
         }
     });
- 
-    function toggleText(button) {
-    	  const card = button.closest('.relative'); // Find the clicked card
-    	  const moreText = card.querySelector(".moreText"); // Find the text within the card
-    	  const readMoreBtn = button; // Use the passed button element directly
-
-    	  // First, reset the height of all cards to their default height
-    	  const allCards = document.querySelectorAll('.relative');
-    	  allCards.forEach((card) => {
-    	    card.style.height = ''; // Reset height for all cards
-    	  });
-
-    	  // If the clicked card's moreText is hidden, show it and increase the height
-    	  if (moreText.classList.contains("hidden")) {
-    	    moreText.classList.remove("hidden"); // Show the extra content
-    	    readMoreBtn.textContent = "Read less"; // Change button text
-    	    card.style.height = 'auto'; // Increase the height of the clicked card
-    	  } else {
-    	    moreText.classList.add("hidden"); // Hide the extra content
-    	    readMoreBtn.textContent = "Read more"; // Reset button text
-    	    card.style.height = ''; // Reset the height to default (collapsed state)
-    	  }
-    	}
-
-
-    
-    /*document.addEventListener("DOMContentLoaded", function() {
-        fetch('loadReviews')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(reviews => {
-                const reviewsContainer = document.getElementById('reviewsContainer');
-                reviews.forEach(review => {
-                    const slide = document.createElement('div');
-                    slide.className = 'swiper-slide';
-                    slide.innerHTML = `
-                        <p class="text-2xl">${'?'.repeat(review.stars)} (${review.stars})</p>
-                        <h2 class="text-3xl font-bold">${review.name}</h2>
-                        <p class="font-semibold">"${review.comment}"</p>
-                    `;
-                    reviewsContainer.appendChild(slide);
-                });
-                // Initialize Swiper here if needed
-            })
-            .catch(error => {
-                console.error('Error fetching reviews:', error);
-            });
-    });*/
-    document.addEventListener("DOMContentLoaded", async function () {
-        try {
-            const response = await fetch('loadReviews');
-            if (!response.ok) {
-                throw new Error("Network response was not ok");
-            }
-
-            const reviews = await response.json();
-            console.log('Fetched Reviews:', reviews); // Log the fetched reviews
-
-            // Select the Swiper wrapper element
-            const swiperWrapper = document.querySelector('.swiper-wrapper');
-
-            // Clear any existing slides
-            swiperWrapper.innerHTML = ''; // Clear previous content
-
-            // Loop through each review and create slides
-            reviews.forEach(review => {
-                // Create a new slide
-                const slide = document.createElement('div');
-                slide.classList.add('swiper-slide');
-
-                // Create the inner content for the slide
-                const stars = document.createElement('p');
-                stars.className = "text-2xl";
-                stars.textContent = '⭐'.repeat(review.stars); // Set stars based on review.stars
-
-                const name = document.createElement('h2');
-                name.className = "text-3xl font-bold";
-                name.textContent = review.name; // Set the review name
-
-                const comment = document.createElement('p');
-                comment.className = "font-semibold";
-                comment.textContent = review.comment; // Set the review comment
-
-                // Append the content to the slide
-                slide.appendChild(stars);
-                slide.appendChild(name);
-                slide.appendChild(comment);
-
-                // Append the slide to the Swiper wrapper
-                swiperWrapper.appendChild(slide);
-            });
-
-            // Initialize Swiper after adding all slides
-            var swiper = new Swiper(".mySwiper", {
-                grabCursor: true,
-                loop: true,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true,
-                },
-                navigation: {
-                    nextEl: ".swiper-button-next",
-                    prevEl: ".swiper-button-prev",
-                },
-            });
-
-        } catch (error) {
-            console.error('Error fetching reviews:', error);
-        }
-    });
-
-    
-    var username = "<%= username != null ? username : "" %>";
-    
-    if (username) {
-        document.getElementById('logout-container').style.display = 'block';
-        document.getElementById('show-login').style.display = 'none';
-        document.getElementById('login-container').style.display = 'none';
-    } else {
-        document.getElementById('logout-container').style.display = 'none';
-        document.getElementById('show-login').style.display = 'block';
-        document.getElementById('login-container').style.display = 'block';
-    }
-    
-    document.addEventListener("DOMContentLoaded", function() {
-        var getStartedButton = document.getElementById('get-started-btn');
-        const features = document.querySelectorAll(".features");
-        
-        if (username) {
-            getStartedButton.href = "/Login_Registration/main.jsp";
-        } else {
-            getStartedButton.href = "/Login_Registration/login.jsp";
-            features.forEach(function(feature) {
-                feature.href = "/Login_Registration/login.jsp";
-            });
-        }
-    });
-
-
-gsap.registerPlugin(ScrollTrigger);
-
-
-
-
-      var swiper = new Swiper(".mySwiper", {
-
-        grabCursor: true,
-        loop: true,
-        pagination: {
-          el: ".swiper-pagination",
-        },
-        navigation: {
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        },
-      });
-
-      function submitReview(event) {
-    	    event.preventDefault(); // Prevent default form submission
-
-    	    const form = document.getElementById("reviewForm");
-    	    const formData = new URLSearchParams(new FormData(form));
-
-    	    console.log("Form Data:", formData.toString()); // Debugging form data output
-
-    	    fetch("submitReview", {
-    	        method: "POST",
-    	        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    	        body: formData.toString()
-    	    })
-    	    .then(response => {
-    	        // Check if the response is okay
-    	        if (!response.ok) {
-    	            throw new Error("Network response was not ok: " + response.statusText);
-    	        }
-    	        return response.text(); // Get the response text
-    	    })
-    	    .then(message => {
-    	        console.log("Server Response:", message); // Debugging log
-    	        displayMessage(message, 'success'); // Display success message
-    	        document.getElementById("reviewForm").reset(); // Optionally reset the form after submission
-    	    })
-    	    .catch(error => {
-    	        console.error("Error:", error); // Detailed error log
-    	        displayMessage("An error occurred while submitting the review. Please try again later.", 'error'); // Display error message
-    	    });
-    	}
-
-    	// Function to display messages
-    	function displayMessage(message, type) {
-    const messageElement = document.getElementById("message");
-    console.log("Displaying message:", message, "Type:", type); // Log message type and content
-    if (messageElement) {
-        messageElement.innerHTML = `<p style='color:${type == 'success' ? 'green' : 'red'};'>${message}</p>`;
-        messageElement.style.display = 'block'; // Ensure the message is visible
-        console.log("Message displayed:", messageElement.innerHTML); // Log displayed message
-    } else {
-        console.log("Message element not found.");
-    }
-}
-
-
-      gsap.from("#anime1 h2, #anime1 div div",{
-        delay:0.4,
-        opacity:0,
-        duration:1,
-        scrollTrigger:{
-          trigger: "#anime1 h2",
-          scroller: "body",
-          start: "top 80%",
-        }
-      })
-
-      gsap.from("#anime3 div div",{
-        delay:0.4,
-        opacity:0,
-        duration:1,
-        x:-60,
-        scrollTrigger:{
-          trigger: "#anime3 div img",
-          scroller: "body",
-          start: "top 90%",
-        }
-      })
-
-      gsap.from("#anime3 div img",{
-        delay:0.4,
-        opacity:0,
-        duration:1,
-        y:60,
-        scrollTrigger:{
-          trigger: "#anime3 div img",
-          scroller: "body",
-          start: "top 90%",
-        }
-      })
-
-      gsap.from("#anime2 div",{
-        delay:0.4,
-        opacity:0,
-        duration:1,
-        x:-60
-      })
-      gsap.from("#anime2 img",{
-        delay:0.4,
-        opacity:0,
-        duration:1,
-        y:60
-      })
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute('href');
-      const targetElement = document.querySelector(targetId);
-
-      if (targetElement) {
-        const navbarHeight = document.querySelector('nav').offsetHeight; 
-        const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight; 
-
-        window.scrollTo({
-          top: targetPosition,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-  
-      
     </script>
-  </body>
-
-  </html>
+</body>
+</html>

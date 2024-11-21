@@ -26,13 +26,13 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/generateotp")
 public class GenerateOtp extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
+	private static final String DB_URL = "jdbc:mariadb://localhost:3306/User_Details";
     private static final String DB_USER = "Sanket";
     private static final String DB_PASSWORD = "password";
 
     // Email configuration for sending OTP
-    private static final String EMAIL = "sanketdeyng11c@gmail.com"; // Replace with your email
-    private static final String EMAIL_PASSWORD = "glrd unwo pbmh zfqd"; // Replace with your email password
+    private static final String EMAIL = "eduler.notes@gmail.com"; // Replace with your email
+    private static final String EMAIL_PASSWORD = "clki pyqk gcay zmbk"; // Replace with your email password
 
     public GenerateOtp() {
         super();
@@ -52,7 +52,7 @@ public class GenerateOtp extends HttpServlet {
                 Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
                 // SQL select query to verify user credentials
-                String sql = "SELECT Username FROM User WHERE Email = ?";
+                String sql = "SELECT username FROM User WHERE email = ?";
 
                 // Prepare statement
                 PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -63,9 +63,10 @@ public class GenerateOtp extends HttpServlet {
 
                 // Check if a matching user exists
                 if (resultSet.next()) {
-                    String username = resultSet.getString("Username");
+                    String username = resultSet.getString("username");
                     HttpSession session = request.getSession();
                     session.setAttribute("username", username);
+                    session.setAttribute("email",email );
 
                     // Generate OTP
                     int otp = generateOtp();
