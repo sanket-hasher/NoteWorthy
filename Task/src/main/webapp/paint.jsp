@@ -128,7 +128,7 @@
       </nav>
     </div>
      <div id="logout-container"  style="display: none">
-        <form action="logout" method="post">
+        <form action="lout" method="post">
             <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
              <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
         </form>

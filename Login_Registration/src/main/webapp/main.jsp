@@ -173,7 +173,7 @@ if (cookies != null) {
         <input class="border rounded p-2 w-full" id="new-task-todo" type="text" placeholder="Add new task" />
         <button class="mt-2 w-full bg-purple-600 text-white p-2 rounded" onclick="addTask('todo')">Add Task</button>
     </div>
-    <div id="todo" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg">
+    <div id="todo" class="h-[300px] overflow-y-scroll p-2 space-y-2 bg-gray-50 rounded-lg">
         <!-- Sample Task -->
         <div class="flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer">
             <p>Task 1</p>
@@ -188,13 +188,13 @@ if (cookies != null) {
 <!-- In Progress Column -->
 <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
     <h2 class="font-bold text-xl mb-4">In Progress</h2>
-    <div id="inprogress" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+    <div id="inprogress" class="h-[400px]  overflow-y-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
 </div>
 
 <!-- Done Column -->
 <div class="w-[25rem] bg-white rounded-lg shadow-md p-4">
     <h2 class="font-bold text-xl mb-4">Done</h2>
-    <div id="done" class="max-h-[300px] overflow-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
+    <div id="done" class="h-[400px]  overflow-y-scroll p-2 space-y-2 bg-gray-50 rounded-lg"></div>
 </div>
 				
 				

@@ -20,7 +20,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.worker.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -130,7 +129,7 @@
     </nav>
   </div>
    <div id="logout-container"  style="display: none">
-        <form action="logout" method="post">
+        <form action="lout" method="post">
             <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
              <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
         </form>
@@ -174,96 +173,166 @@
 		// Apply it to the background of the profile-icon
 		document.getElementById("profile-icon").style.backgroundColor = randomColor;
 	});
- const filesList = [];
+	
+	
+	const filesList = [];
 
-document.getElementById('uploadFileBtn').addEventListener('click', () => {
-    document.getElementById('fileInput').click();
-});
+	// Trigger file input when the "Upload File" button is clicked
+	document.getElementById("uploadFileBtn").addEventListener("click", () => {
+	    document.getElementById("fileInput").click();
+	});
 
-document.getElementById('fileInput').addEventListener('change', function(event) {
-    const files = event.target.files;
-    if (files.length > 0) {
-        Array.from(files).forEach(file => {
-            filesList.push(file);
-        });
-        renderFiles();
-    }
-});
+	// Handle file input change event
+	document.getElementById("fileInput").addEventListener("change", function (event) {
+	    const files = event.target.files;
+	    if (files.length > 0) {
+	        Array.from(files).forEach(file => {
+	            uploadFile(file);
+	        });
+	    }
+	});
+
+	// Function to upload a file to the server
+	function uploadFile(file) {
+	    const formData = new FormData();
+	    formData.append("file", file);
+
+	    fetch("upload", {
+	        method: "POST",
+	        body: formData
+	    })
+	        .then(response => {
+	            if (response.ok) {
+	                loadFiles(); // Reload files after successful upload
+	            } else {
+	                alert("Failed to upload the file to the server.");
+	            }
+	        })
+	        .catch(error => {
+	            console.error("Error uploading file:", error);
+	        });
+	}
+
+	// Function to fetch and render files from the server
+	function loadFiles() {
+	    fetch("load")
+	        .then(response => response.json())
+	        .then(data => {
+	            filesList.length = 0; // Clear existing list
+	            data.forEach(file => {
+	                filesList.push(file); // File object { fileid, filename, filetype }
+	            });
+	            renderFiles();
+	        })
+	        .catch(error => {
+	            console.error("Error fetching files:", error);
+	        });
+	}
+
+	// Function to delete a file from the server
+	function deleteFile(index, fileId) {
+	    fetch("delete?fileId=" + encodeURIComponent(fileId), {
+	        method: "DELETE"
+	    })
+	        .then(response => {
+	            if (response.ok) {
+	                // Remove file from the filesList and re-render
+	                filesList.splice(index, 1);
+	                renderFiles();
+	            } else {
+	                alert("Failed to delete the file from the database.");
+	            }
+	        })
+	        .catch(error => {
+	            console.error("Error deleting file:", error);
+	        });
+	}
+
+	// Function to get the appropriate icon for the file
+	function getFileIcon(extension) {
+	    switch (extension.toLowerCase()) {
+	        case "pdf":
+	            return "/Task/Assets/pdf-download-2617.png";
+	        case "jpg":
+	        case "jpeg":
+	        case "png":
+	        case "gif":
+	            return "/Task/Assets/photos-10603.png";
+	        case "doc":
+	        case "docx":
+	        case "xls":
+	        case "xlsx":
+	        case "txt":
+	            return "/Task/Assets/attachment-1483.png";
+	        default:
+	            return "/Task/Assets/folder-1485.png";
+	    }
+	}
+
+	// Function to truncate file names
+	function truncateFileName(name, charLimit = 10) {
+	    if (name.length > charLimit) {
+	        return name.slice(0, charLimit) + "...";
+	    }
+	    return name;
+	}
+
+	// Function to render the list of files
+	function renderFiles() {
+	    const filesContainer = document.getElementById("files");
+	    const elementCountDisplay = document.querySelector(".flex.mb-4 p");
+
+	    elementCountDisplay.textContent = filesList.length + " element" + (filesList.length !== 1 ? "s" : "");
+	    filesContainer.innerHTML = "";
+
+	    filesList.forEach((file, index) => {
+	        const fileDiv = document.createElement("div");
+	        fileDiv.className = "p-4 bg-gray-200 drop-shadow-md border border-[#CDC1FF] rounded-md cursor-pointer flex flex-col items-center w-28 h-32";
+
+	        const extension = file.filename.split(".").pop();
+	        const iconPath = getFileIcon(extension);
+
+	        const iconImg = document.createElement("img");
+	        iconImg.src = iconPath;
+	        iconImg.alt = "File Icon";
+	        iconImg.className = "w-12 h-12 mb-2";
+
+	        const fileTitle = document.createElement("div");
+	        fileTitle.className = "text-sm font-light text-center";
+	        fileTitle.textContent = truncateFileName(file.filename);
+
+	        const deleteBtn = document.createElement("button");
+	        deleteBtn.textContent = "Delete";
+	        deleteBtn.className = "mt-2 bg-red-500 text-white px-2 py-1 rounded text-sm";
+	        deleteBtn.addEventListener("click", () => {
+	            deleteFile(index, file.fileid);
+	        });
+	        fileDiv.addEventListener("click", () => {
+	            const previewUrl = "preview?fileId=" + encodeURIComponent(file.fileid); // Construct preview URL with fileId
+	            const fileType = file.filename.split(".").pop().toLowerCase(); // Extract file extension and convert to lowercase
+
+	            // Check if the file is a supported type for preview (PDF or image types)
+	            if (fileType === "pdf" || ["jpg", "jpeg", "png", "gif"].includes(fileType)) {
+	                fileViewer.src = previewUrl; // Set iframe source to the preview URL
+	                filePreview.classList.remove("hidden"); // Show preview container
+	            } else {
+	                alert("Preview not supported for this file type.");
+	            }
+	        });
 
 
-function getFileIcon(extension) {
-    switch (extension.toLowerCase()) {
-        case 'pdf':
-            return '/Task/Assets/pdf-download-2617.png'; 
-        case 'jpg':
-        case 'jpeg':
-        case 'png':
-        case 'gif':
-            return '/Task/Assets/photos-10603.png'; 
-        case 'doc':
-        case 'docx':
-            return '/Task/Assets/attachment-1483.png'; 
-        case 'xls':
-        case 'xlsx':
-            return '/Task/Assets/attachment-1483.png'; 
-        case 'txt':
-            return '/Task/Assets/attachment-1483.png';
-        default:
-            return '/Task/Assets/folder-1485.png';
-    }
-}
+	        fileDiv.appendChild(iconImg);
+	        fileDiv.appendChild(fileTitle);
+	        fileDiv.appendChild(deleteBtn);
+	        filesContainer.appendChild(fileDiv);
+	    });
+	}
 
-function truncateFileName(name, charLimit = 10) {
-    if (name.length > charLimit) {
-        return name.slice(0, charLimit) + '...'; // Truncate to charLimit and add ellipsis
-    }
-    return name;
-}
+	// Load files on page load
+	window.onload = function () {
+	    loadFiles();
+	};
 
-function renderFiles() {
-    const filesContainer = document.getElementById('files');
-    const filePreview = document.getElementById('filePreview');
-    const fileViewer = document.getElementById('fileViewer');
-    const elementCountDisplay = document.querySelector(".flex.mb-4 p");
-    elementCountDisplay.textContent = filesList.length + " element" + (filesList.length !== 1 ? "s" : "");
-    filesContainer.innerHTML = '';
-
-    filesList.forEach(file => {
-        const fileDiv = document.createElement('div');
-        fileDiv.className = 'p-4 bg-gray-200 drop-shadow-md border border-[#CDC1FF] rounded-md cursor-pointer flex flex-col items-center w-28 h-32';
-
-        // Get file extension
-        const extension = file.name.split('.').pop();
-        const iconPath = getFileIcon(extension);
-
-        // Create icon image element
-        const iconImg = document.createElement('img');
-        iconImg.src = iconPath;
-        iconImg.alt = 'File Icon';
-        iconImg.className = 'w-12 h-12 mb-2';
-
-        // Create file title element
-        const fileTitle = document.createElement('div');
-        fileTitle.className = 'text-sm font-light text-center';
-        fileTitle.textContent = truncateFileName(file.name);
-
-        // Add click event for previewing the file
-        fileDiv.addEventListener('click', () => {
-            const fileType = file.type;
-            if (fileType === 'application/pdf' || fileType.startsWith('image/')) {
-                const fileURL = URL.createObjectURL(file);
-                fileViewer.src = fileURL;
-                filePreview.classList.remove('hidden');
-            } else {
-                alert('Preview not supported for this file type.');
-            }
-        });
-
-        fileDiv.appendChild(iconImg);
-        fileDiv.appendChild(fileTitle);
-        filesContainer.appendChild(fileDiv);
-    });
-}
 
 var username = "<%= username != null ? username : "" %>";
 
