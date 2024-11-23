@@ -1,4 +1,4 @@
-CREATE TABLE User (Username VARCHAR(30) UNIQUE Primary Key,Email VARCHAR(50),Password VARCHAR(20));
+﻿CREATE TABLE User (Username VARCHAR(30) UNIQUE Primary Key,Email VARCHAR(50),Password VARCHAR(20));
 
 CREATE TABLE review (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -8,8 +8,8 @@ CREATE TABLE review (
 );
 CREATE TABLE tasks (
     taskid VARCHAR(50) NOT NULL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    FOREIGN KEY (username) REFERENCES user(username)
+    Username VARCHAR(255) NOT NULL,
+    FOREIGN KEY (Username) REFERENCES User(Username)
 );
 
 CREATE TABLE todo (
@@ -29,11 +29,11 @@ CREATE TABLE done (
 
 CREATE TABLE user_files (
     fileid INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
+    Username VARCHAR(50) NOT NULL,
     filename VARCHAR(255) NOT NULL,
     filetype VARCHAR(50) NOT NULL,
     filedata LONGBLOB NOT NULL,
-    FOREIGN KEY (username) REFERENCES user(username)
+    FOREIGN KEY (Username) REFERENCES User(Username)
 );
 
 
