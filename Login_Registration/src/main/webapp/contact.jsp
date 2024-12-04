@@ -55,11 +55,11 @@
           <div class="absolute  z-10 mt-2 w-56  rounded-md bg-white shadow-lg ">
     <div class=" cursor-pointer  max-h-0 overflow-hidden transition-all duration-500 ease-in-out" id="exploreContainer">
       <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
-      <a href="/Login_Registration/main.jsp" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] rounded-t-md transition-all duration-300">Task</a>
-      <a href="http://localhost:8080/Task/files.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Files</a>
-      <a href="http://localhost:8080/Task/paint.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300">Whiteboard</a>
-       <a href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Notes</a>
-        <a href="http://localhost:8080/Task/schedule.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Schedule</a>
+      <a href="main.jsp" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] rounded-t-md transition-all duration-300">Task</a>
+      <a href="/Task/files.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Files</a>
+      <a href="/Task/paint.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300">Whiteboard</a>
+       <a href="/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Notes</a>
+        <a href="/Task/schedule.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Schedule</a>
     </div></div>
         </li>
 
@@ -77,7 +77,7 @@
         </li>
         <li class="relative">
           <div class="group">
-            <a href="http://localhost:8080/Login_Registration/login.jsp" id="login-container" style="display: none" class="block">login</a>
+            <a href="login.jsp" id="login-container" style="display: none" class="block">login</a>
             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
           </div>
            <div id="logout-container" class="group" style="display: none">
@@ -295,6 +295,22 @@
             exploreContainer.classList.add('max-h-0');
         }
     });
+    console.log(username);
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        var getStartedButton = document.getElementById('get-started-btn');
+        const features = document.querySelectorAll(".features");
+        
+        if (username) {
+            getStartedButton.href = "/Login_Registration/main.jsp";
+        } else {
+            getStartedButton.href = "/Login_Registration/login.jsp";
+            features.forEach(function(feature) {
+                feature.href = "/Login_Registration/login.jsp";
+            });
+        }
+    });
+    
     </script>
 </body>
 </html>

@@ -223,7 +223,7 @@ color: red;
 	        </p>
 	      </div>
 	    </div>
-	    <a href="http://localhost:8080/Login_Registration/updatepass.jsp?username=<%=username%>"
+	    <a href="updatepass.jsp?username=<%=username%>"
 						class="mx-4 font-medium">Update Password</a>
 						
 				
