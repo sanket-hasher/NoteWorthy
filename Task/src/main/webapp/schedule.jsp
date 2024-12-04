@@ -68,7 +68,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 30px;
   background-color: #e2e1dc;
 }
 .container {
@@ -324,18 +323,19 @@ body {
 }
 .events .event {
   position: relative;
-  width: 95%;
-  min-height: 70px;
+  min-height: 70px; /* Minimum height for the event container */
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: 5px;
-  padding: 0 20px;
-  padding-left: 50px;
-  color: #fff;
-  background: linear-gradient(90deg, #3f4458, transparent);
-  cursor: pointer;
+  justify-content: space-evenly; /* Centers content horizontally */
+  align-items:center;
+  gap: 5px; /* Adds a gap between content inside the event */
+  padding: 0 20px; /* Horizontal padding */
+  color: #fff; /* White text color */
+  background: linear-gradient(90deg, #3f4458, transparent); /* Gradient background */
+  cursor: pointer; /* Pointer cursor on hover */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Optional: add shadow for depth */
 }
+
 /* even event */
 .events .event:nth-child(even) {
   background: transparent;
@@ -724,8 +724,8 @@ body {
       </div>
       <div class="right">
         <div class="today-date">
-          <div class="event-day">wed</div>
-          <div class="event-date">12th december 2022</div>
+          <div class="event-day">Events</div>
+          
         </div>
         <div class="events"></div>
         <div class="add-event-wrapper">

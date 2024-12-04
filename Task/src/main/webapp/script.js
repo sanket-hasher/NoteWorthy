@@ -143,21 +143,23 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 
 	   //function to add month and year on prev and next button
 	   function prevMonth() {
-	     month--;
-	     if (month < 0) {
-	       month = 11;
-	       year--;
-	     }
-	     initCalendar();
+	       month--;
+	       if (month < 0) {
+	           month = 11;
+	           year--;
+	       }
+	       initCalendar();
+	       updateEvents(activeDay);  // Update events after switching months
 	   }
 
 	   function nextMonth() {
-	     month++;
-	     if (month > 11) {
-	       month = 0;
-	       year++;
-	     }
-	     initCalendar();
+	       month++;
+	       if (month > 11) {
+	           month = 0;
+	           year++;
+	       }
+	       initCalendar();
+	       updateEvents(activeDay);  // Update events after switching months
 	   }
 
 	   prev.addEventListener("click", prevMonth);
@@ -168,51 +170,56 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	   //function to add active on day
 	   function addListner() {
 	     const days = document.querySelectorAll(".day");
+
 	     days.forEach((day) => {
 	       day.addEventListener("click", (e) => {
-	         getActiveDay(e.target.innerHTML);
-	         updateEvents(Number(e.target.innerHTML));
-	         activeDay = Number(e.target.innerHTML);
-	         //remove active
-	         days.forEach((day) => {
-	           day.classList.remove("active");
-	         });
-	         //if clicked prev-date or next-date switch to that month
+	         const dayNumber = Number(e.target.innerHTML);
+	         
+	         // Update the active day and display events
+	         getActiveDay(dayNumber);
+	         updateEvents(dayNumber); // Update events for clicked day
+	         activeDay = dayNumber;
+
+	         // Remove 'active' class from all days
+	         days.forEach(day => day.classList.remove("active"));
+	         
+	         // Add 'active' to the clicked day
+	         e.target.classList.add("active");
+
+	         // If clicked on a day in the previous month
 	         if (e.target.classList.contains("prev-date")) {
-	           prevMonth();
-	           //add active to clicked day afte month is change
+	           prevMonth(); // Switch to the previous month
 	           setTimeout(() => {
-	             //add active where no prev-date or next-date
+	             // After switching months, add 'active' to the day
 	             const days = document.querySelectorAll(".day");
 	             days.forEach((day) => {
-	               if (
-	                 !day.classList.contains("prev-date") &&
-	                 day.innerHTML === e.target.innerHTML
-	               ) {
+	               if (!day.classList.contains("prev-date") && day.innerHTML === e.target.innerHTML) {
 	                 day.classList.add("active");
 	               }
 	             });
 	           }, 100);
-	         } else if (e.target.classList.contains("next-date")) {
-	           nextMonth();
-	           //add active to clicked day afte month is changed
+	         } 
+	         // If clicked on a day in the next month
+	         else if (e.target.classList.contains("next-date")) {
+	           nextMonth(); // Switch to the next month
 	           setTimeout(() => {
+	             // After switching months, add 'active' to the day
 	             const days = document.querySelectorAll(".day");
 	             days.forEach((day) => {
-	               if (
-	                 !day.classList.contains("next-date") &&
-	                 day.innerHTML === e.target.innerHTML
-	               ) {
+	               if (!day.classList.contains("next-date") && day.innerHTML === e.target.innerHTML) {
 	                 day.classList.add("active");
 	               }
 	             });
 	           }, 100);
-	         } else {
+	         } 
+	         // If clicked on a day in the current month
+	         else {
 	           e.target.classList.add("active");
 	         }
 	       });
 	     });
 	   }
+
 
 	   
 	 
@@ -241,7 +248,7 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	   gotoBtn.addEventListener("click", gotoDate);
 
 	   function gotoDate() {
-	     console.log("here");
+	    
 	     const dateArr = dateInput.value.split("/");
 	     if (dateArr.length === 2) {
 	       if (dateArr[0] > 0 && dateArr[0] < 13 && dateArr[1].length === 4) {
@@ -258,40 +265,45 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	   function getActiveDay(date) {
 	     const day = new Date(year, month, date);
 	     const dayName = day.toString().split(" ")[0];
-	     eventDay.innerHTML = dayName;
-	     eventDate.innerHTML = date + " " + months[month] + " " + year;
+	   
+	   
 	   }
 
 	   //function update events when a day is active
-	   function updateEvents(date) {
+	   function updateEvents() {
 	     let events = "";
-	     eventsArr.forEach((event) => {
-	       if (
-	         date === event.day &&
-	         month + 1 === event.month &&
-	         year === event.year
-	       ) {
-	         event.events.forEach((event) => {
-	           events += `<div class="event">
-	               <div class="title">
-	                 <i class="fas fa-circle"></i>
-	                 <h3 class="event-title">${event.title}</h3>
-	               </div>
-	               <div class="event-time">
-	                 <span class="event-time">${event.time}</span>
-	               </div>
-	           </div>`;
-	         });
-	       }
+	     let eventsFound = false;
+		 let totalEvents = 0;
+	     // Loop through all events and display them
+	     eventsArr.forEach(eventDay => {
+	       eventDay.events.forEach(event => {
+	         eventsFound = true;
+			 totalEvents++;
+	         events += `
+	           <div class="event">
+			   <span class="serial-number">${totalEvents}.</span> 
+	             <div class="title">
+	               <i class="fas fa-circle"></i>
+	               <h3 class="event-title">${event.title}</h3>
+	             </div>
+	             <div class="event-time">
+	               <span>${event.time}</span>
+	             </div>
+	            
+	           </div>
+	         `;
+	       });
 	     });
-	     if (events === "") {
-	       events = `<div class="no-event">
-	               <h3>No Events</h3>
-	           </div>`;
+
+	     // If no events found, display "No Events"
+	     if (!eventsFound) {
+	       events = `<div class="no-event"><h3>No Events</h3></div>`;
 	     }
+
+	     // Update the events container
 	     eventsContainer.innerHTML = events;
-	     //saveEvents();
 	   }
+
 
 	   //function to add event
 	   addEventBtn.addEventListener("click", () => {
@@ -313,25 +325,7 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	     addEventTitle.value = addEventTitle.value.slice(0, 60);
 	   });
 
-	   function defineProperty() {
-	     var osccred = document.createElement("div");
-	     osccred.innerHTML =
-	       "A Project By <a href='https://www.youtube.com/channel/UCiUtBDVaSmMGKxg1HYeK-BQ' target=_blank>Open Source Coding</a>";
-	     osccred.style.position = "absolute";
-	     osccred.style.bottom = "0";
-	     osccred.style.right = "0";
-	     osccred.style.fontSize = "10px";
-	     osccred.style.color = "#ccc";
-	     osccred.style.fontFamily = "sans-serif";
-	     osccred.style.padding = "5px";
-	     osccred.style.background = "#fff";
-	     osccred.style.borderTopLeftRadius = "5px";
-	     osccred.style.borderBottomRightRadius = "5px";
-	     osccred.style.boxShadow = "0 0 5px #ccc";
-	     document.body.appendChild(osccred);
-	   }
-
-	   defineProperty();
+	  
 
 	   //allow only time in eventtime from and to
 	   addEventFrom.addEventListener("input", (e) => {
@@ -356,6 +350,7 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 
 	   //function to add event to eventsArr
 	   addEventSubmit.addEventListener("click", () => {
+		
 	     const eventTitle = addEventTitle.value;
 	     const eventTimeFrom = addEventFrom.value;
 	     const eventTimeTo = addEventTo.value;
@@ -363,7 +358,7 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	       alert("Please fill all the fields");
 	       return;
 	     }
-
+    
 	     //check correct time format 24 hour
 	     const timeFromArr = eventTimeFrom.split(":");
 	     const timeToArr = eventTimeTo.split(":");
@@ -454,7 +449,7 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 		 	         console.error('Error:', error);
 		 	         showToaster('Failed to save events');
 		 	       });
-		
+				   renderEvents();
 	     addEventWrapper.classList.remove("active");
 	     addEventTitle.value = "";
 	     addEventFrom.value = "";
@@ -472,21 +467,21 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	     if (e.target.classList.contains("event")) {
 	       if (confirm("Are you sure you want to delete this event?")) {
 	         const eventTitle = e.target.children[0].children[1].innerHTML;
+
+	         // Loop through eventsArr and delete the selected event
 	         eventsArr.forEach((event) => {
-	           if (
-	             event.day === activeDay &&
-	             event.month === month + 1 &&
-	             event.year === year
-	           ) {
+	           if (event.day === activeDay && event.month === month + 1 && event.year === year) {
 	             event.events.forEach((item, index) => {
 	               if (item.title === eventTitle) {
-	                 event.events.splice(index, 1);
+	                 event.events.splice(index, 1); // Remove event from the day
 	               }
 	             });
-	             //if no events left in a day then remove that day from eventsArr
+
+	             // If no events left for the day, remove the entire day entry from eventsArr
 	             if (event.events.length === 0) {
 	               eventsArr.splice(eventsArr.indexOf(event), 1);
-	               //remove event class from day
+
+	               // Remove the 'event' class from the corresponding day element
 	               const activeDayEl = document.querySelector(".day.active");
 	               if (activeDayEl.classList.contains("event")) {
 	                 activeDayEl.classList.remove("event");
@@ -494,7 +489,9 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	             }
 	           }
 	         });
-	         updateEvents(activeDay);
+
+	         // Re-render the events and update the UI
+	         updateEvents(activeDay); // Ensure to refresh the event list for the active day
 	       }
 	     }
 	   });
@@ -507,35 +504,33 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 	   
 		 // Send a GET request to the server to fetch data
 		 function getevents() {
-			/*if (localStorage.getItem("events") === null) {
-			       return;
-			     }*/
-				 fetch("loadd")  // Ensure the correct endpoint here (e.g., "/loadd")
-				 	       .then(response => response.json())  // Parse the JSON response
-				 	       .then(data => {
-				 	           eventsArr.length = 0; // Clear existing list (if any)
+		     if (localStorage.getItem("events") === null) {
+		         return; // No events in localStorage, so skip.
+		     }
 
-				 	           // Check if events array exists in the response
-				 	           if (data.events && Array.isArray(data.events)) {
-				 	               data.events.forEach(event => {
-				 	                   // Push each event into the eventsArr
-				 	                   eventsArr.push({
-				 	                       title: event.title,
-				 	                       time: event.time,
-				 	                       date: event.date
-				 	                   });
-				 	               });
+		     // Fetch events dynamically (Ensure the correct endpoint)
+		     fetch("loadd")  // Replace 'loadd' with correct endpoint
+		         .then(response => response.json()) // Parse JSON response
+		         .then(data => {
+		             eventsArr.length = 0; // Clear existing events
 
-				 	               // Render the events after fetching them
-				 	               renderEvents();
-				 	           } else {
-				 	               console.log("No events found in the response.");
-				 	           }
-				 	       })
-				 	       .catch(error => {
-				 	           console.error("Error fetching events:", error);
-				 	       });
+		             // Check if events exist in the response and are an array
+		             if (data && Array.isArray(data.events)) {
+		                 data.events.forEach(event => {
+		                     eventsArr.push({
+		                         title: event.title,
+		                         time: event.time,
+		                         date: event.date,
+		                     });
+		                 });
+
+		                 // After fetching events, render them on the active day
+		                 renderEvents();
+		             }
+		         })
+		         .catch(error => console.error("Error fetching events:", error));
 		 }
+
 	   
 
 	   function convertTime(time) {
@@ -556,25 +551,44 @@ const colors = ["#FF5722", "#D32F2F", "#388E3C"];
 
 		   // Example renderEvents function (this should render events as needed)
 		   function renderEvents() {
-		     // Clear any existing events
-		     eventsContainer.innerHTML = ''; 
+		     // Clear the existing events
+		     eventsContainer.innerHTML = '';
 
-		     // Loop through events and create HTML to display them
-		     eventsArr.forEach(event => {
-		       const eventElement = document.createElement('div');
-		       eventElement.classList.add('event'); // Add event class
-		       
-		       eventElement.innerHTML = `
-		         <div class="title">
-		           <i class="fas fa-circle"></i>
-		           <h3 class="event-title">${event.title}</h3>
-		         </div>
-		         <div class="event-time">
-		           <span class="event-time">${event.time}</span>
-		         </div>
-		       `;
+		     let totalEvents = 0; // Initialize the counter for total events
 
-		       eventsContainer.appendChild(eventElement);
+		     // Iterate over all events and display them
+		     eventsArr.forEach((eventDay) => {
+		       eventDay.events.forEach((event) => {
+		         totalEvents++; // Increment the counter for each event
+
+		         const eventElement = document.createElement('div');
+		         eventElement.classList.add('event');
+
+		         eventElement.innerHTML = `
+				 <span class="serial-number">${totalEvents}.</span>  
+		           <div class="title">
+		            
+		             <i class="fas fa-circle"></i>
+		             <h3 class="event-title">${event.title}</h3>
+		           </div>
+		           <div class="event-time">
+		             <span>${event.time}</span>
+		           </div>
+		           <div class="event-date">
+		             <span>${eventDay.day}-${eventDay.month}-${eventDay.year}</span>
+		           </div>
+		         `;
+
+		         // Append the event to the eventsContainer
+		         eventsContainer.appendChild(eventElement);
+		       });
 		     });
+
+		     // Log the total number of events rendered
+		     console.log(`Total Events Rendered: ${totalEvents}`);
 		   }
+
+
+
+
 
