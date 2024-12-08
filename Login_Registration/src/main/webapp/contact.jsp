@@ -272,18 +272,6 @@
       </div>
     </footer>
     <script>
- var username = "<%= username != null ? username : "" %>";
-    
-    if (username) {
-        document.getElementById('logout-container').style.display = 'block';
-    
-        document.getElementById('login-container').style.display = 'none';
-    } else {
-        document.getElementById('logout-container').style.display = 'none';
-       
-        document.getElementById('login-container').style.display = 'block';
-    }
-    
     document.getElementById("exploreBtn").addEventListener("click", () => {
         const exploreContainer = document.getElementById('exploreContainer');
         
@@ -295,16 +283,25 @@
             exploreContainer.classList.add('max-h-0');
         }
     });
+    var username = "<%= username != null ? username : "" %>";
     console.log(username);
-    
+    if (username) {
+        document.getElementById('logout-container').style.display = 'block';
+        
+        document.getElementById('login-container').style.display = 'none';
+    } 
+    else {
+        document.getElementById('logout-container').style.display = 'none';
+        
+        document.getElementById('login-container').style.display = 'block';
+    }
     document.addEventListener("DOMContentLoaded", function() {
-        var getStartedButton = document.getElementById('get-started-btn');
+      
         const features = document.querySelectorAll(".features");
         
         if (username) {
             getStartedButton.href = "/Login_Registration/main.jsp";
         } else {
-            getStartedButton.href = "/Login_Registration/login.jsp";
             features.forEach(function(feature) {
                 feature.href = "/Login_Registration/login.jsp";
             });

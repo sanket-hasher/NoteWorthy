@@ -226,17 +226,55 @@ display:none;
         </form>
 </aside>
        <div class="main-container">
-				<div class="editor-container editor-container_document-editor" id="editor-container">
-					<div class="editor-container__menu-bar" id="editor-menu-bar"></div>
-					<div class="editor-container__toolbar" id="editor-toolbar"></div>
-					<div class="editor-container__editor-wrapper">
-						<div class="editor-container__editor"><div id="editor"></div></div>
-					</div>
-				</div>
-				<button class="fixed right-[8rem] bottom-[6rem] bg-purple-600 text-white p-4 rounded-full" id="downloadBtn">
-				<svg class="w-8 h-8"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#ffffff" d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>
-				</button>
-			</div>
+    <div class="editor-container editor-container_document-editor" id="editor-container">
+        <div class="editor-container__menu-bar" id="editor-menu-bar"></div>
+        <div class="editor-container__toolbar" id="editor-toolbar"></div>
+        <div class="editor-container__editor-wrapper">
+            <div class="editor-container__editor">
+                <div id="editor"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Box for sending a prompt to Gemini -->
+    <div class="gemini-query-container p-4 bg-gray-100 rounded shadow mt-4">
+        <label for="geminiPrompt" class="block font-bold text-gray-700 mb-2">Send a Query to Gemini:</label>
+        <textarea
+            id="geminiPrompt"
+            class="w-full border border-gray-300 rounded p-2"
+            placeholder="Type your prompt here..."
+            rows="3"></textarea>
+        
+        <!-- Block to display the generated content from Gemini -->
+       <div id="response-container" class="mt-4">
+  <!-- New response boxes will be added here dynamically -->
+</div>
+       
+        
+        <button
+            id="geminiSendButton"
+            class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700">
+            Send to Gemini
+        </button>
+    </div>
+
+    <!-- Existing Download Button -->
+    <button class="fixed right-[8rem] bottom-[6rem] bg-purple-600 text-white p-4 rounded-full" id="downloadBtn">
+        <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path
+                fill="#ffffff"
+                d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
+        </svg>
+    </button>
+</div>
+
+
+
+
+</div>
+
+
+			
 			
 			
     </div>
@@ -261,17 +299,18 @@ display:none;
             doc.html(editorElement, {
                 callback: function (doc) {
                     // Adjust layout, scale, or page size if needed
-                    doc.save('editor-content.pdf');
+                    doc.save('your-note.pdf');
                 },
-                x: 10,
-                y: 15,
+                x: '9.52%',  // x position as a percentage of page width
+                y: '5.72%',  // y position as a percentage of page height
                 html2canvas: {
                     scale: 1, // Increase scale for better resolution
                     useCORS: true // For cross-origin images if any
                 },
                 width: doc.internal.pageSize.getWidth() - 20 // Adjust the width
             });
-        } else {
+        }
+ else {
             console.error('Editor content not found.');
         }
     });
@@ -500,7 +539,7 @@ const editorConfig = {
 		}
 	},
 	menuBar: {
-		isVisible: true
+		isVisible: false
 	},
 	placeholder: 'Type or paste your content here!',
 	table: {
@@ -508,32 +547,107 @@ const editorConfig = {
 	}
 };
 
-DecoupledEditor.create(document.querySelector('#editor'), editorConfig).then(editor => {
-	document.querySelector('#editor-toolbar').appendChild(editor.ui.view.toolbar.element);
-	document.querySelector('#editor-menu-bar').appendChild(editor.ui.view.menuBarView.element);
+DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
+  .then(editor => {
+    document.querySelector('#editor-toolbar').appendChild(editor.ui.view.toolbar.element);
+    document.querySelector('#editor-menu-bar').appendChild(editor.ui.view.menuBarView.element);
 
-	try {
-    const savedData = localStorage.getItem('editorData');
-    if (savedData) {
-        editor.setData(savedData);
+    // Function to send the content from the "Send to Gemini" textarea to the server
+    function sendPromptToServer(promptText, callback) {
+      fetch("gemini", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"  // Sending as form data
+        },
+        body: new URLSearchParams({
+          editorData: promptText  // Pass the prompt data as URL-encoded parameter
+        })
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Error: " + response.statusText);
+        }
+        return response.text();  // Expecting plain text response from the server
+      })
+      .then(generatedContent => {
+        // Format the response into a more readable format
+        const formattedContent = formatResponse(generatedContent);
+
+        // Create a new box for Gemini's response
+        const responseContainer = document.querySelector('#response-container');  // Get the container to add new boxes
+
+        // Create a new div for the new response box
+        const newResponseBox = document.createElement('div');
+        newResponseBox.classList.add('response-box', 'mt-4', 'bg-white', 'p-4', 'border', 'border-gray-300', 'rounded');
+        
+        // Set the content of the response box
+        const responseHeader = document.createElement('h4');
+        responseHeader.classList.add('font-semibold', 'text-gray-700');
+        responseHeader.textContent = "Gemini's Response:";  // Set the title
+
+        const responseContent = document.createElement('div');
+        responseContent.classList.add('text-gray-600');
+        responseContent.innerHTML = formattedContent;  // Set the formatted content as response text
+
+        // Append the header and content to the new box
+        newResponseBox.appendChild(responseHeader);
+        newResponseBox.appendChild(responseContent);
+
+        // Append the new response box to the container
+        responseContainer.appendChild(newResponseBox);
+
+        // Show the response container if hidden
+        responseContainer.classList.remove('hidden');
+        
+        if (callback) callback(generatedContent);  // Execute callback if provided
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Failed to fetch response: " + error.message);
+      });
     }
 
-    // Save content to local storage whenever it changes
-    editor.model.document.on('change:data', () => {
-        const currentData = editor.getData();
-        try {
-            localStorage.setItem('editorData', currentData);
-        } catch (e) {
-            console.error('Error saving to localStorage:', e);
+    // Function to format the response content to make it more readable
+    function formatResponse(responseText) {
+      // Split response by lines and add proper formatting
+      const lines = responseText.split('\n');
+      let formattedContent = '';
+
+      lines.forEach(function(line) {
+        if (line.trim()) {
+          // Add bullet points for each line (optional for bullet-point style)
+          formattedContent += '<p class="mb-2">- ' + line.trim() + '</p>';
+        } else {
+          // Add a line break if the line is empty
+          formattedContent += '<br>';
         }
-    });
-} catch (e) {
-    console.error('Error accessing localStorage:', e);
-}
+      });
+
+      return formattedContent;
+    }
+
+    // Listen for the button click to trigger sending the content
+    const sendButton = document.querySelector('#geminiSendButton');
+    if (sendButton) {
+      sendButton.addEventListener('click', function() {
+        const promptText = document.querySelector('#geminiPrompt').value.trim();  // Get text from the prompt textarea
+        if (promptText) {
+          sendPromptToServer(promptText);  // Send the prompt to the server
+        } else {
+          alert("Please enter a prompt.");
+        }
+      });
+    }
+
+  })
+  .catch(function(error) {
+    console.error("Error initializing the editor:", error);
+  });
 
 
 
-});
+
+
 
         </script>
         <!-- A friendly reminder to run on a server, remove this during the integration. -->

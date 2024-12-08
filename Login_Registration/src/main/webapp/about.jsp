@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
+ 
     String username = null;
     String emailid = null;
     Cookie[] cookies = request.getCookies();
@@ -15,6 +16,7 @@
             }
         }
     }
+    System.out.println(username);
 %>
 <!DOCTYPE html>
 <html>
@@ -182,7 +184,7 @@ width:fit-content;
           <div class="absolute  z-10 mt-2 w-56  rounded-md bg-white shadow-lg ">
     <div class=" cursor-pointer  max-h-0 overflow-hidden transition-all duration-500 ease-in-out" id="exploreContainer">
       <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
-      <a href="main.jsp" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] rounded-t-md transition-all duration-300">Task</a>
+      <a href="/Login_Registration/main.jsp" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] rounded-t-md transition-all duration-300">Task</a>
       <a href="/Task/files.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Files</a>
       <a href="/Task/paint.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300">Whiteboard</a>
        <a href="/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Notes</a>
@@ -204,7 +206,7 @@ width:fit-content;
         </li>
         <li class="relative">
           <div class="group">
-            <a href="login.jsp" id="login-container" style="display: none" class="block">login</a>
+            <a href="login.jsp" id="login-container" style="display: none" class="block">Login</a>
             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
           </div>
            <div id="logout-container" class="group" style="display: none">
@@ -410,43 +412,41 @@ width:fit-content;
       </div>
     </footer>
     <script>
- var username = "<%= username != null ? username : "" %>";
- document.getElementById("exploreBtn").addEventListener("click", () => {
-     const exploreContainer = document.getElementById('exploreContainer');
-     
-     if (exploreContainer.classList.contains('max-h-0')) {
-         exploreContainer.classList.remove('max-h-0');
-         exploreContainer.classList.add('max-h-screen'); // Arbitrary large height for full expansion
-     } else {
-         exploreContainer.classList.remove('max-h-screen');
-         exploreContainer.classList.add('max-h-0');
-     }
- });
-    
- if (username) {
-     document.getElementById('logout-container').style.display = 'block';
-     document.getElementById('show-login').style.display = 'none';
-     document.getElementById('login-container').style.display = 'none';
- } else {
-     document.getElementById('logout-container').style.display = 'none';
-     document.getElementById('show-login').style.display = 'block';
-     document.getElementById('login-container').style.display = 'block';
- }
- 
- document.addEventListener("DOMContentLoaded", function() {
-     var getStartedButton = document.getElementById('get-started-btn');
-     const features = document.querySelectorAll(".features");
-     
-     if (username) {
-         getStartedButton.href = "/Login_Registration/main.jsp";
-     } else {
-         getStartedButton.href = "/Login_Registration/login.jsp";
-         features.forEach(function(feature) {
-             feature.href = "/Login_Registration/login.jsp";
-         });
-     }
- });
-
+    document.getElementById("exploreBtn").addEventListener("click", () => {
+        const exploreContainer = document.getElementById('exploreContainer');
+        
+        if (exploreContainer.classList.contains('max-h-0')) {
+            exploreContainer.classList.remove('max-h-0');
+            exploreContainer.classList.add('max-h-screen'); // Arbitrary large height for full expansion
+        } else {
+            exploreContainer.classList.remove('max-h-screen');
+            exploreContainer.classList.add('max-h-0');
+        }
+    });
+    var username = "<%= username != null ? username : "" %>";
+    console.log(username);
+    if (username) {
+        document.getElementById('logout-container').style.display = 'block';
+        
+        document.getElementById('login-container').style.display = 'none';
+    } 
+    else {
+        document.getElementById('logout-container').style.display = 'none';
+        
+        document.getElementById('login-container').style.display = 'block';
+    }
+    document.addEventListener("DOMContentLoaded", function() {
+      
+        const features = document.querySelectorAll(".features");
+        
+        if (username) {
+            getStartedButton.href = "/Login_Registration/main.jsp";
+        } else {
+            features.forEach(function(feature) {
+                feature.href = "/Login_Registration/login.jsp";
+            });
+        }
+    });
 
     </script>
 </body>

@@ -555,33 +555,7 @@
     	}
 
 
-    
-    /*document.addEventListener("DOMContentLoaded", function() {
-        fetch('loadReviews')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(reviews => {
-                const reviewsContainer = document.getElementById('reviewsContainer');
-                reviews.forEach(review => {
-                    const slide = document.createElement('div');
-                    slide.className = 'swiper-slide';
-                    slide.innerHTML = `
-                        <p class="text-2xl">${'?'.repeat(review.stars)} (${review.stars})</p>
-                        <h2 class="text-3xl font-bold">${review.name}</h2>
-                        <p class="font-semibold">"${review.comment}"</p>
-                    `;
-                    reviewsContainer.appendChild(slide);
-                });
-                // Initialize Swiper here if needed
-            })
-            .catch(error => {
-                console.error('Error fetching reviews:', error);
-            });
-    });*/
+
     document.addEventListener("DOMContentLoaded", async function () {
         try {
             const response = await fetch('loadReviews');
@@ -715,6 +689,7 @@ gsap.registerPlugin(ScrollTrigger);
     	        console.log("Server Response:", message); // Debugging log
     	        displayMessage(message, 'success'); // Display success message
     	        document.getElementById("reviewForm").reset(); // Optionally reset the form after submission
+    	        location.reload();
     	    })
     	    .catch(error => {
     	        console.error("Error:", error); // Detailed error log
