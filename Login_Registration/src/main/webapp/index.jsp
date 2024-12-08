@@ -82,7 +82,7 @@
   }
   </style>
 
-  <body class="bg-white text-black">
+  <body class="bg-[#eee] text-black">
     <nav class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50">
     <div class="flex items-center gap-4">
     <img class="h-[4rem] stroke-black stroke-2 relative bottom-[7px]" src="Assets/logo1.png" />
@@ -104,10 +104,10 @@
     <div class=" cursor-pointer  max-h-0 overflow-hidden transition-all duration-500 ease-in-out" id="exploreContainer">
       <!-- Active: "bg-gray-100 text-gray-900 outline-none", Not Active: "text-gray-700" -->
       <a href="/Login_Registration/main.jsp" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] rounded-t-md transition-all duration-300">Task</a>
-      <a href="http://localhost:8080/Task/files.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Files</a>
-      <a href="http://localhost:8080/Task/paint.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300">Whiteboard</a>
-       <a href="http://localhost:8080/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Notes</a>
-        <a href="http://localhost:8080/Task/schedule.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Schedule</a>
+      <a href="/Task/files.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Files</a>
+      <a href="/Task/paint.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300">Whiteboard</a>
+       <a href="/Task/editor.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Notes</a>
+        <a href="/Task/schedule.jsp?username=<%=username%>&email=<%=emailid%>" class="features block px-4 py-2 text-sm text-gray-700 hover:bg-[#F3F4F6] hover:text-[#7E60BF] transition-all duration-300" >Schedule</a>
     </div></div>
         </li>
 
@@ -125,7 +125,7 @@
         </li>
         <li class="relative">
           <div class="group">
-            <a href="http://localhost:8080/Login_Registration/login.jsp" id="login-container" style="display: none" class="block">login</a>
+            <a href="login.jsp" id="login-container" style="display: none" class="block">login</a>
             <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
           </div>
            <div id="logout-container" class="group" style="display: none">
@@ -159,11 +159,11 @@
 </a>
          
           <div id="show-login" class="mt-8 underline font-semibold none">
-            <a href="http://localhost:8080/Login_Registration/login.jsp">Already have an account? </a><a
-              href="http://localhost:8080/Login_Registration/login.jsp">Login</a>
+            <a href="login.jsp">Already have an account? </a><a
+              href="login.jsp">Login</a>
           </div>
         </div>
-        <img class="h-[42rem]" src="Assets/bg.jpg" />
+        <img class="h-[42rem] mix-blend-multiply" src="Assets/bg.jpg" />
       </div>
     </div>
     <div class="relative flex flex-col items-center w-full  mb-8 p-8">
@@ -177,14 +177,14 @@
         <div class="grid grid-cols-5 text-start gap-4 cursor-pointer">
           <div
             class=" relative flex flex-col my-6 ">
-           <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
+           <div class="p-4 bg-[#FFEECC] shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#FF9900]">
     <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Progress Tracker</h5>
     <p class="text-slate-600 leading-normal font-light">
       <span class="defaultText">Our study planner helps students stay focused and keep you on top of your academic goals with an integrated progress tracker. This feature lets students break down their study goals into manageable tasks, track their completion in real-time.</span>
       <span class="moreText hidden">and see visual representations of their progress. By regularly updating the tracker, students can stay organized, celebrate their accomplishments, and easily adjust their study plans as needed.</span>
     </p>
     <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      class="rounded-md bg-[#FF9900] py-2 px-4 mt-6 text-center text-sm text-white hover:bg-[#CC7A00]"
       type="button"
       onclick="toggleText(this)">
       Read more
@@ -193,14 +193,14 @@
           </div>
 		<div
             class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
+             <div class="p-4 bg-[#cdffcd] shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#28A745]">
     <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Whiteboard Support</h5>
     <p class="text-slate-600 leading-normal font-light">
       <span class="defaultText"> Our study planner includes whiteboard support, allowing students to brainstorm, organize, and visualize ideas, and map out complex topics interactively. This feature mimics a physical whiteboard, making it easy to draw diagrams </span>
       <span class="moreText hidden">,connect concepts, and organize thoughts.Perfect for collaborative or individual study, it enhances comprehension, simplifies revision, and brings creative flexibility to the planning process for more effective learning.</span>
     </p>
     <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      class="rounded-md bg-[#28A745] py-2 px-4 mt-6 text-center text-sm text-white hover:bg-[#1E7E34]"
       type="button"
       onclick="toggleText(this)">
       Read more
@@ -210,14 +210,14 @@
 		
           <div
             class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
+             <div class="p-4 bg-[#E8DAEF] shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#9B59B6]">
     <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Notes Editor</h5>
     <p class="text-slate-600 leading-normal font-light">
       <span class="defaultText"> Our study planner’s notes editor feature offers students to organize their study materials in one convenient place. The notes editor allows for easy formatting, categorizing, and updating of study notes, making it simple to review key points and </span>
       <span class="moreText hidden">stay on top of course content.This feature supports efficient learning by enabling students to personalize notes, highlight important information, and quickly access them during study sessions.</span>
     </p>
     <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      class="rounded-md bg-[#9B59B6] py-2 px-4 mt-6 text-center text-sm text-white hover:bg-[#7E3D96]"
       type="button"
       onclick="toggleText(this)">
       Read more
@@ -227,14 +227,14 @@
 
           <div
             class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
+             <div class="p-4 bg-[#FDEBD0] shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#FFC107]">
     <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Personal Scheduler</h5>
     <p class="text-slate-600 leading-normal font-light">
       <span class="defaultText"> Personal scheduler empowers students to effectively manage their time by setting up a personalized study timetable. With this tool, students can allocate specific times for subjects, assignments, and breaks, creating a balanced study </span>
       <span class="moreText hidden">routine that fits their unique needs.The scheduler encourages consistency, helps prevent last-minute cramming, and ensures steady progress toward academic goals, reducing stress and enhancing productivity.</span>
     </p>
     <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      class="rounded-md bg-[#FFC107] py-2 px-4 mt-6 text-center text-sm text-white hover:bg-[#E0A800]"
       type="button"
       onclick="toggleText(this)">
       Read more
@@ -243,14 +243,14 @@
           </div>
           <div
             class=" relative flex flex-col my-6 ">
-             <div class="p-4 bg-white shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#7E60BF]">
+             <div class="p-4 bg-[#D6EAF8] shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#007BFF]">
     <h5 class="mb-2 text-slate-800 text-xl text-center font-semibold">Pdf Viewer</h5>
     <p class="text-slate-600 leading-normal font-light">
       <span class="defaultText"> Our study planner’s PDF viewer enables students to access and read study materials directly within the platform . With the integrated PDF viewer, students can open, annotate, and highlight documents without switching between apps.</span>
       <span class="moreText hidden"> This feature makes reviewing notes, textbooks, and resources more efficient, keeping all essential study tools in one place for a seamless learning experience.</span>
     </p>
     <button
-      class="rounded-md bg-[#7E60BF] py-2 px-4 mt-6 text-center text-sm text-white"
+      class="rounded-md bg-[#007BFF] py-2 px-4 mt-6 text-center text-sm text-white hover:bg-[#0056B3]"
       type="button"
       onclick="toggleText(this)">
       Read more
@@ -267,7 +267,7 @@
       <h2 class="text-center text-4xl font-bold mb-8">Customer Reviews</h2>
       <div id="anime3" class="flex w-full items-start">
         <div class="w-[60%]">
-          <img class="h-[35rem]" src="Assets/customer.jpg" />
+          <img class="h-[35rem] mix-blend-multiply" src="Assets/customer.jpg" />
         </div>
 
         <div class="flex flex-col gap-4 w-[40%] ">
@@ -298,7 +298,7 @@
               <div class="relative w-full min-w-[200px]">
                 <textarea rows="8"
                   name="comment"
-                  class="peer h-full min-h-[100px] w-full !resize-none  rounded-[7px] border border-blue-gray-200  bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
+                  class="peer h-full min-h-[100px] w-full !resize-none  rounded-[7px] border border-blue-gray-200 bg-white px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-gray-900 focus:border-t-transparent focus:outline-0 disabled:resize-none disabled:border-0 disabled:bg-blue-gray-50"
                   placeholder=" "></textarea>
                 <label
                   class="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-gray-900 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:!border-gray-900 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:!border-gray-900 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
@@ -319,7 +319,7 @@
                 <!-- Submit Button -->
                 <div class="flex gap-2">
                   <input
-                    class="select-none rounded-md bg-gray-900 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    class="select-none rounded-md bg-black py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-gray-900/10 transition-all hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="submit" value="Submit Review" />
                 </div>
               </div>
@@ -555,33 +555,7 @@
     	}
 
 
-    
-    /*document.addEventListener("DOMContentLoaded", function() {
-        fetch('loadReviews')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then(reviews => {
-                const reviewsContainer = document.getElementById('reviewsContainer');
-                reviews.forEach(review => {
-                    const slide = document.createElement('div');
-                    slide.className = 'swiper-slide';
-                    slide.innerHTML = `
-                        <p class="text-2xl">${'?'.repeat(review.stars)} (${review.stars})</p>
-                        <h2 class="text-3xl font-bold">${review.name}</h2>
-                        <p class="font-semibold">"${review.comment}"</p>
-                    `;
-                    reviewsContainer.appendChild(slide);
-                });
-                // Initialize Swiper here if needed
-            })
-            .catch(error => {
-                console.error('Error fetching reviews:', error);
-            });
-    });*/
+
     document.addEventListener("DOMContentLoaded", async function () {
         try {
             const response = await fetch('loadReviews');
@@ -647,7 +621,7 @@
 
     
     var username = "<%= username != null ? username : "" %>";
-    
+    console.log(username);
     if (username) {
         document.getElementById('logout-container').style.display = 'block';
         document.getElementById('show-login').style.display = 'none';
@@ -715,6 +689,7 @@ gsap.registerPlugin(ScrollTrigger);
     	        console.log("Server Response:", message); // Debugging log
     	        displayMessage(message, 'success'); // Display success message
     	        document.getElementById("reviewForm").reset(); // Optionally reset the form after submission
+    	        location.reload();
     	    })
     	    .catch(error => {
     	        console.error("Error:", error); // Detailed error log
