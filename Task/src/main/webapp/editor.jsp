@@ -123,6 +123,10 @@ display:none;
 	margin-left: 72px;
 	margin-right: 72px;
 }
+
+/* Base styles */
+
+
    
     
     </style>
@@ -234,38 +238,99 @@ display:none;
                 <div id="editor"></div>
             </div>
         </div>
-    </div>
-
-    <!-- Box for sending a prompt to Gemini -->
-    <div class="gemini-query-container p-4 bg-gray-100 rounded shadow mt-4">
-        <label for="geminiPrompt" class="block font-bold text-gray-700 mb-2">Send a Query to Gemini:</label>
-        <textarea
-            id="geminiPrompt"
-            class="w-full border border-gray-300 rounded p-2"
-            placeholder="Type your prompt here..."
-            rows="3"></textarea>
-        
-        <!-- Block to display the generated content from Gemini -->
-       <div id="response-container" class="mt-4">
-  <!-- New response boxes will be added here dynamically -->
-</div>
-       
-        
-        <button
-            id="geminiSendButton"
-            class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700">
-            Send to Gemini
-        </button>
-    </div>
-
-    <!-- Existing Download Button -->
-    <button class="fixed right-[8rem] bottom-[6rem] bg-purple-600 text-white p-4 rounded-full" id="downloadBtn">
+       <div class="flex justify-between items-end fixed right-14 bottom-12 p-8 gap-x-6">
+    <!-- Download Button -->
+    <button class="bg-purple-600 text-white p-4 rounded-full" id="downloadBtn">
         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path
                 fill="#ffffff"
                 d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
         </svg>
     </button>
+
+    <!-- Talk To Us Button -->
+    <button
+        class="flex items-center bg-gray-100 rounded-full gap-x-3.5 px-4 py-3 talk-to-us-btn">
+        <svg class="h-8 w-8" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z"
+                fill="url(#prefix__paint0_radial_980_20147)" />
+            <defs>
+                <radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)">
+                    <stop offset=".067" stop-color="#9168C0" />
+                    <stop offset=".343" stop-color="#5684D1" />
+                    <stop offset=".672" stop-color="#1BA1E3" />
+                </radialGradient>
+            </defs>
+        </svg>
+        <span>Talk To Us</span>
+    </button>
+</div>
+       
+        
+    </div>
+    
+
+<!-- Gemini Query Container -->
+<div class="gemini-query-container fixed bg-white rounded-t-3xl shadow-xl bottom-0 right-0 h-[80vh] w-[25vw] transform translate-y-full transition-transform duration-300 flex flex-col z-50">
+ <div class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded-t-3xl">
+        <h3 class="text-lg font-semibold text-gray-800"> AI Assistant</h3>
+        <button class="text-gray-600 hover:text-gray-800" id="closeChatBox">
+            ✕
+        </button>
+    </div>
+    <div class="flex-1 overflow-y-auto px-6 py-4">
+        <!-- Welcome Card -->
+        <div class="bg-blue-50 p-4 rounded-lg shadow">
+            <img
+                src="/Login_Registration/Assets/google-gemini-logo.png"
+                alt="University Logo"
+                class="w-24 h-auto mb-3"
+            />
+            <h4 class="text-xl font-bold text-gray-800 mb-2">Welcome to Our Ai Chatbot</h4>
+            <p class="text-gray-700 text-sm">
+                I am your AI Assistant! Feel free to ask me any questions regarding:
+            </p>
+            <ul class="list-disc list-inside text-gray-600 text-sm mt-2">
+                <li>Admission process</li>
+                <li>Scholarships</li>
+                <li>Student life</li>
+            </ul>
+            <div class="mt-4 flex flex-wrap gap-2">
+            <button class="bg-gray-100 text-gray-800 px-3 py-2 rounded-full text-sm shadow-sm hover:bg-gray-200">
+                I'm a transfer student
+            </button>
+            <button class="bg-gray-100 text-gray-800 px-3 py-2 rounded-full text-sm shadow-sm hover:bg-gray-200">
+                I'm an international student
+            </button>
+            <button class="bg-gray-100 text-gray-800 px-3 py-2 rounded-full text-sm shadow-sm hover:bg-gray-200">
+                I'm just browsing
+            </button>
+        </div>
+        </div>
+    
+    <!-- Response Container -->
+    <div id="response-container" class="mt-4">
+        <!-- New response boxes will be added here dynamically -->
+    </div>
+    
+   <div class="p-4 bg-gray-100">
+        <div class="flex items-center bg-white rounded-full shadow px-4 py-2">
+            <input
+                        id="geminiPrompt"
+               
+                type="text"
+                placeholder="Ask me anything..."
+                class="flex-1 border-none outline-none text-sm text-gray-800"
+            />
+            <button id="geminiSendButton" class="text-blue-600 hover:text-blue-800">
+                ➤
+            </button>
+        </div>
+    </div>
+</div>
+    <!-- Existing Download Button -->
+    
 </div>
 
 
@@ -281,6 +346,34 @@ display:none;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
+    const chatBox = document.querySelector('.gemini-query-container');
+    const talkToUsBtn = document.querySelector('.talk-to-us-btn');
+    const closeChatBox = document.querySelector('#closeChatBox');
+
+    // Show chatbox when hovering over the button
+    talkToUsBtn.addEventListener('mouseover', () => {
+        chatBox.classList.remove('translate-y-full');
+    });
+
+    // Close chatbox when clicking the close button
+    closeChatBox.addEventListener('click', () => {
+        chatBox.classList.add('translate-y-full');
+    });
+
+    // Prevent chatbox from disappearing when the mouse hovers over it
+    chatBox.addEventListener('mouseover', () => {
+        chatBox.classList.remove('translate-y-full');
+    });
+
+    // Hide chatbox when the mouse leaves both the button and the chatbox
+    chatBox.addEventListener('mouseleave', () => {
+        chatBox.classList.add('translate-y-full');
+    });
+    talkToUsBtn.addEventListener('mouseleave', () => {
+        if (!chatBox.matches(':hover')) {
+            chatBox.classList.add('translate-y-full');
+        }
+    });
     document.getElementById('downloadBtn').addEventListener('click', () => {
         const { jsPDF } = window.jspdf;
 
