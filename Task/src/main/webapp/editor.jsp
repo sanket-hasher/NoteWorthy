@@ -312,7 +312,7 @@ display:none;
         <!-- Welcome Card -->
         <div class="bg-blue-50 p-4 rounded-lg shadow">
             <img
-                src="/Login_Registration/Assets/google-gemini-logo.png"
+                src="Assets/google-gemini-logo.jpg"
                 alt="University Logo"
                 class="w-24 h-auto mb-3"
             />
