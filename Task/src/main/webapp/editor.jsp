@@ -127,6 +127,35 @@ display:none;
 /* Base styles */
 
 
+   .spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+   .copy-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.copy-button:hover {
+  background-color: rgba(59, 130, 246, 0.1); /* Light blue background */
+}
    
     
     </style>
@@ -292,26 +321,21 @@ display:none;
                 I am your AI Assistant! Feel free to ask me any questions regarding:
             </p>
             <ul class="list-disc list-inside text-gray-600 text-sm mt-2">
-                <li>Admission process</li>
-                <li>Scholarships</li>
-                <li>Student life</li>
+                <li>Summarize</li>
+                <li>Describe</li>
+                <li>Make Notes</li>
+                <li>Write Essays</li>
             </ul>
-            <div class="mt-4 flex flex-wrap gap-2">
-            <button class="bg-gray-100 text-gray-800 px-3 py-2 rounded-full text-sm shadow-sm hover:bg-gray-200">
-                I'm a transfer student
-            </button>
-            <button class="bg-gray-100 text-gray-800 px-3 py-2 rounded-full text-sm shadow-sm hover:bg-gray-200">
-                I'm an international student
-            </button>
-            <button class="bg-gray-100 text-gray-800 px-3 py-2 rounded-full text-sm shadow-sm hover:bg-gray-200">
-                I'm just browsing
-            </button>
-        </div>
+
         </div>
     
     <!-- Response Container -->
     <div id="response-container" class="mt-4">
         <!-- New response boxes will be added here dynamically -->
+        <div id="loader" class="hidden flex items-center justify-center mb-8">
+  <div class="spinner"></div>
+</div>
+        
     </div>
     
    <div class="p-4 bg-gray-100">
@@ -349,9 +373,9 @@ display:none;
     const chatBox = document.querySelector('.gemini-query-container');
     const talkToUsBtn = document.querySelector('.talk-to-us-btn');
     const closeChatBox = document.querySelector('#closeChatBox');
-
+    
     // Show chatbox when hovering over the button
-    talkToUsBtn.addEventListener('mouseover', () => {
+    talkToUsBtn.addEventListener('click', () => {
         chatBox.classList.remove('translate-y-full');
     });
 
@@ -366,14 +390,14 @@ display:none;
     });
 
     // Hide chatbox when the mouse leaves both the button and the chatbox
-    chatBox.addEventListener('mouseleave', () => {
+    /*chatBox.addEventListener('mouseleave', () => {
         chatBox.classList.add('translate-y-full');
     });
     talkToUsBtn.addEventListener('mouseleave', () => {
         if (!chatBox.matches(':hover')) {
             chatBox.classList.add('translate-y-full');
         }
-    });
+    });*/
     document.getElementById('downloadBtn').addEventListener('click', () => {
         const { jsPDF } = window.jspdf;
 
@@ -647,6 +671,12 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
 
     // Function to send the content from the "Send to Gemini" textarea to the server
     function sendPromptToServer(promptText, callback) {
+const loader = document.querySelector('#loader'); // Reference the loader element
+  
+  // Show the loader before initiating the fetch
+  if (loader) {
+    loader.classList.remove('hidden');
+  }
       fetch("gemini", {
         method: "POST",
         headers: {
@@ -663,6 +693,9 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
         return response.text();  // Expecting plain text response from the server
       })
       .then(generatedContent => {
+ if (loader) {
+      loader.classList.add('hidden');
+    }
         // Format the response into a more readable format
         const formattedContent = formatResponse(generatedContent);
 
@@ -682,8 +715,41 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
         responseContent.classList.add('text-gray-600');
         responseContent.innerHTML = formattedContent;  // Set the formatted content as response text
 
+const copyButton = document.createElement('button');
+copyButton.textContent = "Copy";
+copyButton.classList.add('copy-button', 'ml-2', 'text-blue-600', 'hover:text-blue-800', 'text-sm');
+copyButton.addEventListener('click', function () {
+  const paragraphs = responseContent.querySelectorAll('p');
+  let textToCopy = '';
+  
+  paragraphs.forEach((p) => {
+    textToCopy += p.textContent.trim() + '\n';
+  });
+  
+  navigator.clipboard.writeText(textToCopy.trim()).then(() => {
+    copyButton.innerText = "Copied!";
+    copyButton.classList.add('text-green-600'); // Optional: Add a green color for success feedback
+    
+    // Revert back to "Copy" after 2 seconds
+    setTimeout(() => {
+      copyButton.innerText = "Copy";
+      copyButton.classList.remove('text-green-600');
+    }, 2000);
+  }).catch((err) => {
+    console.error('Failed to copy text: ', err);
+    copyButton.innerText = "Failed";
+    copyButton.classList.add('text-red-600'); // Optional: Add a red color for error feedback
+    
+    // Revert back to "Copy" after 2 seconds
+    setTimeout(() => {
+      copyButton.innerText = "Copy";
+      copyButton.classList.remove('text-red-600');
+    }, 2000);
+  });
+});
         // Append the header and content to the new box
         newResponseBox.appendChild(responseHeader);
+newResponseBox.appendChild(copyButton);
         newResponseBox.appendChild(responseContent);
 
         // Append the new response box to the container
@@ -697,6 +763,9 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
       .catch(error => {
         console.error("Error:", error);
         alert("Failed to fetch response: " + error.message);
+if (loader) {
+      loader.classList.add('hidden');
+    }
       });
     }
 
