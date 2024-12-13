@@ -123,6 +123,39 @@ display:none;
 	margin-left: 72px;
 	margin-right: 72px;
 }
+
+/* Base styles */
+
+
+   .spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.hidden {
+  display: none;
+}
+   .copy-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.copy-button:hover {
+  background-color: rgba(59, 130, 246, 0.1); /* Light blue background */
+}
    
     
     </style>
@@ -234,38 +267,94 @@ display:none;
                 <div id="editor"></div>
             </div>
         </div>
-    </div>
-
-    <!-- Box for sending a prompt to Gemini -->
-    <div class="gemini-query-container p-4 bg-gray-100 rounded shadow mt-4">
-        <label for="geminiPrompt" class="block font-bold text-gray-700 mb-2">Send a Query to Gemini:</label>
-        <textarea
-            id="geminiPrompt"
-            class="w-full border border-gray-300 rounded p-2"
-            placeholder="Type your prompt here..."
-            rows="3"></textarea>
-        
-        <!-- Block to display the generated content from Gemini -->
-       <div id="response-container" class="mt-4">
-  <!-- New response boxes will be added here dynamically -->
-</div>
-       
-        
-        <button
-            id="geminiSendButton"
-            class="bg-blue-600 text-white px-4 py-2 rounded mt-2 hover:bg-blue-700">
-            Send to Gemini
-        </button>
-    </div>
-
-    <!-- Existing Download Button -->
-    <button class="fixed right-[8rem] bottom-[6rem] bg-purple-600 text-white p-4 rounded-full" id="downloadBtn">
+       <div class="flex justify-between items-end fixed right-14 bottom-12 p-8 gap-x-6">
+    <!-- Download Button -->
+    <button class="bg-purple-600 text-white p-4 rounded-full" id="downloadBtn">
         <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path
                 fill="#ffffff"
                 d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z" />
         </svg>
     </button>
+
+    <!-- Talk To Us Button -->
+    <button
+        class="flex items-center bg-gray-100 rounded-full gap-x-3.5 px-4 py-3 talk-to-us-btn">
+        <svg class="h-8 w-8" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+            <path d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z"
+                fill="url(#prefix__paint0_radial_980_20147)" />
+            <defs>
+                <radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+                    gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)">
+                    <stop offset=".067" stop-color="#9168C0" />
+                    <stop offset=".343" stop-color="#5684D1" />
+                    <stop offset=".672" stop-color="#1BA1E3" />
+                </radialGradient>
+            </defs>
+        </svg>
+        <span>Talk To Us</span>
+    </button>
+</div>
+       
+        
+    </div>
+    
+
+<!-- Gemini Query Container -->
+<div class="gemini-query-container fixed bg-white rounded-t-3xl shadow-xl bottom-0 right-0 h-[80vh] w-[25vw] transform translate-y-full transition-transform duration-300 flex flex-col z-50">
+ <div class="flex items-center justify-between px-4 py-3 bg-gray-100 rounded-t-3xl">
+        <h3 class="text-lg font-semibold text-gray-800"> AI Assistant</h3>
+        <button class="text-gray-600 hover:text-gray-800" id="closeChatBox">
+            ✕
+        </button>
+    </div>
+    <div class="flex-1 overflow-y-auto px-6 py-4">
+        <!-- Welcome Card -->
+        <div class="bg-blue-50 p-4 rounded-lg shadow">
+            <img
+                src="Assets/google-gemini-logo.jpg"
+                alt="University Logo"
+                class="w-24 h-auto mb-3"
+            />
+            <h4 class="text-xl font-bold text-gray-800 mb-2">Welcome to Our Ai Chatbot</h4>
+            <p class="text-gray-700 text-sm">
+                I am your AI Assistant! Feel free to ask me any questions regarding:
+            </p>
+            <ul class="list-disc list-inside text-gray-600 text-sm mt-2">
+                <li>Summarize</li>
+                <li>Describe</li>
+                <li>Make Notes</li>
+                <li>Write Essays</li>
+            </ul>
+
+        </div>
+    
+    <!-- Response Container -->
+    <div id="response-container" class="mt-4">
+        <!-- New response boxes will be added here dynamically -->
+        <div id="loader" class="hidden flex items-center justify-center mb-8">
+  <div class="spinner"></div>
+</div>
+        
+    </div>
+    
+   <div class="p-4 bg-gray-100">
+        <div class="flex items-center bg-white rounded-full shadow px-4 py-2">
+            <input
+                        id="geminiPrompt"
+               
+                type="text"
+                placeholder="Ask me anything..."
+                class="flex-1 border-none outline-none text-sm text-gray-800"
+            />
+            <button id="geminiSendButton" class="text-blue-600 hover:text-blue-800">
+                ➤
+            </button>
+        </div>
+    </div>
+</div>
+    <!-- Existing Download Button -->
+    
 </div>
 
 
@@ -281,6 +370,34 @@ display:none;
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script>
+    const chatBox = document.querySelector('.gemini-query-container');
+    const talkToUsBtn = document.querySelector('.talk-to-us-btn');
+    const closeChatBox = document.querySelector('#closeChatBox');
+    
+    // Show chatbox when hovering over the button
+    talkToUsBtn.addEventListener('click', () => {
+        chatBox.classList.remove('translate-y-full');
+    });
+
+    // Close chatbox when clicking the close button
+    closeChatBox.addEventListener('click', () => {
+        chatBox.classList.add('translate-y-full');
+    });
+
+    // Prevent chatbox from disappearing when the mouse hovers over it
+    chatBox.addEventListener('mouseover', () => {
+        chatBox.classList.remove('translate-y-full');
+    });
+
+    // Hide chatbox when the mouse leaves both the button and the chatbox
+    /*chatBox.addEventListener('mouseleave', () => {
+        chatBox.classList.add('translate-y-full');
+    });
+    talkToUsBtn.addEventListener('mouseleave', () => {
+        if (!chatBox.matches(':hover')) {
+            chatBox.classList.add('translate-y-full');
+        }
+    });*/
     document.getElementById('downloadBtn').addEventListener('click', () => {
         const { jsPDF } = window.jspdf;
 
@@ -554,6 +671,12 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
 
     // Function to send the content from the "Send to Gemini" textarea to the server
     function sendPromptToServer(promptText, callback) {
+const loader = document.querySelector('#loader'); // Reference the loader element
+  
+  // Show the loader before initiating the fetch
+  if (loader) {
+    loader.classList.remove('hidden');
+  }
       fetch("gemini", {
         method: "POST",
         headers: {
@@ -570,6 +693,9 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
         return response.text();  // Expecting plain text response from the server
       })
       .then(generatedContent => {
+ if (loader) {
+      loader.classList.add('hidden');
+    }
         // Format the response into a more readable format
         const formattedContent = formatResponse(generatedContent);
 
@@ -589,8 +715,41 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
         responseContent.classList.add('text-gray-600');
         responseContent.innerHTML = formattedContent;  // Set the formatted content as response text
 
+const copyButton = document.createElement('button');
+copyButton.textContent = "Copy";
+copyButton.classList.add('copy-button', 'ml-2', 'text-blue-600', 'hover:text-blue-800', 'text-sm');
+copyButton.addEventListener('click', function () {
+  const paragraphs = responseContent.querySelectorAll('p');
+  let textToCopy = '';
+  
+  paragraphs.forEach((p) => {
+    textToCopy += p.textContent.trim() + '\n';
+  });
+  
+  navigator.clipboard.writeText(textToCopy.trim()).then(() => {
+    copyButton.innerText = "Copied!";
+    copyButton.classList.add('text-green-600'); // Optional: Add a green color for success feedback
+    
+    // Revert back to "Copy" after 2 seconds
+    setTimeout(() => {
+      copyButton.innerText = "Copy";
+      copyButton.classList.remove('text-green-600');
+    }, 2000);
+  }).catch((err) => {
+    console.error('Failed to copy text: ', err);
+    copyButton.innerText = "Failed";
+    copyButton.classList.add('text-red-600'); // Optional: Add a red color for error feedback
+    
+    // Revert back to "Copy" after 2 seconds
+    setTimeout(() => {
+      copyButton.innerText = "Copy";
+      copyButton.classList.remove('text-red-600');
+    }, 2000);
+  });
+});
         // Append the header and content to the new box
         newResponseBox.appendChild(responseHeader);
+newResponseBox.appendChild(copyButton);
         newResponseBox.appendChild(responseContent);
 
         // Append the new response box to the container
@@ -604,6 +763,9 @@ DecoupledEditor.create(document.querySelector('#editor'), editorConfig)
       .catch(error => {
         console.error("Error:", error);
         alert("Failed to fetch response: " + error.message);
+if (loader) {
+      loader.classList.add('hidden');
+    }
       });
     }
 
