@@ -401,36 +401,36 @@ display:none;
     document.getElementById('downloadBtn').addEventListener('click', () => {
         const { jsPDF } = window.jspdf;
 
-        // Create a new instance of jsPDF with appropriate settings
+        // Create a new jsPDF instance
         const doc = new jsPDF({
-            orientation: 'p', // 'p' for portrait, 'l' for landscape
+            orientation: 'p', // Portrait orientation
             unit: 'px',
             format: 'a4'
         });
 
-        // Access the CKEditor content
+        // Access the editor content
         const editorElement = document.querySelector('#editor');
 
         if (editorElement) {
-            // Ensure the full content is rendered
+            // Render the editor's HTML content into the PDF
             doc.html(editorElement, {
                 callback: function (doc) {
-                    // Adjust layout, scale, or page size if needed
+                    // Save the document
                     doc.save('your-note.pdf');
                 },
-                x: '9.52%',  // x position as a percentage of page width
-                y: '5.72%',  // y position as a percentage of page height
+                x: 100, // Left margin
+                y: 100, // Top margin
                 html2canvas: {
-                    scale: 1, // Increase scale for better resolution
-                    useCORS: true // For cross-origin images if any
+                    scale: 2, // Render at higher resolution
+                    useCORS: true // Enable cross-origin content rendering
                 },
-                width: doc.internal.pageSize.getWidth() - 20 // Adjust the width
+                width: doc.internal.pageSize.getWidth() - 40 // Deduct margins from the page width
             });
-        }
- else {
+        } else {
             console.error('Editor content not found.');
         }
     });
+
 
 </script>
 

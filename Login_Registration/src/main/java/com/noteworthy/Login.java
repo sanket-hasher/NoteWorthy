@@ -55,21 +55,37 @@ public class Login extends HttpServlet {
 
 				// Establish a connection
 				Connection connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-
-				// SQL select query to verify user credentials
-				String sql = "SELECT email FROM User WHERE username = ? AND password = ?";
+				String sql1 = "SELECT admin_name FROM admin WHERE admin_name = ? AND password = ?";
 
 				// Prepare statement
-				PreparedStatement preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, username);
-				preparedStatement.setString(2, password);
+				PreparedStatement preparedStatement1 = connection.prepareStatement(sql1);
+				preparedStatement1.setString(1, username);
+				preparedStatement1.setString(2, password);
 
 				// Execute query
-				ResultSet resultSet = preparedStatement.executeQuery();
+				ResultSet resultSet1 = preparedStatement1.executeQuery();
 
 				// Check if a matching user exists
-				if (resultSet.next()) {
-					String email = resultSet.getString("email");
+				if (resultSet1.next()) {
+					// Redirect to the main page
+					response.sendRedirect("/Admin/admin.jsp");
+					return;
+				}
+
+				// SQL select query to verify user credentials
+				String sql2 = "SELECT email FROM User WHERE username = ? AND password = ?";
+
+				// Prepare statement
+				PreparedStatement preparedStatement2 = connection.prepareStatement(sql2);
+				preparedStatement2.setString(1, username);
+				preparedStatement2.setString(2, password);
+
+				// Execute query
+				ResultSet resultSet2 = preparedStatement2.executeQuery();
+
+				// Check if a matching user exists
+				if (resultSet2.next()) {
+					String email = resultSet2.getString("email");
 
 					// Set session attributes
 					HttpSession session = request.getSession();
@@ -95,8 +111,8 @@ public class Login extends HttpServlet {
 				}
 
 				// Close resources
-				resultSet.close();
-				preparedStatement.close();
+				resultSet2.close();
+				preparedStatement2.close();
 				connection.close();
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();

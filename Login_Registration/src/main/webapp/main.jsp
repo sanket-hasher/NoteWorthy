@@ -6,8 +6,8 @@
 <%
 //String username=request.getParameter("username");
 //String emailid=request.getParameter("email");
-// String username = (String) session.getAttribute("username");
-// String emailid = (String) session.getAttribute("email");
+//String username = (String) session.getAttribute("username");
+//String emailid = (String) session.getAttribute("email");
 String username = null;
 String emailid = null;
 

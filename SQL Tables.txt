@@ -6,25 +6,37 @@ CREATE TABLE review (
     stars INT CHECK (stars >= 1 AND stars <= 5),
     comment VARCHAR(300)
 );
+
 CREATE TABLE tasks (
     taskid VARCHAR(50) NOT NULL PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     FOREIGN KEY (username) REFERENCES user(username)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE todo (
     taskid VARCHAR(50) NOT NULL PRIMARY KEY,
-    description VARCHAR(100) NOT NULL
+    description VARCHAR(100) NOT NULL,
+    FOREIGN KEY (taskid) REFERENCES tasks(taskid)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE inprogress (
     taskid VARCHAR(50) NOT NULL PRIMARY KEY,
-    description VARCHAR(100) NOT NULL
+    description VARCHAR(100) NOT NULL,
+    FOREIGN KEY (taskid) REFERENCES tasks(taskid)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE done (
     taskid VARCHAR(50) NOT NULL PRIMARY KEY,
-    description VARCHAR(100) NOT NULL
+    description VARCHAR(100) NOT NULL,
+    FOREIGN KEY (taskid) REFERENCES tasks(taskid)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE user_files (
@@ -34,6 +46,43 @@ CREATE TABLE user_files (
     filetype VARCHAR(50) NOT NULL,
     filedata LONGBLOB NOT NULL,
     FOREIGN KEY (username) REFERENCES user(username)
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE
+);
+// if required
+
+ALTER TABLE tasks
+ADD CONSTRAINT fk_tasks_username
+FOREIGN KEY (username) REFERENCES user(username)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE user_files
+ADD CONSTRAINT fk_user_files_username
+FOREIGN KEY (username) REFERENCES user(username)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE todo
+ADD CONSTRAINT fk_todo_taskid
+FOREIGN KEY (taskid) REFERENCES tasks(taskid)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE inprogress
+ADD CONSTRAINT fk_inprogress_taskid
+FOREIGN KEY (taskid) REFERENCES tasks(taskid)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE done
+ADD CONSTRAINT fk_done_taskid
+FOREIGN KEY (taskid) REFERENCES tasks(taskid)
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+SELECT taskid FROM done
+WHERE taskid  Not IN (SELECT taskid FROM tasks);
+
+CREATE TABLE admin (
+    admin_id INT AUTO_INCREMENT PRIMARY KEY,
+    admin_name VARCHAR(100) NOT NULL,
+    password VARCHAR(30) NOT NULL
 );
 
 
