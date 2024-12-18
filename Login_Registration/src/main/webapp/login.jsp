@@ -291,9 +291,10 @@
           <h1 class="text-sm font-semibold mb-6 text-gray-500 text-center">
             Join to Our Community with all time access and free
           </h1>
-          <div
+          <!-- <div
             class="mt-4 flex flex-col lg:flex-row items-center justify-between"
           >
+           
             <div class="w-full lg:w-1/2 mb-2 lg:mb-0">
             <div class="g_id_signin" 
          data-client_id="454600243556-d5d9aeqpmmr1scbhqmsildr49tbgcnu5.apps.googleusercontent.com" 
@@ -352,7 +353,7 @@
           </div>
           <div class="mt-4 text-sm text-gray-600 text-center">
             <p>or with email</p>
-          </div>
+          </div>-->
           <form id="myForm" action="login" method="post" class="space-y-4">
     <!-- Username field -->
     <div>

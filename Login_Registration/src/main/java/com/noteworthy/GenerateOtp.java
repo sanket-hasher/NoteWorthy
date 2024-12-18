@@ -31,8 +31,8 @@ public class GenerateOtp extends HttpServlet {
     private static final String DB_PASSWORD = "Sanket7044";
 
     // Email configuration for sending OTP
-    private static final String EMAIL = "eduler.notes@gmail.com"; // Replace with your email
-    private static final String EMAIL_PASSWORD = "clki pyqk gcay zmbk"; // Replace with your email password
+    private static final String EMAIL = "eduler.notes@gmail.com"; 
+    private static final String EMAIL_PASSWORD = "clki pyqk gcay zmbk"; 
 
     public GenerateOtp() {
         super();
@@ -73,7 +73,7 @@ public class GenerateOtp extends HttpServlet {
                     session.setAttribute("otp", Integer.toString(otp));
 
                     // Send OTP to email
-                    sendOtpEmail(email, otp);
+                    sendOtpEmail(email, otp,username);
 
                     // Redirect to otp.jsp
                     response.sendRedirect("otp.jsp");
@@ -107,7 +107,7 @@ public class GenerateOtp extends HttpServlet {
         return 100000 + random.nextInt(900000); // Generates a 6-digit OTP
     }
 
-    private void sendOtpEmail(String recipientEmail, int otp) throws MessagingException {
+    private void sendOtpEmail(String recipientEmail, int otp,String username) throws MessagingException {
         // Set up email properties
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -127,7 +127,7 @@ public class GenerateOtp extends HttpServlet {
         message.setFrom(new InternetAddress(EMAIL));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(recipientEmail));
         message.setSubject("Your OTP Code");
-        message.setText("Dear user,\n\nYour OTP code is: " + otp + "\n\nPlease enter this code to complete your request.\n\nThank you.");
+        message.setText("Dear "+username+",\n\nYour OTP code is: " + otp + "\n\nPlease enter this code to complete your request.\n\nThank you.");
 
         // Send the email
         Transport.send(message);

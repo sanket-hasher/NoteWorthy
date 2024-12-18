@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Contact Us</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <style>
@@ -97,19 +97,71 @@
               <h4 class="text-indigo-600 text-base font-medium leading-6 mb-4 lg:text-left text-center">Contact Us</h4>
               <h2 class="text-gray-900 font-manrope text-4xl font-semibold leading-10 mb-9 lg:text-left text-center">
                 Reach Out To Us</h2>
-              <form action="">
-                <input type="text"
+              <form action="contact_customer" method="post">
+                <input type="text" name="Name"
                   class="bg-white w-full h-14 shadow-sm text-gray-600 placeholder-text-400 text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none py-2 px-4 mb-8"
                   placeholder="Name">
-                <input type="email"
+                <input type="email" name="Email"
                   class="bg-white w-full h-14 shadow-sm text-gray-600 placeholder-text-400 text-lg font-normal leading-7 rounded-full border border-gray-200 focus:outline-none py-2 px-4 mb-8"
                   placeholder="Email">
-                <textarea name="" id="text"
+                <textarea name="Comment" id="text"
                   class="bg-white w-full h-48 shadow-sm resize-none text-gray-600 placeholder-text-400 text-lg font-normal leading-7 rounded-2xl border border-gray-200 focus:outline-none px-4 py-4 mb-8"
                   placeholder="Comment"></textarea>
                 <button
-                  class="w-full h-12 text-center text-white text-base font-semibold leading-6 rounded-full bg-indigo-600 shadow transition-all duration-700 hover:bg-indigo-800">Submit</button>
+                  type="submit" class="w-full h-12 text-center text-white text-base font-semibold leading-6 rounded-full bg-indigo-600 shadow transition-all duration-700 hover:bg-indigo-800">Submit</button>
               </form>
+              <% 
+    String msg = request.getParameter("msg"); 
+    if (msg != null) { 
+        if (msg.equals("invalid")) { 
+%>
+<div class="toast flex p-4 bg-[#eee] rounded-lg mt-4">
+    <div class="shrink-0">
+        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0-.708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+        </svg>
+    </div>
+    <div class="ms-3">
+        <p class="text-sm text-gray-700 font-semibold">
+            Please fill out the form
+        </p>
+    </div>
+</div>
+<% 
+        } else if (msg.equals("success")) { 
+%>
+<div class="toast flex p-4 bg-[#e6ffed] rounded-lg mt-4">
+    <div class="shrink-0">
+        <svg class="shrink-0 size-4 text-green-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.707 11.707a1 1 0 0 1-1.414 0L3.343 9.757a1 1 0 1 1 1.414-1.414L6 9.586l4.243-4.243a1 1 0 0 1 1.414 1.414l-5 5z"></path>
+        </svg>
+    </div>
+    <div class="ms-3">
+        <p class="text-sm text-gray-700 font-semibold">
+            Thank you! Your message has been sent successfully.
+        </p>
+    </div>
+</div>
+<% 
+        } else if (msg.equals("error")) { 
+%>
+<div class="toast flex p-4 bg-[#ffeded] rounded-lg mt-4">
+    <div class="shrink-0">
+        <svg class="shrink-0 size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0-.708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+        </svg>
+    </div>
+    <div class="ms-3">
+        <p class="text-sm text-gray-700 font-semibold">
+            Oops! Something went wrong. Please try again.
+        </p>
+    </div>
+</div>
+<% 
+        } 
+    } 
+%>
+              
             </div>
           </div>
           <div
@@ -307,6 +359,23 @@
             });
         }
     });
+    
+    
+    
+
+    if (toast) {
+        toast.style.display = 'flex';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 3000); // Hide after 3 seconds
+    }
+    document.getElementById('signupForm').addEventListener('submit', (e) => {
+  	    e.preventDefault();
+  	
+  	    
+  	});
+
+    
     
     </script>
 </body>

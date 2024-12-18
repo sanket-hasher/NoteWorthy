@@ -84,5 +84,11 @@ CREATE TABLE admin (
     admin_name VARCHAR(100) NOT NULL,
     password VARCHAR(30) NOT NULL
 );
+CREATE TABLE `user_details`.`contact` (
+  `contact_id` INT NOT NULL AUTO_INCREMENT,
+  `Name` VARCHAR(100) NULL,
+  `Email` VARCHAR(100) NOT NULL,
+  `comment` VARCHAR(10000) NULL,
+  PRIMARY KEY (`contact_id`, `Email`));
 
 
