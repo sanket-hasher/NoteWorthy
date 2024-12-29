@@ -7,8 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-auth.js"></script>
     
     <script src="https://apis.google.com/js/api:client.js"></script>
     
@@ -450,57 +448,6 @@
     </div>
  
  <script src="/Login_Registration/script1.js" ></script>
- <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
-import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-
-// Your Firebase configuration
-const firebaseConfig = {
-    apiKey: "AIzaSyCfX2-NYv587NRPNGXXPFJXFW4MyDp4hvM",
-    authDomain: "eduler-aa8a6.firebaseapp.com",
-    projectId: "eduler-aa8a6",
-    storageBucket: "eduler-aa8a6.appspot.com",
-    messagingSenderId: "130343224889",
-    appId: "1:130343224889:web:af64cf2bf7b3656b186fe8",
-    measurementId: "G-XK1NDEME6D"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-const auth = getAuth();
-
-// Google Sign-In function
-document.getElementById('googleSignInButton').addEventListener('click', async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        const idToken = await user.getIdToken();
-
-        console.log("ID Token:", idToken); // Log the ID Token for debugging
-
-        // Send the ID token to your servlet
-        const response = await fetch('googlelogin', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ idToken }) // Ensure that idToken is sent as a JSON object
-        });
-
-        const data = await response.json();
-        if (data.success) {
-            window.location.href = 'main.jsp'; // Redirect to main.jsp on success
-        } else {
-            console.error(data.message);
-        }
-    } catch (error) {
-        console.error("Error during sign-in:", error);
-    }
-});
-
-    </script>
+ 
   </body>
 </html>

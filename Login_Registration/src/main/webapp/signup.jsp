@@ -295,7 +295,7 @@
         </div>
       </div>
       <script>
-
+      const toast = document.querySelector('.toast');
       if (toast) {
           toast.style.display = 'flex';
           setTimeout(() => {

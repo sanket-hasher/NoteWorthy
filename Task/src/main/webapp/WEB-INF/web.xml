@@ -67,4 +67,14 @@
     <servlet-name>GeminiQuery</servlet-name>
     <url-pattern>/GeminiQuery</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteEvents</display-name>
+    <servlet-name>DeleteEvents</servlet-name>
+    <servlet-class>com.tasks.DeleteEvents</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteEvents</servlet-name>
+    <url-pattern>/DeleteEvents</url-pattern>
+  </servlet-mapping>
 </web-app>

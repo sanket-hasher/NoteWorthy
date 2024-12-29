@@ -3,6 +3,10 @@ package com.tasks;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -18,6 +22,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/event-handler")
 public class EventServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/user_details";
+    private static final String DB_USER = "Sanket";
+    private static final String DB_PASSWORD = "Sanket7044";
 
     public EventServlet() {
         super();
@@ -38,6 +45,14 @@ public class EventServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
+        
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
+        }
+        
+        
         StringBuilder json = new StringBuilder();
         String line;
         try (BufferedReader reader = request.getReader()) {
@@ -55,7 +70,7 @@ public class EventServlet extends HttpServlet {
                 System.out.println("Received JsonObject: " + jsonObject);
 
                 // Process the JsonObject
-                processJsonObject(jsonObject);
+                processJsonObject(jsonObject, username);
 
             } else if (jsonElement.isJsonArray()) {
                 JsonArray jsonArray = jsonElement.getAsJsonArray();
@@ -64,7 +79,7 @@ public class EventServlet extends HttpServlet {
                 // Process the JsonArray
                 for (JsonElement element : jsonArray) {
                     JsonObject obj = element.getAsJsonObject();
-                    processJsonObject(obj);
+                    processJsonObject(obj,username);
                 }
             } else {
                 throw new IllegalArgumentException("Unexpected JSON type");
@@ -83,17 +98,28 @@ public class EventServlet extends HttpServlet {
     }
 
     // Helper method to process JsonObject
-    private void processJsonObject(JsonObject jsonObject) {
+    private void processJsonObject(JsonObject jsonObject, String username) {
         int day = jsonObject.get("day").getAsInt();
         int month = jsonObject.get("month").getAsInt();
         int year = jsonObject.get("year").getAsInt();
         System.out.println("Date: " + day + "/" + month + "/" + year);
-
+        
+      
         JsonArray events = jsonObject.getAsJsonArray("events");
         if (events.size() > 0) {
             JsonObject lastEvent = events.get(events.size() - 1).getAsJsonObject();
             String title = lastEvent.get("title").getAsString();
             String time = lastEvent.get("time").getAsString();
+            String eventDate = String.format("%d-%02d-%02d %s", year, month, day, time);
+            System.out.println(eventDate);
+            
+            String[] times = time.split(" - ");
+            String startTime = convertTo24HourFormat(times[0].trim());
+            String endTime = convertTo24HourFormat(times[1].trim());
+
+            String eventStartDateTime = String.format("%d-%02d-%02d %s", year, month, day, startTime);
+            String eventEndDateTime = String.format("%d-%02d-%02d %s", year, month, day, endTime);
+            saveEventToDatabase(username, title, eventStartDateTime, eventEndDateTime);
 
             // Print the result
             System.out.println("Last Event:");
@@ -107,4 +133,49 @@ public class EventServlet extends HttpServlet {
     
    
     }
+    private void saveEventToDatabase(String username, String eventName, String eventStartDateTime, String eventEndDateTime) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            // Establish a database connection
+            connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+
+            // Prepare the SQL INSERT query
+            String sql = "INSERT INTO Events (username, event_name, event_start_time, event_end_time) VALUES (?, ?, ?, ?)";
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, eventName);
+            preparedStatement.setString(3, eventStartDateTime);
+            preparedStatement.setString(4, eventEndDateTime);
+            // Execute the query
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        } 
+        finally {
+            // Close resources
+            try {
+                if (preparedStatement != null) preparedStatement.close();
+                if (connection != null) connection.close();
+            }
+            catch (SQLException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private String convertTo24HourFormat(String time) {
+        try {
+            // Convert 12-hour time format to 24-hour format
+            java.text.SimpleDateFormat inputFormat = new java.text.SimpleDateFormat("hh:mm a");
+            java.text.SimpleDateFormat outputFormat = new java.text.SimpleDateFormat("HH:mm:ss");
+            return outputFormat.format(inputFormat.parse(time));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Invalid time format: " + time, e);
+        }
+    }
+    
 }

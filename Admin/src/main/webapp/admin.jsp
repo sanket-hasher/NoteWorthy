@@ -6,6 +6,15 @@
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
+     @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+      
+    }
         .popup {
             position: fixed;
             top: 50%;
@@ -28,21 +37,24 @@
             z-index: 999;
             display: none;
         }
+        h1{
+        -webkit-text-stroke: 2px purple;
+        }
     </style>
 </head>
-<body class="bg-gradient-to-r from-blue-100 to-blue-300 text-gray-900">
+<body class="bg-gradient-to-l from-purple-100 to-purple-300 text-gray-900">
     <div class="container mx-auto py-10 px-6">
-        <h1 class="text-4xl font-extrabold mb-8 text-center text-blue-800">Admin Dashboard</h1>
+        <h1 class="text-6xl font-extrabold mb-8 text-center text-white">Admin Dashboard</h1>
 
         <!-- User Management Table -->
         <section class="mb-12">
-            <h2 class="text-2xl font-bold mb-4 text-blue-700">User Management</h2>
+            <h2 class="text-2xl font-bold mb-4 text-white">User Management</h2>
             <table class="table-auto w-full border-collapse border border-gray-300 bg-white rounded-lg shadow">
-                <thead class="bg-blue-100">
+                <thead class="bg-purple-400">
                     <tr>
-                        <th class="px-6 py-3 border-b text-blue-800">Username</th>
-                        <th class="px-6 py-3 border-b text-blue-800">Email</th>
-                        <th class="px-6 py-3 border-b text-blue-800">Actions</th>
+                        <th class="px-6 py-3 border-b text-white">Username</th>
+                        <th class="px-6 py-3 border-b text-white">Email</th>
+                        <th class="px-6 py-3 border-b text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,7 +70,7 @@
                             rs = stmt.executeQuery("SELECT Username, Email FROM User");
                             while (rs.next()) {
                     %>
-                    <tr class="hover:bg-blue-50">
+                    <tr class="hover:bg-purple-50">
                         <td class="px-6 py-4 border-b text-center"><%= rs.getString("Username") %></td>
                         <td class="px-6 py-4 border-b text-center"><%= rs.getString("Email") %></td>
                         <td class="px-6 py-4 border-b text-center">
@@ -85,14 +97,14 @@
 
         <!-- Review Management Table -->
         <section>
-            <h2 class="text-2xl font-bold mb-4 text-blue-700">Customer Reviews</h2>
+            <h2 class="text-2xl font-bold mb-4 text-white">Customer Reviews</h2>
             <table class="table-auto w-full border-collapse border border-gray-300 bg-white rounded-lg shadow">
-                <thead class="bg-blue-100">
+                <thead class="bg-purple-400">
                     <tr>
-                        <th class="px-6 py-3 border-b text-blue-800">Name</th>
-                        <th class="px-6 py-3 border-b text-blue-800">Review</th>
-                        <th class="px-6 py-3 border-b text-blue-800">Rating</th>
-                        <th class="px-6 py-3 border-b text-blue-800">Actions</th>
+                        <th class="px-6 py-3 border-b text-white">Name</th>
+                        <th class="px-6 py-3 border-b text-white">Review</th>
+                        <th class="px-6 py-3 border-b text-white">Rating</th>
+                        <th class="px-6 py-3 border-b text-white">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -108,7 +120,7 @@
                             rs = stmt.executeQuery("SELECT id, name, stars, comment FROM review");
                             while (rs.next()) {
                     %>
-                    <tr class="hover:bg-blue-50">
+                    <tr class="hover:bg-purple-50">
                         <td class="px-6 py-4 border-b text-center"><%= rs.getString("name") %></td>
                         <td class="px-6 py-4 border-b text-center"><%= rs.getString("comment") %></td>
                         <td class="px-6 py-4 border-b text-center"><%= rs.getString("stars") %></td>

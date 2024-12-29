@@ -67,7 +67,7 @@ public class GeminiQuery extends HttpServlet {
 
                     // Debug: Log the raw JSON response
                     String rawResponse = content.toString();
-                    System.out.println("Raw Response from Gemini API: " + rawResponse);
+//                    System.out.println("Raw Response from Gemini API: " + rawResponse);
 
                     // Parse JSON response with Gson
                     Gson gson = new Gson();

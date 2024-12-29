@@ -82,7 +82,7 @@
   }
   </style>
 
-  <body class="bg-[#eee] text-black">
+  <body class="bg-white text-black">
     <nav class="w-screen flex justify-between items-center px-[20px] h-[10vh] bg-[#433878] text-white fixed top-0 z-50">
     <div class="flex items-center gap-4">
     <img class="h-[4rem] stroke-black stroke-2 relative bottom-[7px]" src="Assets/logo1.png" />
@@ -166,15 +166,15 @@
         <img class="h-[42rem] mix-blend-multiply" src="Assets/bg.jpg" />
       </div>
     </div>
-    <div class="relative flex flex-col items-center w-full  mb-8 p-8">
+    <div class="relative flex flex-col items-center w-full  mb-8 p-8 h-[60vh]">
       <video autoplay muted loop class="absolute top-0 left-0 w-full h-full object-cover z-0">
         <source src="Assets/file.mp4" type="video/mp4">
 
       </video>
-      <div id="service" class="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10 "></div>
-      <div id="anime1" class="relative z-20 w-full">
-        <h2 class="text-center text-4xl font-bold mb-8 text-white">Services</h2>
-        <div class="grid grid-cols-5 text-start gap-4 cursor-pointer">
+      <div id="service" class="absolute top-0 left-0 w-full h-full bg-black opacity-50 z-10 h-full  "></div>
+      <div id="anime1" class="relative z-20 w-full h-full flex flex-col justify-center">
+        <h2 class="text-center text-4xl font-bold  text-white">Services</h2>
+        <div class="grid grid-cols-5 text-start gap-4 cursor-pointer content-center">
           <div
             class=" relative flex flex-col my-6 ">
            <div class="p-4 bg-[#FFEECC] shadow-sm border border-slate-200 rounded-lg w-[22rem] transition-transform transform hover:scale-105 hover:shadow-lg hover:border-[#FF9900]">

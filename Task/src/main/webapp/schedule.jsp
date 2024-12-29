@@ -371,20 +371,6 @@ body {
   color: #fff;
 }
 /* add tick in event after */
-.events .event::after {
-  content: "✓";
-  position: absolute;
-  top: 50%;
-  right: 0;
-  font-size: 3rem;
-  line-height: 1;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  opacity: 0.3;
-  color: var(--primary-clr);
-  transform: translateY(-50%);
-}
 .events .event:hover::after {
   display: flex;
 }
@@ -689,7 +675,7 @@ body {
         </nav>
       </div>
        <div id="logout-container"  style="display: none">
-        <form action="lout" method="post">
+        <form action="/Login_Registration/logout" method="post">
             <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
              <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
         </form>
@@ -892,6 +878,7 @@ body {
   	    	days = days + '<div class="day next-date">' + j + '</div>';
   	     }
   	     daysContainer.innerHTML = days;
+  	     renderEvents();
   	     addListner();
   	   }
 
@@ -939,6 +926,7 @@ body {
   	         
   	         // Add 'active' to the clicked day
   	         e.target.classList.add("active");
+  	         renderEvents()
 
   	         // If clicked on a day in the previous month
   	         if (e.target.classList.contains("prev-date")) {
@@ -1024,44 +1012,45 @@ body {
   	   }
 
   	   //function update events when a day is active
-  	   function updateEvents() {
-  	     let events = "";
-  	     let eventsFound = false;
-  		 let totalEvents = 0;
-  	     // Loop through all events and display them
-  	     eventsArr.forEach(eventDay => {
-  	       eventDay.events.forEach(event => {
-  	         eventsFound = true;
-  			 totalEvents++;
-  			events += 
-  			    '<div class="event">' +
-  			        '<span class="serial-number">' + totalEvents + '.</span>' +
-  			        '<div class="title">' +
-  			            '<i class="fas fa-circle"></i>' +
-  			            '<h3 class="event-title">' + event.title + '</h3>' +
-  			        '</div>' +
-  			        '<div class="event-time">' +
-  			            '<span>' + event.time + '</span>'  +
-	    	                "<div class=\"event-date\">" +
-	    	                    "<span>" + eventDay.day + "-" + eventDay.month + "-" + eventDay.year + "</span>" +
-	    	                "</div>"+
-  			        '</div>' +
-  			    '</div>';
+  	  function updateEvents() {
+    let events = ""; // String to hold HTML for all events
+    let eventsFound = false; // Flag to check if events exist
+    let totalEvents = 0; // Counter for total events
 
-  	       });
-  	     });
+    // Loop through all events in eventsArr and construct HTML
+    eventsArr.forEach(event => {
+        eventsFound = true;
+        totalEvents++;
 
-  	     // If no events found, display "No Events"
-  	     if (!eventsFound) {
-  	    	events = '<div class="no-event">' +
+        events += 
+            '<div class="event">' +
+                '<span class="serial-number">' + totalEvents + '.</span>' +
+                '<div class="title">' +
+                    '<i class="fas fa-circle"></i>' +
+                    '<h3 class="event-title">' + event.title + '</h3>' +
+                '</div>' +
+                '<div class="event-time">' +
+                    '<span>' + event.startTime + ' - ' + event.endTime + '</span>' +
+                '</div>' +
+                '<button class="delete-button" onclick="deleteEvent(' + totalEvents + ')">Delete</button>' +
+            '</div>';
+
+    });
+
+    // If no events are found, display a "No Events" message
+    if (!eventsFound) {
+        events = '<div class="no-event">' +
             '<h3>No Events</h3>' +
         '</div>';
+    }
 
-  	     }
+    // Update the events container with the generated events HTML
+    eventsContainer.innerHTML = events;
 
-  	     // Update the events container
-  	     eventsContainer.innerHTML = events;
-  	   }
+    // Log the total number of events rendered
+
+}
+
 
 
   	   //function to add event
@@ -1214,81 +1203,63 @@ body {
   	     addEventFrom.value = "";
   	     addEventTo.value = "";
   	     updateEvents(activeDay);
+  	   location.reload();
   	     //select active day and add event class if not added
   	     const activeDayEl = document.querySelector(".day.active");
   	     if (!activeDayEl.classList.contains("event")) {
   	       activeDayEl.classList.add("event");
-  	     }
-  	   });
-
-  	   //function to delete event when clicked on event
-  	   eventsContainer.addEventListener("click", (e) => {
-  	     if (e.target.classList.contains("event")) {
-  	       if (confirm("Are you sure you want to delete this event?")) {
-  	         const eventTitle = e.target.children[0].children[1].innerHTML;
-
-  	         // Loop through eventsArr and delete the selected event
-  	         eventsArr.forEach((event) => {
-  	           if (event.day === activeDay && event.month === month + 1 && event.year === year) {
-  	             event.events.forEach((item, index) => {
-  	               if (item.title === eventTitle) {
-  	                 event.events.splice(index, 1); // Remove event from the day
-  	               }
-  	             });
-
-  	             // If no events left for the day, remove the entire day entry from eventsArr
-  	             if (event.events.length === 0) {
-  	               eventsArr.splice(eventsArr.indexOf(event), 1);
-
-  	               // Remove the 'event' class from the corresponding day element
-  	               const activeDayEl = document.querySelector(".day.active");
-  	               if (activeDayEl.classList.contains("event")) {
-  	                 activeDayEl.classList.remove("event");
-  	               }
-  	             }
-  	           }
-  	         });
-
-  	         // Re-render the events and update the UI
-  	         updateEvents(activeDay); // Ensure to refresh the event list for the active day
-  	       }
+  	       
+  	     
   	     }
   	   });
 
   	   //function to save events in local storage
-
   	   
-
   	   //function to get events from local storage
   	   
   		 // Send a GET request to the server to fetch data
-  		 function getevents() {
-  		     if (localStorage.getItem("events") === null) {
-  		         return; // No events in localStorage, so skip.
-  		     }
+  		function getevents() {
+    fetch("loadd")  // Ensure this endpoint matches the servlet's @WebServlet mapping
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
+            }
+            return response.json(); // Parse the JSON response
+        })
+        .then(data => {
+            eventsArr.length = 0; // Clear existing list (if any)
 
-  		     // Fetch events dynamically (Ensure the correct endpoint)
-  		     fetch("loadd")  // Replace 'loadd' with correct endpoint
-  		         .then(response => response.json()) // Parse JSON response
-  		         .then(data => {
-  		             eventsArr.length = 0; // Clear existing events
+            // Check if events array exists in the response
+            if (data.events && Array.isArray(data.events)) {
+                data.events.forEach(event => {
+                    // Ensure the correct day, month, and year are set for each event
+                    let eventDate = new Date(event.event_start_time); // Assuming event_start_time is in a valid date format
 
-  		             // Check if events exist in the response and are an array
-  		             if (data && Array.isArray(data.events)) {
-  		                 data.events.forEach(event => {
-  		                     eventsArr.push({
-  		                         title: event.title,
-  		                         time: event.time,
-  		                         date: event.date,
-  		                     });
-  		                 });
+                    let month = eventDate.getMonth() + 1;  // Months are 0-indexed
+                    let year = eventDate.getFullYear();
 
-  		                 // After fetching events, render them on the active day
-  		                 renderEvents();
-  		             }
-  		         })
-  		         .catch(error => console.error("Error fetching events:", error));
-  		 }
+                    // Push each event into the eventsArr with the date information
+                    eventsArr.push({
+                    	eventid:event.event_id,
+                        title: event.event_name,
+                        startTime: event.event_start_time,
+                        endTime: event.event_end_time
+                    });
+                });
+
+                // Render the events after fetching them
+                renderEvents();
+                console.log(eventsArr)
+            } else {
+                console.log("No events found in the response.");
+            }
+        })
+        .catch(error => {
+            console.error("Error fetching events:", error);
+        });
+}
+
+
 
   	   
 
@@ -1315,35 +1286,112 @@ body {
 
   	    	    let totalEvents = 0; // Initialize the counter for total events
 
-  	    	    // Iterate over all events and display them
-  	    	    eventsArr.forEach((eventDay) => {
-  	    	        eventDay.events.forEach((event) => {
-  	    	            totalEvents++; // Increment the counter for each event
+  	    	    // Iterate over all events in the eventsArr and construct DOM elements
+  	    	    eventsArr.forEach((event,index) => {
+  	    	        totalEvents++; // Increment the counter for each event
 
-  	    	            const eventElement = document.createElement("div");
-  	    	            eventElement.classList.add("event");
+  	    	        // Create the main event div
+  	    	        const eventElement = document.createElement("div");
+  	    	        eventElement.classList.add("event");
+  	    	        eventElement.id = "event-" + event.event_id; // Add unique ID for the event
 
-  	    	            eventElement.innerHTML = 
-  	    	                "<span class=\"serial-number\">" + totalEvents + ".</span>" +  
-  	    	                "<div class=\"title\">" +
-  	    	                    "<i class=\"fas fa-circle\"></i>" +
-  	    	                    "<h3 class=\"event-title\">" + event.title + "</h3>" +
-  	    	                "</div>" +
-  	    	                "<div class=\"event-time\">" +
-  	    	                    "<span>" + event.time + "</span>" +
-  	    	                "</div>" +
-  	    	                "<div class=\"event-date\">" +
-  	    	                    "<span>" + eventDay.day + "-" + eventDay.month + "-" + eventDay.year + "</span>" +
-  	    	                "</div>";
+  	    	        // Create and append the serial number
+  	    	        const serialNumber = document.createElement("span");
+  	    	        serialNumber.classList.add("serial-number");
+  	    	        serialNumber.textContent = totalEvents + ".";
+  	    	        eventElement.appendChild(serialNumber);
 
-  	    	            // Append the event to the eventsContainer
-  	    	            eventsContainer.appendChild(eventElement);
-  	    	        });
+  	    	        // Create the title container
+  	    	        const titleContainer = document.createElement("div");
+  	    	        titleContainer.classList.add("title");
+
+  	    	        // Add the icon to the title
+  	    	        const icon = document.createElement("i");
+  	    	        icon.classList.add("fas", "fa-circle");
+  	    	        titleContainer.appendChild(icon);
+
+  	    	        // Add the event title
+  	    	        const eventTitle = document.createElement("h3");
+  	    	        eventTitle.classList.add("event-title");
+  	    	        eventTitle.textContent = event.title;
+  	    	        titleContainer.appendChild(eventTitle);
+
+  	    	        // Append the title container to the event
+  	    	        eventElement.appendChild(titleContainer);
+
+  	    	        // Create the time container
+  	    	        const timeContainer = document.createElement("div");
+  	    	        timeContainer.classList.add("event-time");
+
+  	    	        // Add the event time
+  	    	        const eventTime = document.createElement("span");
+  	    	        eventTime.textContent = event.startTime + " - " + event.endTime;
+  	    	        timeContainer.appendChild(eventTime);
+
+  	    	        // Append the time container to the event
+  	    	        eventElement.appendChild(timeContainer);
+
+  	    	        // Create the delete button container
+  	    	        const deleteButtonContainer = document.createElement("div");
+  	    	        deleteButtonContainer.classList.add("delete-button-container");
+
+  	    	        // Add the delete button
+  	    	        const deleteButton = document.createElement("button");
+  	    	        deleteButton.classList.add("delete-button");
+  	    	        deleteButton.textContent = "Delete";
+  	    	        deleteButton.onclick = function () {
+  	    	            // Debugging the event_id before sending to the function
+  	    	            console.log("Deleting event with ID: " + event.eventid);
+  	    	            deleteEvent(event.eventid);  // Correctly pass the event_id
+  	    	        };
+  	    	        deleteButtonContainer.appendChild(deleteButton);
+
+  	    	        // Append the delete button container to the event
+  	    	        eventElement.appendChild(deleteButtonContainer);
+
+  	    	        // Append the complete event element to the events container
+  	    	        eventsContainer.appendChild(eventElement);
   	    	    });
 
   	    	    // Log the total number of events rendered
-  	    	    console.log("Total Events Rendered:" + totalEvents);
+  	    	    console.log("Total events rendered: " + totalEvents);
   	    	}
+  	       
+  	     function deleteEvent(index) {
+  	       // Prepare the data to send
+  	       const data = { event_id: index };
+
+  	       // Send the data using fetch
+  	       fetch('delete-event', {
+  	           method: 'POST',
+  	           headers: {
+  	               'Content-Type': 'application/json', // JSON payload
+  	           },
+  	           body: JSON.stringify(data), // Convert data to JSON string
+  	       })
+  	       .then(response => {
+  	           if (response.ok) {
+  	               console.log("Event deleted successfully.");
+  	          // Refresh the current page
+  	             location.reload();
+
+  	               // Optionally, refresh the UI or fetch updated events
+  	           } else {
+  	               console.error("Failed to delete event.");
+  	               alert("Failed to delete event.");
+  	           }
+  	       })
+  	       .catch(error => {
+  	           console.error("Error occurred while deleting event:", error);
+  	           alert("An error occurred. Please try again.");
+  	       });
+  	   }
+
+  	    	
+
+
+
+
 
      </script> 
      

@@ -128,7 +128,7 @@
       </nav>
     </div>
      <div id="logout-container"  style="display: none">
-        <form action="lout" method="post">
+        <form action="/Login_Registration/logout" method="post">
             <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
              <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
         </form>
@@ -140,15 +140,15 @@
           <label class="title">Shapes</label>
           <ul class="options list-none mt-2.5 ml-1.25">
             <li class="option tool flex items-center cursor-pointer mb-2.5" id="rectangle">
-              <img src="icons/rectangle.svg" alt="">
+              <img class="h-5 w-5" src="https://cdn-icons-png.flaticon.com/512/1014/1014902.png" alt="">
               <span class="pl-2.5 text-gray-600 cursor-pointer">Rectangle</span>
             </li>
             <li class="option tool flex items-center cursor-pointer mb-2.5" id="circle">
-              <img src="icons/circle.svg" alt="">
+              <img class="h-5 w-5" src="https://cdn-icons-png.flaticon.com/512/319/319248.png" alt="">
               <span class="pl-2.5 text-gray-600 cursor-pointer">Circle</span>
             </li>
             <li class="option tool flex items-center cursor-pointer mb-2.5" id="triangle">
-              <img src="icons/triangle.svg" alt="">
+              <img class="h-5 w-5" src="https://cdn-icons-png.flaticon.com/512/649/649731.png" alt="">
               <span class="pl-2.5 text-gray-600 cursor-pointer">Triangle</span>
             </li>
             <li class="option flex items-center cursor-pointer mb-2.5">
