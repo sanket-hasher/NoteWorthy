@@ -7,8 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-auth.js"></script>
+<!-- <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.5.0/firebase-auth.js"></script>-->
     
     <script src="https://apis.google.com/js/api:client.js"></script>
     
@@ -450,7 +450,7 @@
     </div>
  
  <script src="/Login_Registration/script1.js" ></script>
- <script type="module">
+ <!-- <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-analytics.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
@@ -501,6 +501,6 @@ document.getElementById('googleSignInButton').addEventListener('click', async ()
     }
 });
 
-    </script>
+    </script>-->
   </body>
 </html>

@@ -91,4 +91,13 @@ CREATE TABLE `user_details`.`contact` (
   `comment` VARCHAR(10000) NULL,
   PRIMARY KEY (`contact_id`, `Email`));
 
+create table Events(
+event_id  INT PRIMARY KEY AUTO_INCREMENT,
+username VARCHAR(100), 
+event_name VARCHAR(1000),    
+event_start_time DATETIME,  
+event_end_time DATETIME,
+FOREIGN KEY (username) REFERENCES user(username) ON DELETE CASCADE
+);
+
 

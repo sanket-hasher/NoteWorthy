@@ -11,5 +11,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/mysql-connector-j-9.0.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/servlet-api.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/gson-2.9.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/json-20240303.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -253,7 +253,7 @@ display:none;
     </nav>
   </div>
    <div id="logout-container"  style="display: none">
-        <form action="lout" method="post">
+        <form action="/Login_Registration/logout" method="post">
             <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
              <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
         </form>
@@ -398,34 +398,49 @@ display:none;
             chatBox.classList.add('translate-y-full');
         }
     });*/
+ // Event listener for the download button
     document.getElementById('downloadBtn').addEventListener('click', () => {
         const { jsPDF } = window.jspdf;
 
-        // Create a new jsPDF instance
+        // Create a new instance of jsPDF with appropriate settings
         const doc = new jsPDF({
-            orientation: 'p', // Portrait orientation
+            orientation: 'p', // 'p' for portrait, 'l' for landscape
             unit: 'px',
             format: 'a4'
         });
 
-        // Access the editor content
+        // Access the CKEditor content
         const editorElement = document.querySelector('#editor');
-
         if (editorElement) {
-            // Render the editor's HTML content into the PDF
+            const editorContent = editorElement.innerHTML; // Get the HTML content
+
+            // PDF Download
             doc.html(editorElement, {
                 callback: function (doc) {
-                    // Save the document
                     doc.save('your-note.pdf');
                 },
-                x: 100, // Left margin
-                y: 100, // Top margin
+                x: '9.52%',  // x position as a percentage of page width
+                y: '5.72%',  // y position as a percentage of page height
                 html2canvas: {
-                    scale: 2, // Render at higher resolution
-                    useCORS: true // Enable cross-origin content rendering
+                    scale: 1, // Increase scale for better resolution
+                    useCORS: true // For cross-origin images if any
                 },
-                width: doc.internal.pageSize.getWidth() - 40 // Deduct margins from the page width
+                width: doc.internal.pageSize.getWidth() - 20 // Adjust the width
             });
+
+            // Text file download
+            const plainText = editorElement.innerText || editorElement.textContent; // Get plain text content
+            const textBlob = new Blob([plainText], { type: 'text/plain' });
+            const textUrl = URL.createObjectURL(textBlob);
+
+            // Create a temporary anchor element to trigger download
+            const textLink = document.createElement('a');
+            textLink.href = textUrl;
+            textLink.download = 'your-note.txt';
+            textLink.click();
+
+            // Revoke the object URL to release memory
+            URL.revokeObjectURL(textUrl);
         } else {
             console.error('Editor content not found.');
         }

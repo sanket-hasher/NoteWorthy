@@ -129,7 +129,7 @@
     </nav>
   </div>
    <div id="logout-container"  style="display: none">
-        <form action="lout" method="post">
+        <form action="/Login_Registration/logout" method="post">
             <input type="submit"  class="block cursor-pointer text-white" value="LOGOUT">
              <div class="absolute left-0 right-0 bottom-0 h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></div>
         </form>
@@ -145,7 +145,6 @@
             <div class="flex gap-2 items-center">
                                     <svg id="uploadFileBtn" class="h-5 w-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M364.2 83.8c-24.4-24.4-64-24.4-88.4 0l-184 184c-42.1 42.1-42.1 110.3 0 152.4s110.3 42.1 152.4 0l152-152c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-152 152c-64 64-167.6 64-231.6 0s-64-167.6 0-231.6l184-184c46.3-46.3 121.3-46.3 167.6 0s46.3 121.3 0 167.6l-176 176c-28.6 28.6-75 28.6-103.6 0s-28.6-75 0-103.6l144-144c10.9-10.9 28.7-10.9 39.6 0s10.9 28.7 0 39.6l-144 144c-6.7 6.7-6.7 17.7 0 24.4s17.7 6.7 24.4 0l176-176c24.4-24.4 24.4-64 0-88.4z"/></svg></button>
             
-            <svg class="h-5 w-5 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#000000" d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8L32 224c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8l256 0c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z"/></svg>
             </div>
             
             </div>
@@ -154,12 +153,12 @@
             <!-- File List Container -->
             <div id="fileContainer" class="bg-[#F5EFFF] drop-shadow-2xl p-4 rounded w-[20%]">
                 <h3 class="text-lg font-semibold mb-2">Uploaded Files</h3>
-                <div id="files" class="flex flex-wrap gap-4"></div>
+                <div id="files" class="flex flex-wrap gap-4 overflow-y-auto max-h-[700px]"></div>
             </div>
             <!-- File Preview Container -->
-            <div id="filePreview" class="bg-[#F5EFFF] drop-shadow-2xl p-4 rounded w-[80%] ml-4">
+            <div id="filePreview" class="bg-[#F5EFFF] drop-shadow-2xl p-4 rounded w-[80%] h-full ml-4">
                 <h3 class="text-lg font-semibold mb-2">File Preview</h3>
-                <iframe id="fileViewer" class="w-full h-full  rounded" src=""></iframe>
+                <iframe id="fileViewer" class="w-full h-[95%] rounded" src=""></iframe>
             </div>
         </div>
     </div>
@@ -287,7 +286,7 @@
 
 	    filesList.forEach((file, index) => {
 	        const fileDiv = document.createElement("div");
-	        fileDiv.className = "p-4 bg-gray-200 drop-shadow-md border border-[#CDC1FF] rounded-md cursor-pointer flex flex-col items-center w-28 h-32";
+	        fileDiv.className = "p-4 bg-gray-200 drop-shadow-md border border-[#CDC1FF] rounded-md cursor-pointer flex flex-col items-center w-28";
 
 	        const extension = file.filename.split(".").pop();
 	        const iconPath = getFileIcon(extension);
