@@ -66,33 +66,33 @@ public class AddTask extends HttpServlet {
             // Establish database connection
             Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
 
-            // Insert task into `Todo` table using the provided taskId
-            String insertTodoSQL = "INSERT INTO Todo (taskid, description) VALUES (?, ?)";
-            PreparedStatement psTodo = conn.prepareStatement(insertTodoSQL);
-            psTodo.setString(1, taskId); // Use the taskId from the JavaScript code
-            psTodo.setString(2, taskDescription);
-            int rowsTodo = psTodo.executeUpdate();
+            // Insert user-task mapping into `tasks` table
+            String insertMappingSQL = "INSERT INTO tasks (taskid, username) VALUES (?, ?)";
+            PreparedStatement psMapping = conn.prepareStatement(insertMappingSQL);
+            psMapping.setString(1, taskId); // Use the taskId from the JSON request
+            psMapping.setString(2, username);
+            int rowsMapping = psMapping.executeUpdate();
 
-            if (rowsTodo > 0) {
-                // Insert user-task mapping into `tasks` table
-                String insertMappingSQL = "INSERT INTO tasks (taskid, username) VALUES (?, ?)";
-                PreparedStatement psMapping = conn.prepareStatement(insertMappingSQL);
-                psMapping.setString(1, taskId); // Use the same taskId
-                psMapping.setString(2, username);
-                int rowsMapping = psMapping.executeUpdate();
+            if (rowsMapping > 0) {
+                // Insert task into `Todo` table using the provided taskId
+                String insertTodoSQL = "INSERT INTO Todo (taskid, description) VALUES (?, ?)";
+                PreparedStatement psTodo = conn.prepareStatement(insertTodoSQL);
+                psTodo.setString(1, taskId); // Use the same taskId
+                psTodo.setString(2, taskDescription);
+                int rowsTodo = psTodo.executeUpdate();
 
                 // Return success response if both inserts succeed
-                if (rowsMapping > 0) {
+                if (rowsTodo > 0) {
                     JSONObject responseObject = new JSONObject();
                     responseObject.put("success", true);
                     responseObject.put("taskId", taskId);
                     responseObject.put("description", taskDescription);
                     out.write(responseObject.toString());
                 } else {
-                    throw new Exception("Failed to insert user-task mapping into tasks.");
+                    throw new Exception("Failed to insert task into Todo.");
                 }
             } else {
-                throw new Exception("Failed to insert task into Todo.");
+                throw new Exception("Failed to insert user-task mapping into tasks.");
             }
 
             // Close the connection
