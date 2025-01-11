@@ -93,7 +93,7 @@ public class ContactServlet extends HttpServlet {
             message.setFrom(new InternetAddress(EMAIL));
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(recipientEmail));
             message.setSubject("Thank You for Contacting Us");
-            message.setText("Dear " + name + ",\n\nThank you for reaching out to us. We have received your comment: \n\""+comment+"\"\n\nWe will get back to you shortly.\n\nBest regards,\nYour Company Name");
+            message.setText("Dear " + name + ",\n\nThank you for reaching out to us. We have received your comment: \n\""+comment+"\"\n\nWe will get back to you shortly.\n\nBest regards,\nTeam Eduler");
 
             Transport.send(message);
         } catch (MessagingException e) {
