@@ -384,13 +384,13 @@ if (cookies != null) {
 
 		function populateTasks(tasks) {
 		    // Clear current tasks
-		    document.getElementById('todo').innerHTML = '';
-		    document.getElementById('inprogress').innerHTML = '';
-		    document.getElementById('done').innerHTML = '';
+		    document.getElementById("todo").innerHTML = "";
+		    document.getElementById("inprogress").innerHTML = "";
+		    document.getElementById("done").innerHTML = "";
 
 		    tasks.forEach(task => {
 		        const taskElement = document.createElement("div");
-		        taskElement.className = `flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer mb-2`;
+		        taskElement.className = "flex justify-between items-center task bg-blue-100 p-4 rounded-md cursor-pointer mb-2";
 		        taskElement.id = task.taskid;
 
 		        const taskTextElement = document.createElement("p");
@@ -401,43 +401,39 @@ if (cookies != null) {
 		        buttonContainer.className = "flex gap-2";
 
 		        // Add buttons based on the task status
-		        if (task.status === 'todo') {
+		        if (task.status === "todo") {
 		            const startButton = document.createElement("button");
 		            startButton.textContent = "Start";
 		            startButton.className = "bg-green-500 rounded-md py-1 px-3 text-white";
 		            startButton.onclick = function() {
-		                moveTask(taskElement, 'inprogress');
+		                moveTask(taskElement, "inprogress");
 		            };
 		            buttonContainer.appendChild(startButton);
 
 		            // Add remove button only for 'todo' tasks
 		            const removeButton = document.createElement("button");
-		            removeButton.innerHTML = '<svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#ff0000" d="M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32s-14.3-32-32-32H135.2zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>';
+		            removeButton.innerHTML = "<svg class='h-5 w-5' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path fill='#ff0000' d='M135.2 17.7L128 32 32 32C14.3 32 0 46.3 0 64S14.3 96 32 96h384c17.7 0 32-14.3 32-32s-14.3-32-32-32H135.2zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45h245.8c25.3 0 46.3-19.7 47.9-45L416 128z'/></svg>";
 		            removeButton.onclick = function() {
 		                removeTask(removeButton);
 		            };
 		            buttonContainer.appendChild(removeButton);
-		        } else if (task.status === 'inprogress') {
+		        } else if (task.status === "inprogress") {
 		            taskElement.className = "flex justify-between items-center task bg-yellow-100 p-4 rounded-md cursor-pointer mb-2";
 		            const doneButton = document.createElement("button");
 		            doneButton.textContent = "Done";
 		            doneButton.className = "float-right bg-green-500 rounded-md py-1 px-3 text-white";
 		            doneButton.onclick = function() {
-		                moveTask(taskElement, 'done');
+		                moveTask(taskElement, "done");
 		            };
 		            buttonContainer.appendChild(doneButton);
 		        }
 		        taskElement.appendChild(buttonContainer);
 
 		        // Add the green checkmark icon for completed tasks in the 'done' status
-		        if (task.status === 'done') {
+		        if (task.status === "done") {
 		            taskElement.className = "flex justify-between items-center task bg-green-100 p-4 rounded-md cursor-pointer mb-2";
-		            taskElement.innerHTML += `
-		                <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#04ff00" d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>
-		            `;
+		            taskElement.innerHTML += "<svg class='h-5 w-5' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'><path fill='#04ff00' d='M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z'/></svg>";
 		        }
-
-		        
 
 		        // Append task to the appropriate column
 		        const columnId = task.status; // Get column based on status
