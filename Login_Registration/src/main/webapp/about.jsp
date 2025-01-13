@@ -237,8 +237,8 @@ width:fit-content;
                 <path d="M21 6.5a1 1 0 0 0-.5-.87l-8-4a1 1 0 0 0-.92 0l-8 4a1 1 0 0 0-.58.87v10a1 1 0 0 0 .58.87l8 4a1 1 0 0 0 .92 0l8-4a1 1 0 0 0 .5-.87v-10Zm-9-2.72L18.75 6.5 12 9.72 5.25 6.5ZM11 20.28l-6-3V8.78l6 3Zm2 0v-8.5l6-3v8.5Z"/>
             </svg>
         </span>
-        <h3 class="text-2xl font-semibold text-gray-800">69+</h3>
-        <p class="text-gray-600">Courses</p>
+        <h3 class="text-2xl font-semibold text-gray-800">10+</h3>
+        <p class="text-gray-600">Features</p>
     </article>
 
     <article class="achievements_card bg-white shadow-md p-6 rounded-lg text-center w-64">
@@ -275,61 +275,61 @@ width:fit-content;
         <div class="container team-container">
             <article class="team_member">
                 <div class="team_member-image">
-                    <img src="https://i.pinimg.com/736x/1a/96/03/1a96033f708fd1b8942a25527c622044.jpg" alt="Team Member">
+                    <img src="Assets/sanket.jpg" alt="Team Member">
                 </div>
                 <div class="team_member-info">
-                    <h4>John Dumelo</h4>
-                    <p>Expert Tutor</p>
+                    <h4>Sanket Dey</h4>
+                    <p></p>
                 </div>
             </article>
 
             <article class="team_member">
                 <div class="team_member-image">
-                    <img src="https://i.pinimg.com/736x/1a/96/03/1a96033f708fd1b8942a25527c622044.jpg" alt="Team Member">
+                    <img src="Assets/debrgu.jpg" alt="Team Member">
                 </div>
                 <div class="team_member-info">
-                    <h4>Shatta Wale</h4>
-                    <p>Expert Tutor</p>
+                    <h4>Debarghya Halder</h4>
+                    <p></p>
                 </div>
             </article>
 
             <article class="team_member">
                 <div class="team_member-image">
-                    <img src="https://i.pinimg.com/736x/1a/96/03/1a96033f708fd1b8942a25527c622044.jpg" alt="Team Member">
+                    <img src="Assets/anuska.jpg" alt="Team Member">
                 </div>
                 <div class="team_member-info">
-                    <h4>Diana Ayi</h4>
-                    <p>Expert Tutor</p>
+                    <h4>Anuska Sadhukhan</h4>
+                    <p></p>
                 </div>
             </article>
 
             <article class="team_member">
                 <div class="team_member-image">
-                    <img src="https://i.pinimg.com/736x/1a/96/03/1a96033f708fd1b8942a25527c622044.jpg" alt="Team Member">
+                    <img src="Assets/rupam.jpg" alt="Team Member">
                 </div>
                 <div class="team_member-info">
-                    <h4>Mia Jones</h4>
-                    <p>Expert Tutor</p>
+                    <h4>Rupam Halder</h4>
+                    <p></p>
                 </div>
             </article>
 
             <article class="team_member">
                 <div class="team_member-image">
-                    <img src="https://i.pinimg.com/736x/1a/96/03/1a96033f708fd1b8942a25527c622044.jpg" alt="Team Member">
+                    <img src="Assets/debeneek.jpg" alt="Team Member">
                 </div>
                 <div class="team_member-info">
                     <h4>Debeneek Rai</h4>
-                    <p>Professional Hater</p>
+                    <p></p>
                 </div>
             </article>
 
             <article class="team_member">
                 <div class="team_member-image">
-                    <img src="https://i.pinimg.com/736x/1a/96/03/1a96033f708fd1b8942a25527c622044.jpg" alt="Team Member">
+                    <img src="Assets/ruprekha.jpg" alt="Team Member">
                 </div>
                 <div class="team_member-info">
-                    <h4>Jane Doe</h4>
-                    <p>Professional Coder</p>
+                    <h4>Ruprekha Saha</h4>
+                    <p></p>
                 </div>
             </article>
         </div>

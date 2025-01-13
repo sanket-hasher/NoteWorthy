@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletResponse;
 @WebServlet("/gemini")
 public class GeminiQuery extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private static final String API_KEY = "AIzaSyBoB9SUv8ebI0tHm6XzFaKS6yO9FlxIlgU";
+    private static final String API_KEY = "AIzaSyBMtD5_96BopTTK9z2JxTv8PKkZ-qWsikU";
     private static final String GEMINI_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
     @Override
