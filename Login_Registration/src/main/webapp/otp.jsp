@@ -187,12 +187,10 @@ color: red;
 				/*request.setAttribute("username", username);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("updatepass");
 			    dispatcher.forward(request, response);*/
-              String received = (String) session.getAttribute("receivedotp");
-                 String otp = (String) session.getAttribute("otp");
-                 boolean otpVerified = false;
-                 if(received!=null){
+              String msg = request.getParameter("msg");
+                 if(msg!=null){
 					//System.out.println(otp);
-					if(!otp.equals(received))
+					if(msg.equals("incorrect"))
 					{%>
 						<div class="toast flex p-4 bg-[#eee] rounded-lg">
             <div class="shrink-0">
@@ -206,35 +204,8 @@ color: red;
         </div>
         <a href="/Login_Registration/forgot.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Resend otp</a>
 				<% }
-					else if(otp.equals(received)){
-						otpVerified = true;
-						
-						%>
-						
-						<div class="toast none flex p-4 bg-[#eee] rounded-lg">
-	      <div class="shrink-0">
-	       <svg class="shrink-0 size-5 mt-0.2" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="100" height="100" viewBox="0 0 48 48">
-<path fill="#c8e6c9" d="M44,24c0,11.045-8.955,20-20,20S4,35.045,4,24S12.955,4,24,4S44,12.955,44,24z"></path><path fill="#4caf50" d="M34.586,14.586l-13.57,13.586l-5.602-5.586l-2.828,2.828l8.434,8.414l16.395-16.414L34.586,14.586z"></path>
-</svg>
-	      </div>
-	      <div class="ms-3">
-	        <p id="hs-toast-error-example-label" class="text-sm text-gray-700 dark:text-neutral-400 font-semibold">
-	        Verified
-	        </p>
-	      </div>
-	    </div>
-	    <a href="http://localhost:8080/Login_Registration/updatepass.jsp?username=<%=username%>"
-						class="mx-4 font-medium">Update Password</a>
-						
-				
-				
-            	
-				
-				<%}
-					}%>	
-				
-					
-					
+                 }	%>
+								
           </form>
             <div class="mt-4 text-sm text-gray-600 text-center">
               <p>Already have an account? <a href="/Login_Registration/login.jsp" class="text-black hover:underline">Login here</a>
