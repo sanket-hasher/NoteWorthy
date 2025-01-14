@@ -43,6 +43,10 @@ public class VerifyOtp extends HttpServlet {
         String otp = (String) session.getAttribute("otp");
         if(receivedotp.equals(otp))
         response.sendRedirect("updatepass.jsp");
+        else
+        {
+        	response.sendRedirect("otp.jsp?msg=incorrect");
+        }
 	}
 
 	/**

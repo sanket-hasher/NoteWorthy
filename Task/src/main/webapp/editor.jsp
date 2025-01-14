@@ -398,6 +398,7 @@ display:none;
             chatBox.classList.add('translate-y-full');
         }
     });*/
+ // Event listener for the download button
     document.getElementById('downloadBtn').addEventListener('click', () => {
         const { jsPDF } = window.jspdf;
 
@@ -410,12 +411,12 @@ display:none;
 
         // Access the CKEditor content
         const editorElement = document.querySelector('#editor');
-
         if (editorElement) {
-            // Ensure the full content is rendered
+            const editorContent = editorElement.innerHTML; // Get the HTML content
+
+            // PDF Download
             doc.html(editorElement, {
                 callback: function (doc) {
-                    // Adjust layout, scale, or page size if needed
                     doc.save('your-note.pdf');
                 },
                 x: '9.52%',  // x position as a percentage of page width
@@ -426,11 +427,25 @@ display:none;
                 },
                 width: doc.internal.pageSize.getWidth() - 20 // Adjust the width
             });
-        }
- else {
+
+            // Text file download
+            const plainText = editorElement.innerText || editorElement.textContent; // Get plain text content
+            const textBlob = new Blob([plainText], { type: 'text/plain' });
+            const textUrl = URL.createObjectURL(textBlob);
+
+            // Create a temporary anchor element to trigger download
+            const textLink = document.createElement('a');
+            textLink.href = textUrl;
+            textLink.download = 'your-note.txt';
+            textLink.click();
+
+            // Revoke the object URL to release memory
+            URL.revokeObjectURL(textUrl);
+        } else {
             console.error('Editor content not found.');
         }
     });
+
 
 </script>
 
