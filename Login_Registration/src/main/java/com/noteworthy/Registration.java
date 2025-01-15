@@ -87,6 +87,15 @@ public class Registration extends HttpServlet {
                 response.sendRedirect("signup.jsp?msg=same-username-found");
                 return;
             }
+            String sqlEmailCheck = "SELECT Email FROM User WHERE Email = ?";
+            PreparedStatement preparedStatement3 = connection.prepareStatement(sqlEmailCheck);
+            preparedStatement3.setString(1, email);
+            ResultSet emailResultSet = preparedStatement3.executeQuery();
+
+            if (emailResultSet.next()) {
+                response.sendRedirect("signup.jsp?msg=email-already-exist");
+                return;
+            }
 
             PreparedStatement preparedStatement2 = connection.prepareStatement(sqlRegister);
             preparedStatement2.setString(1, username);
