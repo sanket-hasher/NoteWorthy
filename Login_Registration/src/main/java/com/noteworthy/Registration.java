@@ -48,6 +48,12 @@ public class Registration extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
         String passwordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=\\-{}|:;'<>,.?/]).+$";
+        int i=username.indexOf(' ');
+		if (i!=-1)
+		{
+			response.sendRedirect("signup.jsp?msg=space-found");
+			return;
+		}
 
         if (username == null || username.isEmpty() || email == null || email.isEmpty() ||
             password == null || password.isEmpty() || confirmPassword == null || confirmPassword.isEmpty()) {
@@ -79,6 +85,15 @@ public class Registration extends HttpServlet {
 
             if (resultSet.next()) {
                 response.sendRedirect("signup.jsp?msg=same-username-found");
+                return;
+            }
+            String sqlEmailCheck = "SELECT Email FROM User WHERE Email = ?";
+            PreparedStatement preparedStatement3 = connection.prepareStatement(sqlEmailCheck);
+            preparedStatement3.setString(1, email);
+            ResultSet emailResultSet = preparedStatement3.executeQuery();
+
+            if (emailResultSet.next()) {
+                response.sendRedirect("signup.jsp?msg=email-already-exist");
                 return;
             }
 

@@ -245,8 +245,33 @@
 	        </p>
 	      </div>
 	    </div>
-            <% } 
-            else {
+            <% 
+            }  else if (msg.equals("space-found")){ %>
+    <div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                </svg>
+            </div>
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Name Cannot have Space</p>
+            </div>
+        </div>
+        <%}  
+            else if(msg.equals("email-already-exist")){%>
+            <div class="toast flex p-4 bg-[#eee] rounded-lg">
+            <div class="shrink-0">
+                <svg class="size-4 text-red-500 mt-0.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"></path>
+                </svg>
+            </div>
+            <div class="ms-3">
+                <p class="text-sm text-gray-700 font-semibold">Email Already Exists</p>
+            </div>
+        </div>
+            
+            
+            <% }   else {
             	%>
             	  <div class="toast none flex p-4 bg-[#eee] rounded-lg">
 	      <div class="shrink-0">
@@ -260,7 +285,7 @@
 	        </p>
 	      </div>
 	    </div>
-            	<a href="/Login_Registration/index.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl">Return to Home</a>
+            	<a href="/Login_Registration/index.jsp" class="text-black hover:underline text-purple-550 font-italics text-xxxl mt-8">Return to Home</a>
             
             <% }
        }
