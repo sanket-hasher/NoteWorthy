@@ -48,6 +48,12 @@ public class Registration extends HttpServlet {
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirm-password");
         String passwordPattern = "^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+=\\-{}|:;'<>,.?/]).+$";
+        int i=username.indexOf(' ');
+		if (i!=-1)
+		{
+			response.sendRedirect("signup.jsp?msg=space-found");
+			return;
+		}
 
         if (username == null || username.isEmpty() || email == null || email.isEmpty() ||
             password == null || password.isEmpty() || confirmPassword == null || confirmPassword.isEmpty()) {
